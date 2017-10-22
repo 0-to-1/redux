@@ -195,7 +195,7 @@ NPMのエコシステムが初めてでプロジェクトを立ち上げたり�
 
 [Reactiflux](http://www.reactiflux.com)Discordコミュニティの[#redux](https://discord.gg/0ZcbPKXt5bZ6au5t)チャンネルに参加してください。
 
-### ありがとう
+### 感謝
 
 * [The Elm Architecture](https://github.com/evancz/elm-architecture-tutorial)　Reducerとともに状態更新をするモデルへの素晴らしい導入に;
 * [Turning the database inside-out](http://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/)　心を揺さぶってくれて;
