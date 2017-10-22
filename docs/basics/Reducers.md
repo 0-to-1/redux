@@ -13,7 +13,7 @@ Reduxでは、すべてのアプリケーションの状態は一つのオブジ
 * いま選択されているフィルター
 * 実際のToDoリスト
 
-ツリー形の状態で、何かのデータとUIの状態を保持したいことがよくあると思います。それは構いません。ただ、データとUIの状態は常に分けるようにしましょう。
+状態ツリーで、何かのデータとUIの状態を保持したいことがよくあると思います。それは構いません。ただ、データとUIの状態は常に分けるようにしましょう。
 
 ```js
 {
@@ -55,7 +55,7 @@ Reduxでは、すべてのアプリケーションの状態は一つのオブジ
 
 これを頭に入れた上で、Reducerについて書き始めましょう。先に説明した[Action](Actions.md) を理解できるよう、ゆっくり教えていきます。
 
-まず、初期状態を明示しましょう。Reduxは最初、 `undefined`状態とともにReducerを呼び出します。この時が、初期状態を返すチャンスです:
+まず、初期状態を明示しましょう。Reduxは最初、`undefined`状態とともにReducerを呼び出します。この時が、初期状態を返すチャンスです:
 
 ```js
 import { VisibilityFilters } from './actions'
@@ -111,9 +111,9 @@ function todoApp(state = initialState, action) {
 
 >[`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) はES6の一部です。古いブラウザでは、まだ対応していません。対応するためにはポリフィルか、[Babel プラグイン](https://www.npmjs.com/package/babel-plugin-transform-object-assign), または[`_.assign()`](https://lodash.com/docs#assign)のような別のライブラリのヘルパーが必要です。
 
->##### `switch` と定型文についての注意
+>##### `switch` と常用文についての注意
 
->`switch`文は、本当の定型文では*ありません*。 Fluxの本当の定型文は、概念的です: 更新を発行する必要があるし、 DispatcherとともにStoreを登録する必要があるし、Storeは一つのオブジェクトにする必要があります（ユニバーサルアプリにしたいなら、複雑になります）。 Reduxはイベントを発行する代わりに純粋なReducerを使うことで、これらの問題を解決します。
+>`switch`文は、本当の常用文では*ありません*。 Fluxの本当の常用文は、概念的です: 更新を発行する必要があるし、 DispatcherとともにStoreを登録する必要があるし、Storeは一つのオブジェクトにする必要があります（ユニバーサルアプリにしたいなら、複雑になります）。 Reduxはイベントを発行する代わりに純粋なReducerを使うことで、これらの問題を解決します。
 
 >多くの人がまだ、ドキュメントに`switch`文が載っているかどうかでフレームワークを選んでいるのは残念です。もし`switch`が好きでなければ、アクションの処理を対応づける（マッピングする）ために、 特別な`createReducer`関数を使うこともできます。この関数は [“reducing boilerplate”](../recipes/ReducingBoilerplate.md#reducers)で説明しています。
 
@@ -324,7 +324,7 @@ function todoApp(state = {}, action) {
 
 これで良くなりました！アプリが大きくなったらReducerを別のファイルに分割しても構いません。ファイルを分けることで、異なるデータ領域の処理について完全な独立性を保てます。
 
-最後に、Reduxは[`combineReducers()`](../api/combineReducers.md)という便利な関数呼び出しを用意しています。これは上記の`todoApp`でやったのと同じ定型的なロジックです。この関数により、`todoApp`を下記のように書き換えられます:
+最後に、Reduxは[`combineReducers()`](../api/combineReducers.md)という便利な関数呼び出しを用意しています。これは上記の`todoApp`でやったのと同じ常用的なロジックです。この関数により、`todoApp`を下記のように書き換えられます:
 
 ```js
 import { combineReducers } from 'redux'
