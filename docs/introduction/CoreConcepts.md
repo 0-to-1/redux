@@ -1,25 +1,25 @@
-# Core Concepts
+# 核となるコンセプト
 
-Redux itself is very simple.
+Redux自体はとてもシンプルです。
 
-Imagine your app’s state is described as a plain object. For example, the state of a todo app might look like this:
+アプリの状態が、単なるオブジェクトで記述されているのを想像してください。例えば、ToDoアプリの状態がこうだとしたら:
 
 ```js
 {
   todos: [{
-    text: 'Eat food',
+    text: 'ごはんを食べる',
     completed: true
   }, {
-    text: 'Exercise',
+    text: 'エクササイズ',
     completed: false
   }],
   visibilityFilter: 'SHOW_COMPLETED'
 }
 ```
 
-This object is like a “model” except that there are no setters. This is so that different parts of the code can’t change the state arbitrarily, causing hard-to-reproduce bugs.
+このオブジェクトは、setter（設定関数）がないことを除けばモデルのようです。setterがないので、コードの異なる部分が状態を任意に変えるのは難しいです。そのため、バグを出しにくくなります。
 
-To change something in the state, you need to dispatch an action. An action is a plain JavaScript object (notice how we don’t introduce any magic?) that describes what happened. Here are a few example actions:
+状態の何かを変えるには、Actionを送る必要があります。Actionは何が起きたか記述する、単なるJavaScriptのオブジェクトです（どんな魔法も紹介していないことに気づきましたか？）。 いくつかActionの例をあげましょう:
 
 ```js
 { type: 'ADD_TODO', text: 'Go to swimming pool' }
@@ -27,9 +27,8 @@ To change something in the state, you need to dispatch an action. An action is a
 { type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_ALL' }
 ```
 
-Enforcing that every change is described as an action lets us have a clear understanding of what’s going on in the app. If something changed, we know why it changed. Actions are like breadcrumbs of what has happened.
-Finally, to tie state and actions together, we write a function called a reducer. Again, nothing magical about it—it’s just a function that takes state and action as arguments, and returns the next state of the app.
-It would be hard to write such a function for a big app, so we write smaller functions managing parts of the state:
+すべての変化に対して、Actionとして記述することを強制します。これにより、アプリで何が起きているかがはっきり分かります。つまりもし何か変化したら、なぜ変化したのか分かります。Actionは起きたことを伝える、パンくずのようなものです。
+最後に、Reducerという関数を書きます。状態とActionを結びつけるためです。これも、決して魔法ではありません。ただの関数です。状態とActionを引数に取り、アプリの次の状態を返します。大きなアプリだと、このような関数を１つ書くのは難しいでしょう。そのため状態の一部を管理する、より小さな関数をいくつか書きます:
 
 ```js
 function visibilityFilter(state = 'SHOW_ALL', action) {
@@ -57,7 +56,7 @@ function todos(state = [], action) {
 }
 ```
 
-And we write another reducer that manages the complete state of our app by calling those two reducers for the corresponding state keys:
+そして状態全体を管理するもう一つのReducerを書きます。このReducerは、それぞれ対応する状態のキーとともに、上記２つのReducerを呼び出します:
 
 ```js
 function todoApp(state = {}, action) {
@@ -68,4 +67,5 @@ function todoApp(state = {}, action) {
 }
 ```
 
-This is basically the whole idea of Redux. Note that we haven’t used any Redux APIs. It comes with a few utilities to facilitate this pattern, but the main idea is that you describe how your state is updated over time in response to action objects, and 90% of the code you write is just plain JavaScript, with no use of Redux itself, its APIs, or any magic.
+これが基本となる、Reduxの全体的なアイデアです。ReduxのAPIはまったく使っていないことに注意してください。このパターンを容易にするためのユーティリティはいくつかあります。しかし主なアイデアは、アクションのオブジェクトに対し、どうやって状態を更新するか記述することです。そしてコードの90%
+は、ただふつうのJavaScriptです。Redux自体や、ReduxのAPI、そしてどんな魔法も使っていません。
