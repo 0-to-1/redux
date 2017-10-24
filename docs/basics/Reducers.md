@@ -368,7 +368,7 @@ function reducer(state = {}, action) {
 }
 ```
 
-[`combineReducers()`](../api/combineReducers.md)がやるのは、複数のReducerを呼び出す関数の生成です。呼び出されたReducerには、キーによって対応づけられた状態の一部が渡されます。 そして[`combineReducers()`](../api/combineReducers.md)はReducerが返した結果を一つのオブジェクトにまとめ直します。[It's not magic.（これは魔法ではありません。）](https://github.com/reactjs/redux/issues/428#issuecomment-129223274)引数として渡されたすべてのReducerが状態を変更しなければ、新しいオブジェクトは作られません。これは他のReducerと同じです。
+[`combineReducers()`](../api/combineReducers.md)がやるのは、複数のReducerを呼び出す関数の生成です。呼び出されたReducerには、キーによって対応づけられた状態の一部が渡されます。 そして[`combineReducers()`](../api/combineReducers.md)はReducerが返した結果を一つのオブジェクトにまとめ直します。[It's not magic.（これは魔法ではありません。）](https://github.com/reactjs/redux/issues/428#issuecomment-129223274)引数として渡されたすべてのReducerが状態を変えなければ、新しいオブジェクトは作られません。これは他のReducerと同じです。
 
 >##### ES6に精通したユーザーへの注意
 
