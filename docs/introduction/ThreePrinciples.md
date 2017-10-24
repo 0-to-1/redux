@@ -1,12 +1,12 @@
-# Three Principles
+# ３つの原則
 
-Redux can be described in three fundamental principles:
+Reduxは３つの基本的な原則で説明できます:
 
-### Single source of truth
+### 真実の出どころは１つ
 
-**The [state](../Glossary.md#state) of your whole application is stored in an object tree within a single [store](../Glossary.md#store).**
+**アプリケーション全体の[状態](../Glossary.md#state)。それは１つの[Store](../Glossary.md#store)の中にある、１つのオブジェクトツリーで保持されます。**
 
-This makes it easy to create universal apps, as the state from your server can be serialized and hydrated into the client with no extra coding effort. A single state tree also makes it easier to debug or inspect an application; it also enables you to persist your app's state in development, for a faster development cycle. Some functionality which has been traditionally difficult to implement - Undo/Redo, for example - can suddenly become trivial to implement, if all of your state is stored in a single tree.
+これはユニバーサルアプリの制作を簡単にします。なぜならサーバからの状態は、クライアントにシリアライズして溶け込ませることができるからです。余分なコーディングの労力は要りません。 １つの状態ツリーは、デバッグや詳細調査も簡単にします。開発中のアプリの状態に一貫性が出るので、より早い開発サイクルも保てます。またこれまで、実行が難しかった機能があります。例えば、元に戻す/やり直し(Undo/Redo)です。これも突然、実行が簡単になります。なぜなら、すべての状態が１つのツリーで保持されるからです。
 
 ```js
 console.log(store.getState())
@@ -16,11 +16,11 @@ console.log(store.getState())
   visibilityFilter: 'SHOW_ALL',
   todos: [
     {
-      text: 'Consider using Redux',
+      text: 'Reduxの使用を考える',
       completed: true,
     },
     {
-      text: 'Keep all state in a single tree',
+      text: '１つのツリーですべての状態を保持する',
       completed: false
     }
   ]
@@ -28,11 +28,11 @@ console.log(store.getState())
 */
 ```
 
-### State is read-only
+### 状態は読み込み専用
 
-**The only way to change the state is to emit an [action](../Glossary.md#action), an object describing what happened.**
+**状態を変える唯一の方法は、[Action](../Glossary.md#action)を送ることです。Actionは、何が起きたかを記述するオブジェクトです。**
 
-This ensures that neither the views nor the network callbacks will ever write directly to the state. Instead, they express an intent to transform the state. Because all changes are centralized and happen one by one in a strict order, there are no subtle race conditions to watch out for. As actions are just plain objects, they can be logged, serialized, stored, and later replayed for debugging or testing purposes.
+これは、決して状態に直接書き込まないことを保証します。ビューだろうと、ネットワークのコールバックだろうと。その代わり、状態を転換する意図を表します。 すべての変化は集約され、厳密な順番で一つづつ実行されます。気をつけて見なければならない、捉えにくい競合状態はまったくないのです。Actionは単なるオブジェクトです。そのためログをとったり、直列化したり、保管したり、デバックやテストのためにもう一度実行したりできます。
 
 ```js
 store.dispatch({
@@ -46,11 +46,11 @@ store.dispatch({
 })
 ```
 
-### Changes are made with pure functions
+### 変化は純粋（副作用のない）関数でつくられます。
 
-**To specify how the state tree is transformed by actions, you write pure [reducers](../Glossary.md#reducer).**
+**Actionによってどのように状態ツリーが転換されるか明示するために、純粋な[Reducer](../Glossary.md#reducer)を書きます。**
 
-Reducers are just pure functions that take the previous state and an action, and return the next state. Remember to return new state objects, instead of mutating the previous state. You can start with a single reducer, and as your app grows, split it off into smaller reducers that manage specific parts of the state tree. Because reducers are just functions, you can control the order in which they are called, pass additional data, or even make reusable reducers for common tasks such as pagination.
+Reducersはただの純粋関数です。前の状態とActionを引数に取り、次の状態を返します。忘れないで欲しいのは、前の状態を変更するのではなく、新しい状態オブジェクトを返すということです。まず１つのReducerから始めて、アプリが大きくなるにつれて小さく分割できます。この小さな複数のReducerは、それぞれ状態ツリーの特定部分を管理します。 Reducerはただの関数です。そのため呼び出す順番を制御したり、追加データを渡すこともできます。あるいはページ繰り（ページング）のような共通タスクのために、再利用可能なReducerをつくることもできます。
 
 ```js
 function visibilityFilter(state = 'SHOW_ALL', action) {
@@ -91,4 +91,4 @@ const reducer = combineReducers({ visibilityFilter, todos })
 const store = createStore(reducer)
 ```
 
-That's it! Now you know what Redux is all about.
+おしまいです！これでReduxの概要がすべて分かりました。
