@@ -1,51 +1,53 @@
-# Prior Art
+# 先行技術
 
-Redux has a mixed heritage. It is similar to some patterns and technologies, but is also different from them in important ways. We'll explore some of the similarities and the differences below.
+Reduxは先行する技術を組み合わせています。いくつかのパターンや技術に似ているということです。しかし、そのやり方において重要な違いもあります。 下記で、類似点と相違点をいくつか見てみましょう。
 
 ### Flux
 
-Can Redux be considered a [Flux](https://facebook.github.io/flux/) implementation?  
-[Yes](https://twitter.com/fisherwebdev/status/616278911886884864), and [no](https://twitter.com/andrestaltz/status/616270755605708800).
+Reduxは[Flux](https://facebook.github.io/flux/)の実装だと考えられますか?  
+[Yes](https://twitter.com/fisherwebdev/status/616278911886884864)、 そして [No](https://twitter.com/andrestaltz/status/616270755605708800)。
 
-(Don't worry, [Flux creators](https://twitter.com/jingc/status/616608251463909376) [approve of it](https://twitter.com/fisherwebdev/status/616286955693682688), if that's all you wanted to know.)
+( [Fluxの製作者たち](https://twitter.com/jingc/status/616608251463909376)は[賛同しています](https://twitter.com/fisherwebdev/status/616286955693682688)。 だからもしこれが知りたいことのすべてなら、心配しないで。)
 
-Redux was inspired by several important qualities of Flux. Like Flux, Redux prescribes that you concentrate your model update logic in a certain layer of your application (“stores” in Flux, “reducers” in Redux). Instead of letting the application code directly mutate the data, both tell you to describe every mutation as a plain object called an “action”.
+Reduxは、Fluxの重要な特質に触発されています。Fluxと同じく、Reduxもアプリケーションの一定の層にモデルの更新ロジックを集約するよう定めています。(Fluxでは“Store”、Reduxでは“Reducer”。)
+どちらもアプリケーションのコードに直接データを変更させるのではなく、Actionという単なるオブジェクトにすべての変更を記述します。
 
-Unlike Flux, **Redux does not have the concept of a Dispatcher**. This is because it relies on pure functions instead of event emitters, and pure functions are easy to compose and don't need an additional entity managing them. Depending on how you view Flux, you may see this as either a deviation or an implementation detail. Flux has often been [described as `(state, action) => state`](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1). In this sense, Redux is true to the Flux architecture, but makes it simpler thanks to pure functions.
+Fluxと違って、Reduxにはディスパッチャー(Dispatcher)という概念はありません。なぜならイベントエミッターではなく、純粋関数を使っているからです。純粋関数は合成が簡単で、管理するのに追加のエンティティがいりません。Fluxをどう捉えるかによりますが、ReduxがFluxの逸脱や具体的な実装に見えるかもしれません。Fluxはよく、[状態とActionを取り、新たな状態を返すと説明されます (`(state, action) => state`)](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1)。この意味では、ReduxはFluxアーキテクチャだと言えます。しかし純粋関数のおかげで、よりシンプルになっています。
 
-Another important difference from Flux is that **Redux assumes you never mutate your data**. You can use plain objects and arrays for your state just fine, but mutating them inside the reducers is strongly discouraged. You should always return a new object, which is easy with the [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md), or with a library like [Immutable](https://facebook.github.io/immutable-js).
+もう１つFluxとの重要な違いがあります。それは、**Reduxはデータを決していじらないと想定している** ということです。状態のために単なるオブジェクトや配列を使うのは構いません。しかしReducerの内部で状態に手を加えることには、強く反対します。 状態をいじるのではなく、常に新しいオブジェクトを返すべきです。これは[ECMAScriptで提案されている、オブジェクトのスプレッド演算子 (object spread operator proposal)](../recipes/UsingObjectSpreadOperator.md)や、[Immutable](https://facebook.github.io/immutable-js)のようなライブラリを使えば簡単です。
 
-While it is technically *possible* to [write impure reducers](https://github.com/reactjs/redux/issues/328#issuecomment-125035516) that mutate the data for performance corner cases, we actively discourage you from doing this. Development features like time travel, record/replay, or hot reloading will break. Moreover it doesn't seem like immutability poses performance problems in most real apps, because, as [Om](https://github.com/omcljs/om) demonstrates, even if you lose out on object allocation, you still win by avoiding expensive re-renders and re-calculations, as you know exactly what changed thanks to reducer purity.
+パフォーマンスが求められる場合、[純粋でないReducerを書く (write impure reducers)](https://github.com/reactjs/redux/issues/328#issuecomment-125035516)ことは技術的には *可能* です。しかし強く反対します。時間の行き来（タイムトラベル）や記録/再生、自動再読み込みなどの開発機能は、すべて壊れてしまいます。 さらに実際のアプリではほとんどの場合、不変性がパフォーマンスの問題になるようなことは、ほとんどありません。[Om](https://github.com/omcljs/om)が実証したように、オブジェクトの割り当てで遅れをとったとしても、まだ優位に立てます。なぜならReducerが純粋なおかげで、何が変化したかはっきり分かります。そのためコストの高い再描画や再計算を避けられるからです。
 
 ### Elm
 
-[Elm](http://elm-lang.org/) is a functional programming language inspired by Haskell and created by [Evan Czaplicki](https://twitter.com/czaplic). It enforces [a “model view update” architecture](https://github.com/evancz/elm-architecture-tutorial/), where the update has the following signature: `(action, state) => state`. Elm “updaters” serve the same purpose as reducers in Redux.
+[Elm](http://elm-lang.org/)は関数型のプログラミング言語です。Haskellに触発され、[Evan Czaplicki](https://twitter.com/czaplic)によってつくられました。 [モデルビューの更新アーキテクチャ(a “model view update” architecture)](https://github.com/evancz/elm-architecture-tutorial/)を強制します。 これは更新が、次の形式に従うということです: `(action, state) => state`。 Elmの “Updater”は、ReduxのReducerと同じ目的を担います。
 
-Unlike Redux, Elm is a language, so it is able to benefit from many things like enforced purity, static typing, out of the box immutability, and pattern matching (using the `case` expression). Even if you don't plan to use Elm, you should read about the Elm architecture, and play with it. There is an interesting [JavaScript library playground implementing similar ideas](https://github.com/paldepind/noname-functional-frontend-framework). We should look there for inspiration on Redux! One way that we can get closer to the static typing of Elm is by [using a gradual typing solution like Flow](https://github.com/reactjs/redux/issues/290).
+Reduxと違い、Elmは言語です。そのために多くの恩恵が得られます。純粋性の強制や、静的型付、枠を超えた不変性、そして（`case`表現を使った）パターンマッチングなど。たとえElmを使うつもりがなくても、Elmのアーキテクチャは読んで試してみるべきです。興味深い [同様のアイデアを実装したJavaScriptライブラリを試す場所 (JavaScript library playground implementing similar ideas)](https://github.com/paldepind/noname-functional-frontend-framework)があります。 Reduxのひらめきのために、ここを見るべきです！Elmの静的型付に慣れる、１つの方法があります。それは [Flowのような、ゆるやかな型付けの解決策を使うこと (using a gradual typing solution like Flow)](https://github.com/reactjs/redux/issues/290)です。
 
 ### Immutable
 
-[Immutable](https://facebook.github.io/immutable-js) is a JavaScript library implementing persistent data structures. It is performant and has an idiomatic JavaScript API.
+[Immutable](https://facebook.github.io/immutable-js)はJavaScriptのライブラリです。一貫性のあるデータ構造を実装しています。パフォーマンスが高く、慣用的なJavaScriptのAPIを備えています。
 
-Immutable and most similar libraries are orthogonal to Redux. Feel free to use them together!
+Immutableや他の類似ライブラリのほとんどは、Reduxに影響しません。遠慮なく使ってください！
 
-**Redux doesn't care *how* you store the state—it can be a plain object, an Immutable object, or anything else.** You'll probably want a (de)serialization mechanism for writing universal apps and hydrating their state from the server, but other than that, you can use any data storage library *as long as it supports immutability*. For example, it doesn't make sense to use Backbone for Redux state, because Backbone models are mutable.
+**Reduxは *どのように* 状態が保持されるか気にしません。単なるオブジェクトでもいいし、Immutableのオブジェクトや、他の何でも構いません。** ユニバーサルアプリを書くためには、おそらく（デ）シリアライゼーション（訳注：シリアライゼーションとは、データをネットワークで送受信できるように変換すること。直列化。 デシリアライゼーションとは、変換されたデータをソフトが読めるように復元すること。非直列化。
+）の仕組みが欲しくなるでしょう。サーバからの状態を溶け込ませるためです。しかし *不変性に対応している限り*、それ以外にどんなデータストレージを使っても構いません。例えば、Reduxの状態としてBackboneを使うのは理にかなっていません。なぜならBackboneのモデルは変更されるからです。
 
-Note that, even if your immutable library supports cursors, you shouldn't use them in a Redux app. The whole state tree should be considered read-only, and you should use Redux for updating the state, and subscribing to the updates. Therefore writing via cursor doesn't make sense for Redux. **If your only use case for cursors is decoupling the state tree from the UI tree and gradually refining the cursors, you should look at selectors instead.** Selectors are composable getter functions. See [reselect](http://github.com/faassen/reselect) for a really great and concise implementation of composable selectors.
+注意することがあります。それは、たとえ不変性のあるライブラリがカーソルに対応していたとしても、Reduxのアプリでは使うべきではないということです。すべての状態ツリーは読み込み専用と考えるべきです。そしてReduxを状態更新や、更新の購読のために使うべきです。そのためReduxでカーソルから書き込みをするのは理にかなっていません。 **UIツリーから状態ツリーを分離して、段階的にカーソルを改良する。これがカーソルを使う唯一のユースケースなら、代わりにセレクターを考慮すべきです。** セレクターは、合成可能なGetter関数です。[reselect](http://github.com/faassen/reselect)は合成可能なセレクターを本当に素晴らしく、そして簡潔に実装しています。
 
 ### Baobab
 
-[Baobab](https://github.com/Yomguithereal/baobab) is another popular library implementing immutable API for updating plain JavaScript objects. While you can use it with Redux, there is little benefit in using them together.
+[Baobab](https://github.com/Yomguithereal/baobab)は、ふつうのJavaScriptオブジェクトを更新するために不変性を持ったAPIを実装している、もう１つの人気ライブラリです。 Reduxとともに使えますが、一緒に使う利点はほとんどありません。
 
-Most of the functionality Baobab provides is related to updating the data with cursors, but Redux enforces that the only way to update the data is to dispatch an action. Therefore they solve the same problem differently, and don't complement each other.
+Baobabが用意しているほとんどの機能は、カーソルでデータを更新することに関連しています。しかしReduxでデータを更新する唯一の方法は、アクションを送ることです。つまりBaobabとReduxは、同じ問題を異なる方法で解決しています。そしてこの２つは、補い合うことができません。
 
-Unlike Immutable, Baobab doesn't yet implement any special efficient data structures under the hood, so you don't really win anything from using it together with Redux. It's easier to just use plain objects in this case.
+Immutableとは違い、Baobabは内部で特別に効率的なデータ構造をまだ何も実装していません。そのためReduxと一緒に使っても、本当に何も得るものはありません。 ただ単にふつうのオブジェクトを使った方が簡単です。
 
 ### RxJS
 
-[RxJS](https://github.com/ReactiveX/RxJS) is a superb way to manage the complexity of asynchronous apps. In fact [there is an effort to create a library that models human-computer interaction as interdependent observables](http://cycle.js.org).
+[RxJS](https://github.com/ReactiveX/RxJS)は非同期的なアプリの複雑性を管理する素晴らしい方法です。実際、[ライブラリを作ろうと努力されています。このライブラリは、互いに依存したObservableとして、人間とコンピュータの相互作用を形づくります。(there is an effort to create a library that models human-computer interaction as interdependent observables)](http://cycle.js.org).
 
-Does it make sense to use Redux together with RxJS? Sure! They work great together. For example, it is easy to expose a Redux store as an observable:
+RxJSとReduxを一緒に使う意味はあるでしょうか？ もちろん！素晴らしく協働してくれます。例えば、ReduxのStoreをObservableとして置くのは簡単です:
 
 ```js
 function toObservable(store) {
@@ -59,8 +61,8 @@ function toObservable(store) {
 }
 ```
 
-Similarly, you can compose different asynchronous streams to turn them into actions before feeding them to `store.dispatch()`.
+同様に、異なる非同期ストリームをActionへ変えるために合成することもできます。`store.dispatch()`へ送る前に行います。
 
-The question is: do you really need Redux if you already use Rx? Maybe not. It's not hard to [re-implement Redux in Rx](https://github.com/jas-chen/rx-redux). Some say it's a two-liner using Rx `.scan()` method. It may very well be!
+疑問: すでにRxを使っているなら、Reduxは本当に必要？ たぶん必要ありません。[RxでReduxを再実装する (re-implement Redux in Rx)](https://github.com/jas-chen/rx-redux)のは、難しくありません。Rxの`.scan()`メソッドを使った２系統だという人もいます（訳注：２つのストリームという意味か？１つはActionをStoreに流す、もう１つはStoreの状態変更をビューに流す）。 それはとても良いかも！
 
-If you're in doubt, check out the Redux source code (there isn't much going on there), as well as its ecosystem (for example, [the developer tools](https://github.com/gaearon/redux-devtools)). If you don't care too much about it and want to go with the reactive data flow all the way, you might want to explore something like [Cycle](http://cycle.js.org) instead, or even combine it with Redux. Let us know how it goes!
+嘘だと思うなら、Reduxのソースコードを確認してください(そんなに違いはありません)。エコシステムも同様です(例えば、[開発者ツール (the developer tools)](https://github.com/gaearon/redux-devtools))。こういったことをあまり気にかけず、ずっとリアクティブなデータフローでやりたいなら、代わりに何か他を調べても良いでしょう。例えば、[Cycle](http://cycle.js.org)など。Reduxと組み合わせても良いかもしれません。どうなるか教えてください！
