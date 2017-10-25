@@ -46,7 +46,7 @@ Reduxでは、すべてのアプリケーションの状態は一つのオブジ
 
 なぜReducerと呼ばれるのでしょう？それは、[`Array.prototype.reduce(reducer, ?initialValue)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) に渡すタイプの関数だからです。純粋関数であることは、とても大切です。Reducerで、 **絶対に** してはいけないこと:
 
-* 引数を変化させる
+* 引数に手を加える
 * 副作用を起こす。例）APIコールやページ遷移
 * 純粋ではない関数を呼び出す。 例）`Date.now()` や `Math.random()`
 
@@ -103,7 +103,7 @@ function todoApp(state = initialState, action) {
 
 注意事項:
 
-1. **`state`を変更している訳ではありません** [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)でコピーを作っています。 `Object.assign(state, { visibilityFilter: action.filter })`も間違いです : これは最初の引数を変更しています。最初の引数として、**必ず** 空のオブジェクトを渡してください。代わりに [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) で `{ ...state, ...newState }` と書くこともできます。
+1. **`state`をいじっている訳ではありません** [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)でコピーを作っています。 `Object.assign(state, { visibilityFilter: action.filter })`も間違いです : これは最初の引数に手を加えています。最初の引数として、**必ず** 空のオブジェクトを渡してください。代わりに [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) で `{ ...state, ...newState }` と書くこともできます。
 
 2. **`default（既定）` ケースとして、前の`state（状態）を返します`。** すべての不明なActionには、前の`state`を返すのが重要です。
 
