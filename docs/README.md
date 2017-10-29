@@ -7,7 +7,7 @@
   * [３つの原則](/docs/introduction/ThreePrinciples.md)
   * [先行技術](/docs/introduction/PriorArt.md)
   * [エコシステム](/docs/introduction/Ecosystem.md)
-  * [例](/docs/introduction/Examples.md)
+  * [使用例](/docs/introduction/Examples.md)
 * [初級](/docs/basics/README.md)
   * [Action](/docs/basics/Actions.md)
   * [Reducer](/docs/basics/Reducers.md)
