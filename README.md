@@ -3,7 +3,7 @@
 ReduxはJavaScriptアプリのための、予測しやすい（意外性のない）状態コンテナです。  
 (WordPressのフレームワークと混同しないでください – [Redux Framework](https://reduxframework.com/).)
 
-アプリケーションが異なる環境（クライアント、サーバー、そしてネイティヴ）で一貫して動く手助けをします。テストも簡単です。さらに[時間を行き来するデバッガーを使い、コードを自動反映しながら編集する (live code editing combined with a time traveling debugger)](https://github.com/gaearon/redux-devtools)ように、開発者のための素晴らしい体験も提供します。
+アプリケーションが異なる環境（クライアント、サーバー、そしてネイティヴ）で一貫して動く手助けをします。テストも簡単です。さらに[タイムトラベル（時間を行き来）するデバッガーを使い、コードを自動反映しながら編集する (live code editing combined with a time traveling debugger)](https://github.com/gaearon/redux-devtools)ように、開発者のための素晴らしい体験も提供します。
 
 Reduxは[React](https://facebook.github.io/react/)や、他のどんなViewライブリとも使うことができます。
 Reduxは軽量です。(依存を含め、2kB).
@@ -37,7 +37,7 @@ Reduxは軽量です。(依存を含め、2kB).
 
 ### 開発者の経験
 
-Ruduxは[“時間を行き来しながら自動で再読み込みする (Hot Reloading with Time Travel)”](https://www.youtube.com/watch?v=xsSnOQynTHs)という、Reactヨーロッパの講演で活動しながら書きました。目的は、最小のAPIでありながら完全に予測可能なふるまいをする状態管理ライブラリです。ログをとることもできるし、自動で再読み込みもできるし、時間を行き来することもできるし、ユニバーサルアプリもできるし、記録や再生もできます。開発者から、何も買わなくても。
+Ruduxは[“タイムトラベルしながら自動で再読み込みする (Hot Reloading with Time Travel)”](https://www.youtube.com/watch?v=xsSnOQynTHs)という、Reactヨーロッパの講演で活動しながら書きました。目的は、最小のAPIでありながら完全に予測可能なふるまいをする状態管理ライブラリです。ログをとることもできるし、自動で再読み込みもできるし、タイムトラベルすることもできるし、ユニバーサルアプリもできるし、記録や再生もできます。開発者から、何も買わなくても。
 
 ### 影響
 
@@ -64,14 +64,14 @@ ReduxのソースコードはES2015で書かれています。しかしCommonJS�
 
 #### 補完パッケージ
 
-ほとんどの場合、[React連携 (the React bindings)](https://github.com/reactjs/react-redux)と[開発者ツール (the developer tools)](https://github.com/gaearon/redux-devtools)も必要です。
+ほとんどの場合、[Reactバインディング (the React bindings)](https://github.com/reactjs/react-redux)と[開発者ツール (the developer tools)](https://github.com/gaearon/redux-devtools)も必要です。
 
 ```
 npm install --save react-redux
 npm install --save-dev redux-devtools
 ```
 
-Redux自体とちがい、Reduxと連携する多くのパッケージはUMDビルドを提供していません。そのため最も快適な開発を体験するためには、CommonJSのモジュールバンドラをおすすめします。[Webpack](https://webpack.js.org/)や[Browserify](http://browserify.org/)などです。
+Redux自体と違い、Reduxとバインディング（連携）する多くのパッケージはUMDビルドを提供していません。そのため最も快適な開発を体験するためには、CommonJSのモジュールバンドラをおすすめします。[Webpack](https://webpack.js.org/)や[Browserify](http://browserify.org/)などです。
 
 ### 要点
 
@@ -111,7 +111,7 @@ function counter(state = 0, action) {
 let store = createStore(counter)
 
 // 状態の変化に応じてUIを更新するためにsubscribe()が使えます。
-// たいていはsubscribe()を直接呼び出すのではなく、Viewと連携するライブラリを使います。(例： React Redux)。
+// たいていはsubscribe()を直接呼び出すのではなく、Viewとバインディング（連携）するライブラリを使います。(例： React Redux)。
 // しかし、現在の状態をローカルストレージに保持するのも簡便です。
 
 store.subscribe(() =>
@@ -174,7 +174,7 @@ Fluxを書いたことがあるなら、理解しなければならない一つ�
 
 オフラインのためのドキュメントは、 こちらを: [devdocs](http://devdocs.io/redux/)
 
-### 例
+### 使用例
 
 ほとんどすべての例は、CodeSandboxというサンドボックスに対応しています。オンラインで試せる双方向版のコードです。
 

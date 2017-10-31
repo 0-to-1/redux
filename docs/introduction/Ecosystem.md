@@ -48,7 +48,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ## Reduxを使う
 
-### 連携
+### バインディング（連携プログラム）
 
 * [react-redux](https://github.com/gaearon/react-redux) — React
 * [ng-redux](https://github.com/wbuchwalter/ng-redux) — Angular
@@ -77,7 +77,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### ルーティング（ページ遷移）
 
-* [react-router-redux](https://github.com/reactjs/react-router-redux) — ReactルータとReduxの同期を保つ、徹底してシンプルな連携ライブラリ
+* [react-router-redux](https://github.com/reactjs/react-router-redux) — ReactルータとReduxの同期を保つ、徹底してシンプルなバインディング（連携プログラム）
 * [redial](https://github.com/markdalgleish/redial) — ユニバーサルなデータ取得やルートのライフサイクルをReactのために管理する。Reduxとの相性も良い
 
 ### コンポーネント（構成要素）
@@ -92,7 +92,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [redux-history-transitions](https://github.com/johanneslumpe/redux-history-transitions) — 任意のアクションに基づいたルート遷移
 * [redux-optimist](https://github.com/ForbesLindesay/redux-optimist) — あとでコミットされるか、または元に戻される可能性のあるActionを楽観的に適用する
 * [redux-optimistic-ui](https://github.com/mattkrick/redux-optimistic-ui) — 型にとらわれず（訳注：JSのオブジェクトだけでなく、 immutable.jsなどでも良い）、楽観的に更新するReducerのエンハンサー
-* [redux-undo](https://github.com/omnidan/redux-undo) —  Ruducerのための、手っ取り早いUndo/Redo（元に戻す/やり直す）とAction履歴
+* [redux-undo](https://github.com/omnidan/redux-undo) —  Ruducerのための手っ取り早い、元に戻す/やり直す(Undo/Redo)とAction履歴
 * [redux-ignore](https://github.com/omnidan/redux-ignore) — 配列かフィルター関数によって、ReduxのActionを無視（訳注：特定のActionを無視することで、パフォーマンスの問題を回避）
 * [redux-recycle](https://github.com/omnidan/redux-recycle) — 特定のActionに対して、Reduxの状態をリセット
 * [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) — １つの購読者通知で、複数のActionを送信
