@@ -3,16 +3,20 @@ import { camelizeKeys } from 'humps'
 
 // Extracts the next page URL from Github API response.
 const getNextPageUrl = response => {
+  // link = <https://api.github.com/user/73962/starred?page=2>; rel="next", <https://api.github.com/user/73962/starred?page=4>; rel="last"
   const link = response.headers.get('link')
   if (!link) {
     return null
   }
 
+  // nextLink = <https://api.github.com/user/73962/starred?page=2>; rel="next"
   const nextLink = link.split(',').find(s => s.indexOf('rel="next"') > -1)
   if (!nextLink) {
     return null
   }
 
+  // nextLink.split(';')[0] = <https://api.github.com/user/73962/starred?page=2>
+  //          .slice(1, -1) = https://api.github.com/user/73962/starred?page=2
   return nextLink.split(';')[0].slice(1, -1)
 }
 

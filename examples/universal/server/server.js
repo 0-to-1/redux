@@ -28,6 +28,7 @@ const handleRender = (req, res) => {
   // Query our mock API asynchronously
   fetchCounter(apiResult => {
     // Read the counter from the request, if provided
+    // http://localhost:3000/?counter=10
     const params = qs.parse(req.query)
     const counter = parseInt(params.counter, 10) || apiResult || 0
 
