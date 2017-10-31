@@ -1,10 +1,9 @@
-# Examples
+# 使用例
 
-Redux is distributed with a few examples in its [source code](https://github.com/reactjs/redux/tree/master/examples). Most of these examples are also on [CodeSandbox](https://codesandbox.io), this is an online editor that lets you play with the examples online.
+Reduxではいくつかの使用例が、その[ソースコード](https://github.com/reactjs/redux/tree/master/examples)とともに提供されています。これら使用例のほとんどは、 [CodeSandbox](https://codesandbox.io)にもあります。CodeSandboxはオンラインで使用例を試せる、オンラインエディタです。
+## 普通のカウンター (Counter Vanilla)
 
-## Counter Vanilla
-
-Run the [Counter Vanilla](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla) example:
+[Counter Vanilla](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -13,11 +12,11 @@ cd redux/examples/counter-vanilla
 open index.html
 ```
 
-It does not require a build system or a view framework and exists to show the raw Redux API used with ES5.
+ビルドシステムやビューフレームワークは必要ありません。ES5で生のRedux APIを確認できます。
 
-## Counter
+## カウンター
 
-Run the [Counter](https://github.com/reactjs/redux/tree/master/examples/counter) example:
+[Counter](https://github.com/reactjs/redux/tree/master/examples/counter)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -29,15 +28,15 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/counter).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/counter)を確認してください。
 
-This is the most basic example of using Redux together with React. For simplicity, it re-renders the React component manually when the store changes. In real projects, you will likely want to use the highly performant [React Redux](https://github.com/reactjs/react-redux) bindings instead.
+ReactとともにReduxを使った、最も基本的な使用例です。分かりやすくするため、Storeが変化したら手動でReactコンポーネントを再度レンダリング（描画）しています。 実際のプロジェクトでは、代わりに高性能な[React Redux](https://github.com/reactjs/react-redux)バインディング（連携プログラム）を使いたくなるでしょう。
 
-This example includes tests.
+この使用例は、テストを含んでいます。
 
-## Todos
+## Todo
 
-Run the [Todos](https://github.com/reactjs/redux/tree/master/examples/todos) example:
+[Todos](https://github.com/reactjs/redux/tree/master/examples/todos)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -49,15 +48,15 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos)を確認してください。
 
-This is the best example to get a deeper understanding of how the state updates work together with components in Redux. It shows how reducers can delegate handling actions to other reducers, and how you can use [React Redux](https://github.com/reactjs/react-redux) to generate container components from your presentational components.
+状態更新とReduxのコンポーネント（構成要素）が、どのように協働するか。これを深く理解するのに最適な使用例です。具体的には、Reducerが他のReducerへActionの処理を委任する方法。そしてプレゼンテーショナルコンポーネントからコンテナコンポーネントを作りだすために、[React Redux](https://github.com/reactjs/react-redux)を使う方法。この２つを示しています。
 
-This example includes tests.
+この使用例は、テストを含んでいます。
 
-## Todos with Undo
+## やり直し(Undo)付きTodo
 
-Run the [Todos with Undo](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo) example:
+[Todos with Undo](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -69,13 +68,13 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos-with-undo).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos-with-undo)を確認してください。
 
-This is a variation on the previous example. It is almost identical, but additionally shows how wrapping your reducer with [Redux Undo](https://github.com/omnidan/redux-undo) lets you add a Undo/Redo functionality to your app with a few lines of code.
+先ほどの使用例に、手を加えたものです。ほどんど同じですが、 Reducerを[Redux Undo](https://github.com/omnidan/redux-undo) でどのようにラップ（内包）するかを示しています。数行のコードで、元に戻す/やり直す(Undo/Redo)機能が追加できます。
 
 ## TodoMVC
 
-Run the [TodoMVC](https://github.com/reactjs/redux/tree/master/examples/todomvc) example:
+[TodoMVC](https://github.com/reactjs/redux/tree/master/examples/todomvc)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -87,15 +86,15 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todomvc).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todomvc)を確認してください。
 
-This is the classical [TodoMVC](http://todomvc.com/) example. It's here for the sake of comparison, but it covers the same points as the Todos example.
+古典的な[TodoMVC](http://todomvc.com/)の例です。比較のために掲載しています。しかし、Todoの例と同じ要点を取り扱っています。
 
-This example includes tests.
+この使用例は、テストを含んでいます。
 
-## Shopping Cart
+## ショッピングカート（買い物かご）
 
-Run the [Shopping Cart](https://github.com/reactjs/redux/tree/master/examples/shopping-cart) example:
+[Shopping Cart](https://github.com/reactjs/redux/tree/master/examples/shopping-cart)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -107,13 +106,13 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/shopping-cart).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/shopping-cart)を確認してください。
 
-This example shows important idiomatic Redux patterns that become important as your app grows. In particular, it shows how to store entities in a normalized way by their IDs, how to compose reducers on several levels, and how to define selectors alongside the reducers so the knowledge about the state shape is encapsulated. It also demonstrates logging with [Redux Logger](https://github.com/fcomb/redux-logger) and conditional dispatching of actions with [Redux Thunk](https://github.com/gaearon/redux-thunk) middleware.
+この使用例は、アプリが成長するにつれて重要になる慣用的なReduxパターンを示しています。特に、IDによって標準化された方法でエンティティを保持する方法。階層化した複数のReducerを合成する方法。そして状態の形についての認識をカプセル化するために、ReducerとともにSelector（訳注：セレクターは状態の一部を引数として受け取り、処理して返す関数）を定義する方法。この３つについて示しています。また[Redux Logger](https://github.com/fcomb/redux-logger)でログ取得や、 ミドルウェアの[Redux Thunk](https://github.com/gaearon/redux-thunk)で条件付きのAction送信もしています。
 
-## Tree View
+## ツリー表示
 
-Run the [Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view) example:
+[Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -125,15 +124,15 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/tree-view).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/tree-view)を確認してください。
 
-This example demonstrates rendering a deeply nested tree view and representing its state in a normalized form so it is easy to update from reducers. Good rendering performance is achieved by the container components granularly subscribing only to the tree nodes that they render.
+この使用例では、深くネストされたツリー表示のレンダリングと、その状態を標準化された形で表すデモをしています。状態を標準化された形にすることで、Reducerの更新が簡単になります。レンダリングのパフォーマンスを高めるには、コンテナコンポーネントが描画するツリーノードだけを高い粒度で購読することです。
 
-This example includes tests.
+この使用例は、テストを含んでいます。
 
-## Async
+## 非同期
 
-Run the [Async](https://github.com/reactjs/redux/tree/master/examples/async) example:
+[Async](https://github.com/reactjs/redux/tree/master/examples/async)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -145,13 +144,13 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/async).
+または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/async)を確認してください。
 
-This example includes reading from an asynchronous API, fetching data in response to user input, showing loading indicators, caching the response, and invalidating the cache. It uses [Redux Thunk](https://github.com/gaearon/redux-thunk) middleware to encapsulate asynchronous side effects.
+この使用例は非同期APIからの読み込み、ユーザー入力に対するデータ取得、取得したデータのキャッシュ、キャッシュの無効化が含まれています。また、ミドルウェアの[Redux Thunk](https://github.com/gaearon/redux-thunk)が使われています。 非同期の副作用をカプセル化するためです。
 
-## Universal
+## ユニバーサル
 
-Run the [Universal](https://github.com/reactjs/redux/tree/master/examples/universal) example:
+[Universal](https://github.com/reactjs/redux/tree/master/examples/universal) を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -163,11 +162,11 @@ npm start
 open http://localhost:3000/
 ```
 
-This is a basic demonstration of [server rendering](../recipes/ServerRendering.md) with Redux and React. It shows how to prepare the initial store state on the server, and pass it down to the client so the client store can boot up from an existing state.
+ReduxとReactで[サーバーレンダリング (server rendering)](../recipes/ServerRendering.md)をする基礎的なデモです。サーバーでStoreの初期状態を準備して、その状態をクライアントに受け渡す方法を示しています。クライアントのStoreは、サーバーから渡された既存の状態から立ち上げることができます。
 
-## Real World
+## リアルワールド
 
-Run the [Real World](https://github.com/reactjs/redux/tree/master/examples/real-world) example:
+[Real World](https://github.com/reactjs/redux/tree/master/examples/real-world)を起動する:
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -179,10 +178,10 @@ npm start
 open http://localhost:3000/
 ```
 
-Or check out the [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/real-world).
+または [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/real-world)を確認してください。
 
-This is the most advanced example. It is dense by design. It covers keeping fetched entities in a normalized cache, implementing a custom middleware for API calls, rendering partially loaded data, pagination, caching responses, displaying error messages, and routing. Additionally, it includes Redux DevTools.
+もっとも高度な使用例です。多くのデザインパターンが詰まっています。標準化したキャッシュで、取得したエンティティを保持。API呼び出しのために、カスタマイズしたミドルウェアを実行。部分的に読み込んだデータをレンダリング。ページ表示。レスポンスのキャッシュ。エラーメッセージの表示。そしてルーティング。加えて、Reduxの開発者ツール(DevTools)も含まれます。
 
-## More Examples
+## 他の使用例
 
-You can find more examples in [Awesome Redux](https://github.com/xgrommx/awesome-redux).
+[Awesome Redux](https://github.com/xgrommx/awesome-redux)で、もっと多くの使用例を確認できます。
