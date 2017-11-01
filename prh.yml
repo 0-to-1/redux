@@ -1,11 +1,24 @@
 version: 1
 rules:
   - expected: Redux
-    pattern: /[rR]edux(?!-)/
+    pattern: /redux(?!-)/
   - expected: Web
-    pattern: /[wW]eb/
+    pattern: web
   - expected: 例えば
-    pattern:  /たとえば/
+    pattern:  たとえば
     specs:
       - from: たとえば
         to:   例えば
+  - expected: 1番
+    pattern: 一番
+  - expected: 2番
+    pattern: 二番
+  - expected: 3番
+    pattern: 三番
+  - expected: ください
+    pattern: 下さい
+  - expected: でき
+    pattern:
+      - 出来
+      - することができ
+      - することが可能で
