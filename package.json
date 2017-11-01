@@ -114,6 +114,10 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "rxjs": "^5.5.0",
+    "textlint": "^9.0.1",
+    "textlint-rule-preset-japanese": "^2.0.0",
+    "textlint-rule-preset-jtf-style": "^2.3.0",
+    "textlint-rule-prh": "^5.0.1",
     "typescript": "^1.8.0",
     "typescript-definition-tester": "0.0.4"
   },
