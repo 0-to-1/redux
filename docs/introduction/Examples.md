@@ -3,7 +3,7 @@
 Reduxではいくつかの使用例が、その[ソースコード](https://github.com/reactjs/redux/tree/master/examples)とともに提供されています。これら使用例のほとんどは、 [CodeSandbox](https://codesandbox.io)にもあります。CodeSandboxはオンラインで使用例を試せる、オンラインエディタです。
 ## 普通のカウンター (Counter Vanilla)
 
-[Counter Vanilla](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla)を起動する:
+[Counter Vanilla](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -16,7 +16,7 @@ open index.html
 
 ## カウンター
 
-[Counter](https://github.com/reactjs/redux/tree/master/examples/counter)を起動する:
+[Counter](https://github.com/reactjs/redux/tree/master/examples/counter)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -36,7 +36,7 @@ ReactとともにReduxを使った、最も基本的な使用例です。分か�
 
 ## Todo
 
-[Todos](https://github.com/reactjs/redux/tree/master/examples/todos)を起動する:
+[Todos](https://github.com/reactjs/redux/tree/master/examples/todos)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -50,13 +50,13 @@ open http://localhost:3000/
 
 または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos)を確認してください。
 
-状態更新とReduxのコンポーネント（構成要素）が、どのように協働するか。これを深く理解するのに最適な使用例です。具体的には、Reducerが他のReducerへActionの処理を委任する方法。そしてプレゼンテーショナルコンポーネントからコンテナコンポーネントを作りだすために、[React Redux](https://github.com/reactjs/react-redux)を使う方法。この２つを示しています。
+状態更新とReduxのコンポーネント（構成要素）が、どのように協働するか。これを深く理解するのに最適な使用例です。具体的には、Reducerが他のReducerへActionの処理を委任する方法。そしてプレゼンテーショナルコンポーネントからコンテナコンポーネントを作りだすために、[React Redux](https://github.com/reactjs/react-redux)を使う方法。この2つを示しています。
 
 この使用例は、テストを含んでいます。
 
-## やり直し(Undo)付きTodo
+## やり直し（Undo)付きTodo
 
-[Todos with Undo](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo)を起動する:
+[Todos with Undo](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -70,11 +70,11 @@ open http://localhost:3000/
 
 または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos-with-undo)を確認してください。
 
-先ほどの使用例に、手を加えたものです。ほどんど同じですが、 Reducerを[Redux Undo](https://github.com/omnidan/redux-undo) でどのようにラップ（内包）するかを示しています。数行のコードで、元に戻す/やり直す(Undo/Redo)機能が追加できます。
+先ほどの使用例に、手を加えたものです。ほどんど同じですが、 Reducerを[Redux Undo](https://github.com/omnidan/redux-undo) でどのようにラップ（内包）するかを示しています。数行のコードで、元に戻す/やり直す（Undo/Redo)機能が追加できます。
 
 ## TodoMVC
 
-[TodoMVC](https://github.com/reactjs/redux/tree/master/examples/todomvc)を起動する:
+[TodoMVC](https://github.com/reactjs/redux/tree/master/examples/todomvc)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -94,7 +94,7 @@ open http://localhost:3000/
 
 ## ショッピングカート（買い物かご）
 
-[Shopping Cart](https://github.com/reactjs/redux/tree/master/examples/shopping-cart)を起動する:
+[Shopping Cart](https://github.com/reactjs/redux/tree/master/examples/shopping-cart)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -108,11 +108,11 @@ open http://localhost:3000/
 
 または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/shopping-cart)を確認してください。
 
-この使用例は、アプリが成長するにつれて重要になる慣用的なReduxパターンを示しています。特に、IDによって標準化された方法でエンティティを保持する方法。階層化した複数のReducerを合成する方法。そして状態の形についての認識をカプセル化するために、ReducerとともにSelector（訳注：セレクターは状態の一部を引数として受け取り、処理して返す関数）を定義する方法。この３つについて示しています。また[Redux Logger](https://github.com/fcomb/redux-logger)でログ取得や、 ミドルウェアの[Redux Thunk](https://github.com/gaearon/redux-thunk)で条件付きのAction送信もしています。
+この使用例は、アプリが成長するにつれて重要になる慣用的なReduxパターンを示しています。特に、IDによって標準化された方法でエンティティを保持する方法。階層化した複数のReducerを合成する方法。そして状態の形についての認識をカプセル化するために、ReducerとともにSelector（訳注：セレクターは状態の一部を引数として受け取り、処理して返す関数）を定義する方法。この3つについて示しています。また[Redux Logger](https://github.com/fcomb/redux-logger)でログ取得や、 ミドルウェアの[Redux Thunk](https://github.com/gaearon/redux-thunk)で条件付きのAction送信もしています。
 
 ## ツリー表示
 
-[Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view)を起動する:
+[Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -132,7 +132,7 @@ open http://localhost:3000/
 
 ## 非同期
 
-[Async](https://github.com/reactjs/redux/tree/master/examples/async)を起動する:
+[Async](https://github.com/reactjs/redux/tree/master/examples/async)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -150,7 +150,7 @@ open http://localhost:3000/
 
 ## ユニバーサル
 
-[Universal](https://github.com/reactjs/redux/tree/master/examples/universal) を起動する:
+[Universal](https://github.com/reactjs/redux/tree/master/examples/universal) を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -166,7 +166,7 @@ ReduxとReactで[サーバーレンダリング (server rendering)](../recipes/S
 
 ## リアルワールド
 
-[Real World](https://github.com/reactjs/redux/tree/master/examples/real-world)を起動する:
+[Real World](https://github.com/reactjs/redux/tree/master/examples/real-world)を起動する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -180,7 +180,7 @@ open http://localhost:3000/
 
 または [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/real-world)を確認してください。
 
-もっとも高度な使用例です。多くのデザインパターンが詰まっています。標準化したキャッシュで、取得したエンティティを保持。API呼び出しのために、カスタマイズしたミドルウェアを実行。部分的に読み込んだデータをレンダリング。ページ表示。レスポンスのキャッシュ。エラーメッセージの表示。そしてルーティング。加えて、Reduxの開発者ツール(DevTools)も含まれます。
+もっとも高度な使用例です。多くのデザインパターンが詰まっています。標準化したキャッシュで、取得したエンティティを保持。API呼び出しのために、カスタマイズしたミドルウェアを実行。部分的に読み込んだデータをレンダリング。ページ表示。レスポンスのキャッシュ。エラーメッセージの表示。そしてルーティング。加えて、Reduxの開発者ツール（DevTools)も含まれます。
 
 ## 他の使用例
 
