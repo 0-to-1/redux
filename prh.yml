@@ -1,0 +1,11 @@
+version: 1
+rules:
+  - expected: Redux
+    pattern: /[rR]edux(?!-)/
+  - expected: Web
+    pattern: /[wW]eb/
+  - expected: 例えば
+    pattern:  /たとえば/
+    specs:
+      - from: たとえば
+        to:   例えば
