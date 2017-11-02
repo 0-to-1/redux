@@ -118,6 +118,7 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rxjs": "^5.5.0",
     "textlint": "^9.0.1",
+    "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-japanese": "^2.0.0",
     "textlint-rule-preset-jtf-style": "^2.3.0",
     "textlint-rule-prh": "^5.0.1",
