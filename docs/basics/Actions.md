@@ -4,7 +4,7 @@
 
 **Action** は情報の本体であり、アプリケーションからStoreへ送るデータです。そしてStoreのための、*唯一の* 情報源です。[`store.dispatch()`](../api/Store.md#dispatch)を使うことで、ActionはStoreに送られます。
 
-Here's an example action which represents adding a new todo item:
+下記はActionの例です。新しいTodo項目の追加を表しています。
 
 ```js
 const ADD_TODO = 'ADD_TODO'
@@ -13,23 +13,23 @@ const ADD_TODO = 'ADD_TODO'
 ```js
 {
   type: ADD_TODO,
-  text: 'Build my first Redux app'
+  text: '初めてのReduxアプリをつくる'
 }
 ```
 
-Actions are plain JavaScript objects. Actions must have a `type` property that indicates the type of action being performed. Types should typically be defined as string constants. Once your app is large enough, you may want to move them into a separate module.
+Actionは単なるJavaScriptのオブジェクトです。Actionは必ず`type`プロパティを持ちます。`type`プロパティが、実行されるActionのタイプを示しているのです。一般的には、文字列の定数として定義すべきです。そしてアプリが大きくなったら、Actionタイプを別のモジュールへ移したくなるかもしれません。
 
 ```js
 import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
 ```
 
->##### Note on Boilerplate
+>##### 常用文についての注意
 
->You don't have to define action type constants in a separate file, or even to define them at all. For a small project, it might be easier to just use string literals for action types. However, there are some benefits to explicitly declaring constants in larger codebases. Read [Reducing Boilerplate](../recipes/ReducingBoilerplate.md) for more practical tips on keeping your codebase clean.
+>別ファイルで、Actionタイプの定数を定義する必要はありません。というより定義すること自体、しなくても構いません。小さなプロジェクトなら、Actionタイプとして文字列リテラルを使うだけにした方が簡単でしょう。しかし大きなコードベースでは明示的に定数を宣言することに、いくつか利点があります。詳しくは、[常用文の削減](../recipes/ReducingBoilerplate.md)を読んでください。コードベースを綺麗に保つ、実践的なコツが書かれています。
 
-Other than `type`, the structure of an action object is really up to you. If you're interested, check out [Flux Standard Action](https://github.com/acdlite/flux-standard-action) for recommendations on how actions could be constructed.
+`type`以外の、Actionオブジェクトの構造は全てあなた次第です。 Actionの構成方法に関するおすすめは、[Fluxの標準Action（Flux Standard Action）](https://github.com/acdlite/flux-standard-action)で確認できます。
 
-We'll add one more action type to describe a user ticking off a todo as completed. We refer to a particular todo by `index` because we store them in an array. In a real app, it is wiser to generate a unique ID every time something new is created.
+ユーザーが完了したTodo項目にチェックできるよう、もう1つActionタイプを加えましょう。特定のTodo項目は、`index`で参照します。`index`を配列で保持しているからです。実際のアプリでは、何か新しいものが作られるたびにユニークIDを生成する方が賢明です。
 
 ```js
 {
@@ -38,9 +38,9 @@ We'll add one more action type to describe a user ticking off a todo as complete
 }
 ```
 
-It's a good idea to pass as little data in each action as possible. For example, it's better to pass `index` than the whole todo object.
+それぞれのActionで渡すデータは、できるだけ小さくしましょう。例えば、Todoオブジェクト全体よりも、`index`を渡す方が良いです。
 
-Finally, we'll add one more action type for changing the currently visible todos.
+最後に、もう1つActionタイプを加えましょう。いま表示されるTodo項目を変更するための、Actionタイプです。
 
 ```js
 {
@@ -49,11 +49,11 @@ Finally, we'll add one more action type for changing the currently visible todos
 }
 ```
 
-## Action Creators
+## Actionクリエイター
 
-**Action creators** are exactly that—functions that create actions. It's easy to conflate the terms “action” and “action creator,” so do your best to use the proper term.
+**Actionクリエイター** はその名の通り、Actionを作る関数です。 “Action”と“Actionクリエイター”は混同しやすいので、正しい用語を使うように注意してください。
 
-In Redux, action creators simply return an action:
+Reduxでは、Actionクリエイターは単純にActionを返します：
 
 ```js
 function addTodo(text) {
@@ -64,9 +64,9 @@ function addTodo(text) {
 }
 ```
 
-This makes them portable and easy to test.
+これによって移動が可能となり、テストも簡単になります。
 
-In [traditional Flux](http://facebook.github.io/flux), action creators often trigger a dispatch when invoked, like so:
+[従来のFlux（traditional Flux）](http://facebook.github.io/flux)ではよく、Actionクリエイターが呼び出されたときにDispatch（ディスパッチ）を引き起こします：
 
 ```js
 function addTodoWithDispatch(text) {
@@ -78,39 +78,39 @@ function addTodoWithDispatch(text) {
 }
 ```
 
-In Redux this is *not* the case.  
-Instead, to actually initiate a dispatch, pass the result to the `dispatch()` function:
+Reduxでは、そんなことは *ありません*。  
+その代わりDispachを実際に始動するため、`dispatch()`関数にActionクリエイターの呼び出し結果を渡します：
 
 ```js
 dispatch(addTodo(text))
 dispatch(completeTodo(index))
 ```
 
-Alternatively, you can create a **bound action creator** that automatically dispatches:
+または、自動でDispachする **バウンドActionクリエイター（bound action creator）** を作ることもできます：
 
 ```js
 const boundAddTodo = text => dispatch(addTodo(text))
 const boundCompleteTodo = index => dispatch(completeTodo(index))
 ```
 
-Now you'll be able to call them directly:
+こうすると、直接的に呼び出せます：
 
 ```
 boundAddTodo(text)
 boundCompleteTodo(index)
 ```
 
-The `dispatch()` function can be accessed directly from the store as [`store.dispatch()`](../api/Store.md#dispatch), but more likely you'll access it using a helper like [react-redux](http://github.com/gaearon/react-redux)'s `connect()`. You can use [`bindActionCreators()`](../api/bindActionCreators.md) to automatically bind many action creators to a `dispatch()` function.
+`dispatch()`関数は、[`store.dispatch()`](../api/Store.md#dispatch)としてStoreから直接利用できます。しかし、ヘルパーを使って利用することが多いでしょう。[react-redux](http://github.com/gaearon/react-redux)の`connect()`などです。[`bindActionCreators()`](../api/bindActionCreators.md)を使うと、自動的に多くのActionクリエイターを`dispatch()`関数にバインド（結び付ける、束縛）できます。
 
-Action creators can also be asynchronous and have side-effects. You can read about [async actions](../advanced/AsyncActions.md) in the [advanced tutorial](../advanced/README.md) to learn how to handle AJAX responses and compose action creators into async control flow. Don't skip ahead to async actions until you've completed the basics tutorial, as it covers other important concepts that are prerequisite for the advanced tutorial and async actions.
+Actionクリエイターは非同期でも良いし、副作用も持てます。 詳しくは[上級チュートリアル](../advanced/README.md)にある、[非同期Action](../advanced/AsyncActions.md)を読んでください。AJAXのレスポンスを処理し、Actionクリエイターを非同期な制御フローに組み立てる方法を学べます。初級チュートリアルを終えるまで、非同期Actionに飛ばないでください。 初級チュートリアルには上級チュートリアルと非同期Actionの前に必要となる、重要なコンセプトが含まれています。
 
-## Source Code
+## ソースコード
 
 ### `actions.js`
 
 ```js
 /*
- * action types
+ * Actionタイプ
  */
 
 export const ADD_TODO = 'ADD_TODO'
@@ -118,7 +118,7 @@ export const TOGGLE_TODO = 'TOGGLE_TODO'
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 /*
- * other constants
+ * 他の定数
  */
 
 export const VisibilityFilters = {
@@ -128,7 +128,7 @@ export const VisibilityFilters = {
 }
 
 /*
- * action creators
+ * Actionクリエイター
  */
 
 export function addTodo(text) {
@@ -144,6 +144,6 @@ export function setVisibilityFilter(filter) {
 }
 ```
 
-## Next Steps
+## 次のステップ
 
-Now let's [define some reducers](Reducers.md) to specify how the state updates when you dispatch these actions!
+これから[Reducerを定義](Reducers.md)しましょう！Actionを送信したとき、どうやって状態更新するか指定するためです。
