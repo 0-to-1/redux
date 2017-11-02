@@ -10,15 +10,15 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### 動画
 
-* **[Reduxを始めよう (Getting Started with Redux)](https://egghead.io/series/getting-started-with-redux)** — 作者から直接、Reduxの基本を学びます。 (30本の無料動画）
-* **[Reduxを学ぶ (Learn Redux)](https://learnredux.com)** — シンプルな写真アプリを作ります。Redux、React Router、そしてReact.jsの背後にある、核となるアイデアを分かりやすくしています。
+* **[Reduxを始めよう (Getting Started with Redux)](https://egghead.io/series/getting-started-with-redux)** — 作者から直接、Reduxの基本を学びます (30本の無料動画）
+* **[Reduxを学ぶ (Learn Redux)](https://learnredux.com)** — シンプルな写真アプリを作ります。Redux、React Router、そしてReact.jsの背後にある、核となるアイデアを分かりやすくしています
 
 ### アプリ使用例
 
-* [公式使用例 (Official Examples)](Examples.md) — 公式の使用例です。それぞれ異なるReduxのテクニックを取り扱っています。
-* [SoundRedux](https://github.com/andrewngu/sound-redux) — Reduxで作られたSoundCloudのクライアントアプリです。
-* [grafgiti](https://github.com/mohebifar/grafgiti) — GitHubのコントリビューションウォール（訳注：日本では「草」や「芝生」などと呼ばれている）で落書きをつくります。
-* [React-lego](https://github.com/peter-mouland/react-lego) — 一度に1つの機能だけ、Reactに組み込む手順。（訳注：簡単に比較できるよう、GitHubのブランチごとに様々なReact関連技術を追加している）
+* [公式使用例 (Official Examples)](Examples.md) — 公式の使用例です。それぞれ異なるReduxのテクニックを取り扱っています
+* [SoundRedux](https://github.com/andrewngu/sound-redux) — Reduxで作られたSoundCloudのクライアントアプリです
+* [grafgiti](https://github.com/mohebifar/grafgiti) — GitHubのコントリビューションウォール（訳注：日本では「草」や「芝生」などと呼ばれている）で落書きをつくります
+* [React-lego](https://github.com/peter-mouland/react-lego) — 一度に1つの機能だけ、Reactに組み込む手順（訳注：簡単に比較できるよう、GitHubのブランチごとに様々なReact関連技術を追加している）
 
 ### チュートリアルと記事
 
@@ -42,9 +42,13 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### 講演
 
-* [ライブリアクト： 自動再読み込みとタイムトラベル (Live React: Hot Reloading and Time Travel)](http://youtube.com/watch?v=xsSnOQynTHs) — Reduxによって課された制約がどのようにタイムトラベル（時間の行き来）と自動再読み込みを簡単にするかを見る
-* [ヤニをとる： Firefoxの開発者ツール内でReactを使う (Cleaning the Tar: Using React within the Firefox Developer Tools)](https://www.youtube.com/watch?v=qUlRpybs7_c) — 既存のMVCアプリケーションを段階的にReactへ移行する方法を学ぶ
-* [Redux： アプリケーションの状態を分かりやすくする (Redux: Simplifying Application State)](https://www.youtube.com/watch?v=okdC5gcD-dM) — Reduxアーキテクチャの導入
+<!-- textlint-disable preset-japanese/sentence-length -->
+* [Live React： 自動再読み込みとタイムトラベル (Hot Reloading and Time Travel)](http://youtube.com/watch?v=xsSnOQynTHs) — Reduxによって課された制約がどのようにタイムトラベル（時間の行き来）と自動再読み込みを簡単にするかを見る
+
+* [ヤニをとる(Cleaning the Tar）： Firefoxの開発者ツール内でReactを使う（Using React within the Firefox Developer Tools)](https://www.youtube.com/watch?v=qUlRpybs7_c) — 既存のMVCアプリケーションを段階的にReduxへ移行する方法を学ぶ
+<!-- textlint-enable preset-japanese/sentence-length -->
+
+* [Redux： アプリケーションの状態を分かりやすくする (Simplifying Application State)](https://www.youtube.com/watch?v=okdC5gcD-dM) — Reduxアーキテクチャの導入
 
 ## Reduxを使う
 
@@ -84,7 +88,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 * [redux-form](https://github.com/erikras/redux-form) — ReduxでReactフォームの状態を保つ
 * [react-redux-form](https://github.com/davidkpiano/react-redux-form) — ReduxでReactのフォームを簡単に作る
-* [redux-resource](https://github.com/jmeas/redux-resource) — Reduxでリモートサーバのリソースを管理する
+* [redux-resource](https://github.com/jmeas/redux-resource) — Reduxでリモートサーバーのリソースを管理する
 
 ### エンハンサー（強化材）
 
