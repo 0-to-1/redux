@@ -8,11 +8,12 @@ rules:
     pattern: /サーバ(?!ー)/
   - expected: 製品
     pattern: プロダクト
+  - expected: 作$1
+    pattern: /つく([らりるれろっ])/
+  - expected: とき$1
+    pattern: /時([かがでにのはへもを])/
   - expected: 例えば
     pattern:  たとえば
-    specs:
-      - from: たとえば
-        to:   例えば
   - expected: 1番
     pattern: 一番
   - expected: 2番
