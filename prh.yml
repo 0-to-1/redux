@@ -4,6 +4,8 @@ rules:
     pattern: /redux(?!-)/
   - expected: Web
     pattern: web
+  - expected: 製品
+    pattern: プロダクト
   - expected: 例えば
     pattern:  たとえば
     specs:

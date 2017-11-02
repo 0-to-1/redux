@@ -10,7 +10,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### 動画
 
-* **[Reduxを始めよう (Getting Started with Redux)](https://egghead.io/series/getting-started-with-redux)** — 作者から直接、Reduxの基本を学びます。 (３０本の無料動画)
+* **[Reduxを始めよう (Getting Started with Redux)](https://egghead.io/series/getting-started-with-redux)** — 作者から直接、Reduxの基本を学びます。 (30本の無料動画）
 * **[Reduxを学ぶ (Learn Redux)](https://learnredux.com)** — シンプルな写真アプリを作ります。Redux、React Router、そしてReact.jsの背後にある、核となるアイデアを分かりやすくしています。
 
 ### アプリ使用例
@@ -18,7 +18,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [公式使用例 (Official Examples)](Examples.md) — 公式の使用例です。それぞれ異なるReduxのテクニックを取り扱っています。
 * [SoundRedux](https://github.com/andrewngu/sound-redux) — Reduxで作られたSoundCloudのクライアントアプリです。
 * [grafgiti](https://github.com/mohebifar/grafgiti) — GitHubのコントリビューションウォール（訳注：日本では「草」や「芝生」などと呼ばれている）で落書きをつくります。
-* [React-lego](https://github.com/peter-mouland/react-lego) — 一度に１つの機能だけ、Reactに組み込む手順。（訳注：簡単に比較できるよう、GitHubのブランチごとに様々なReact関連技術を追加している）
+* [React-lego](https://github.com/peter-mouland/react-lego) — 一度に1つの機能だけ、Reactに組み込む手順。（訳注：簡単に比較できるよう、GitHubのブランチごとに様々なReact関連技術を追加している）
 
 ### チュートリアルと記事
 
@@ -88,14 +88,14 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### エンハンサー（強化材）
 
-* [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) — ストアの購読者のために、一括処理やデバウンシングした呼び出し（訳注：抑制した呼び出し。例えば、最大で○秒に１回しか呼び出されないようにする）をカスタマイズ
+* [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) — ストアの購読者のために、一括処理やデバウンシングした呼び出し（訳注：抑制した呼び出し。例えば、最大で○秒に1回しか呼び出されないようにする）をカスタマイズ
 * [redux-history-transitions](https://github.com/johanneslumpe/redux-history-transitions) — 任意のアクションに基づいたルート遷移
 * [redux-optimist](https://github.com/ForbesLindesay/redux-optimist) — あとでコミットされるか、または元に戻される可能性のあるActionを楽観的に適用する
 * [redux-optimistic-ui](https://github.com/mattkrick/redux-optimistic-ui) — 型にとらわれず（訳注：JSのオブジェクトだけでなく、 immutable.jsなどでも良い）、楽観的に更新するReducerのエンハンサー
-* [redux-undo](https://github.com/omnidan/redux-undo) —  Ruducerのための手っ取り早い、元に戻す/やり直す(Undo/Redo)とAction履歴
+* [redux-undo](https://github.com/omnidan/redux-undo) —  Ruducerのための手っ取り早い、元に戻す/やり直す（Undo/Redo)とAction履歴
 * [redux-ignore](https://github.com/omnidan/redux-ignore) — 配列かフィルター関数によって、ReduxのActionを無視（訳注：特定のActionを無視することで、パフォーマンスの問題を回避）
 * [redux-recycle](https://github.com/omnidan/redux-recycle) — 特定のActionに対して、Reduxの状態をリセット
-* [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) — １つの購読者通知で、複数のActionを送信
+* [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) — 1つの購読者通知で、複数のActionを送信
 * [redux-search](https://github.com/treasure-data/redux-search) —  Web Workerで自動的にリソースをインデックスし、ブロッキングなしで検索
 * [redux-electron-store](https://github.com/samiskin/redux-electron-store) — Electronの複数プロセス間でReduxのStoreを同期するStoreエンハンサー
 * [redux-loop](https://github.com/raisemarketplace/redux-loop) — Reducerから返すことで、純粋かつ自然に作用を並べる（訳注：Reducerは通常、同期的な状態遷移のみを扱う。つまり、Actionに対してReducerから新しい状態が返される。しかしredux-loopが加えられたReducerは、Actionに対して非同期関数の実行も定義できる。そしてその関数の結果次第で、新たなActionを呼び出す。ただし通常のReducerと同じく、最終的に返すのは状態としての単なるオブジェクト）

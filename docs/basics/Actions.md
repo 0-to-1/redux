@@ -1,8 +1,8 @@
-# Actions
+# Action
 
-First, let's define some actions.
+まずはじめに、いくつかActionを定義しましょう。
 
-**Actions** are payloads of information that send data from your application to your store. They are the *only* source of information for the store. You send them to the store using [`store.dispatch()`](../api/Store.md#dispatch).
+**Action** は情報の本体であり、アプリケーションからStoreへ送るデータです。そしてStoreのための、*唯一の* 情報源です。[`store.dispatch()`](../api/Store.md#dispatch)を使うことで、ActionはStoreに送られます。
 
 Here's an example action which represents adding a new todo item:
 
@@ -147,4 +147,3 @@ export function setVisibilityFilter(filter) {
 ## Next Steps
 
 Now let's [define some reducers](Reducers.md) to specify how the state updates when you dispatch these actions!
-
