@@ -17,7 +17,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 * [公式使用例 (Official Examples)](Examples.md) — 公式の使用例です。それぞれ異なるReduxのテクニックを取り扱っています
 * [SoundRedux](https://github.com/andrewngu/sound-redux) — Reduxで作られたSoundCloudのクライアントアプリです
-* [grafgiti](https://github.com/mohebifar/grafgiti) — GitHubのコントリビューションウォール（訳注：日本では「草」や「芝生」などと呼ばれている）で落書きをつくります
+* [grafgiti](https://github.com/mohebifar/grafgiti) — GitHubのコントリビューションウォール（訳注：日本では「草」や「芝生」などと呼ばれている）で落書きを作ります
 * [React-lego](https://github.com/peter-mouland/react-lego) — 一度に1つの機能だけ、Reactに組み込む手順（訳注：簡単に比較できるよう、GitHubのブランチごとに様々なReact関連技術を追加している）
 
 ### チュートリアルと記事
@@ -77,7 +77,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [redux-gen](https://github.com/weo-edu/redux-gen) — Reduxのためのジェネレータのミドルウェア
 * [redux-saga](https://github.com/yelouafi/redux-saga) — Reduxのための、別の副作用モデル
 * [redux-action-tree](https://github.com/cerebral/redux-action-tree) — Reduxのための、合成可能なCerebral形式のシグナル
-* [apollo-client](https://github.com/apollostack/apollo-client) — シンプルなキャッシュクライアント。Redux上でつくられた全てのGraphQLとUIフレームワークに対応
+* [apollo-client](https://github.com/apollostack/apollo-client) — シンプルなキャッシュクライアント。Redux上で作られた全てのGraphQLとUIフレームワークに対応
 
 ### ルーティング（ページ遷移）
 

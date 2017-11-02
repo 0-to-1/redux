@@ -12,7 +12,7 @@ Reduxは[Flux](https://facebook.github.io/flux/)の実装だと考えられま�
 Reduxは、Fluxの重要な特質に触発されています。Fluxと同じく、Reduxもアプリケーションの一定の層にモデルの更新ロジックを集約するよう定めています。(Fluxでは“Store”、Reduxでは“Reducer”)
 どちらもアプリケーションのコードに直接データを変更させるのではなく、Actionという単なるオブジェクトにすべての変更を記述します。
 
-Fluxと違って、Reduxにはディスパッチャー(Dispatcher)という概念はありません。なぜならイベントエミッターではなく、純粋関数を使っているからです。純粋関数は合成が簡単で、管理するのに追加のエンティティがいりません。Fluxをどう捉えるかによりますが、ReduxがFluxの逸脱や具体的な実装に見えるかもしれません。Fluxはよく、[状態とActionを取り、新たな状態を返すと説明されます (`(state, action) => state`)](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1)。この意味では、ReduxはFluxアーキテクチャだと言えます。しかし純粋関数のおかげで、よりシンプルになっています。
+Fluxと違って、ReduxにはDispatcher(ディスパッチャー)という概念はありません。なぜならイベントエミッターではなく、純粋関数を使っているからです。純粋関数は合成が簡単で、管理するのに追加のエンティティがいりません。Fluxをどう捉えるかによりますが、ReduxがFluxの逸脱や具体的な実装に見えるかもしれません。Fluxはよく、[状態とActionを取り、新たな状態を返すと説明されます (`(state, action) => state`)](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1)。この意味では、ReduxはFluxアーキテクチャだと言えます。しかし純粋関数のおかげで、よりシンプルになっています。
 
 もう1つFluxとの重要な違いがあります。それは、**Reduxはデータを決していじらないと想定している** ということです。状態のために単なるオブジェクトや配列を使うのは構いません。しかしReducerの内部で状態に手を加えることには、強く反対します。 状態をいじるのではなく、常に新しいオブジェクトを返すべきです。これは[ECMAScriptで提案されている、オブジェクトのスプレッド演算子 (object spread operator proposal)](../recipes/UsingObjectSpreadOperator.md)や、[Immutable](https://facebook.github.io/immutable-js)のようなライブラリを使えば簡単です。
 
@@ -20,7 +20,7 @@ Fluxと違って、Reduxにはディスパッチャー(Dispatcher)という概�
 
 ### Elm
 
-[Elm](http://elm-lang.org/)は関数型のプログラミング言語です。Haskellに触発され、[Evan Czaplicki](https://twitter.com/czaplic)によってつくられました。 [モデルビューの更新アーキテクチャ(a “model view update” architecture)](https://github.com/evancz/elm-architecture-tutorial/)を強制します。 これは更新が、次の形式に従うということです： `(action, state) => state`。 Elmの “Updater”は、ReduxのReducerと同じ目的を担います。
+[Elm](http://elm-lang.org/)は関数型のプログラミング言語です。Haskellに触発され、[Evan Czaplicki](https://twitter.com/czaplic)によって作られました。 [モデルビューの更新アーキテクチャ(a “model view update” architecture)](https://github.com/evancz/elm-architecture-tutorial/)を強制します。 これは更新が、次の形式に従うということです： `(action, state) => state`。 Elmの “Updater”は、ReduxのReducerと同じ目的を担います。
 
 Reduxと違い、Elmは言語です。そのために多くの恩恵が得られます。純粋性の強制や、静的型付、枠を超えた不変性、そして（`case`表現を使った）パターンマッチングなど。たとえElmを使うつもりがなくても、Elmのアーキテクチャは読んで試してみるべきです。
 
