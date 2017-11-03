@@ -1,12 +1,12 @@
-# Basics
+# 初級
 
-Don't be fooled by all the fancy talk about reducers, middleware, store enhancers—Redux is incredibly simple. If you've ever built a Flux application, you will feel right at home. If you're new to Flux, it's easy too!
+Reducerやミドルウェア、そしてStoreエンハンサーについての、おかしな話に騙されないでください。Reduxはとてもシンプルです。もしFluxアプリケーションを作ったことがあれば、すぐに慣れるでしょう。もしFluxの初心者でも、簡単です！
 
-In this guide, we'll walk through the process of creating a simple Todo app.
+このガイドでは、シンプルなTodoアプリを作るプロセスを案内しましょう。
 
-* [Actions](Actions.md)
-* [Reducers](Reducers.md)
+* [Action](Actions.md)
+* [Reducer](Reducers.md)
 * [Store](Store.md)
-* [Data Flow](DataFlow.md)
-* [Usage with React](UsageWithReact.md)
-* [Example: Todo List](ExampleTodoList.md)
+* [データフロー](DataFlow.md)
+* [Reactと併用する](UsageWithReact.md)
+* [使用例：Todoリスト](ExampleTodoList.md)
