@@ -12,6 +12,11 @@ rules:
     pattern: /つく([らりるれろっ])/
   - expected: とき$1
     pattern: /時([かがでにのはへもを])/
+  - expected: おすすめ
+    pattern:
+      - オススメ
+      - お勧め
+      - お薦め
   - expected: 例えば
     pattern:  たとえば
   - expected: 1番
