@@ -1,7 +1,7 @@
 # Reducer
 
 [Action](./Actions.md) は、*何かが起きた* ということを示します。
-しかしアクションに対して、どのようにアプリケーションの状態を変化させるかは明示しません。それはReducerのやることです。
+しかし起きたことに反応して、どのようにアプリケーションの状態を変化させるかは明示しません。それはReducerのやることです。
 
 ## 状態の形をデザインする
 
@@ -33,8 +33,8 @@ Reduxでは、すべてのアプリケーションの状態は1つのオブジ�
 
 >##### 参照についての注意
 
->より複雑なアプリでは、異なるエンティティが互いを参照したいことがあるでしょう。そんな時はいつも、まったくネストせず、できるだけ平準化することをお勧めします。一つのオブジェクトの中にあるすべてのエンティティは、キーとしてIDを持つのです。このIDを使って、他のエンティティやそのリストを参照するのです。アプリの状態を、データベースとして考えてください。この考え方は、 [normalizr's](https://github.com/paularmstrong/normalizr) のドキュメントで詳しく説明されています。
-例えば実際のアプリでは、 状態の中に `todosById: { id -> todo }` と `todos: array<id>` を持つ方が良いでしょう。しかしこのTodoアプリは例なので、シンプルなままにしておきましょう。
+>より複雑なアプリでは、異なるエンティティが互いを参照したいことがあるでしょう。そんな時はいつも、まったくネストせず、できるだけ平準化することをお勧めします。一つのオブジェクトの中にあるすべてのエンティティは、キーとしてIDを持つのです。このIDを使って、他のエンティティやそのリストを参照します。アプリの状態を、データベースとして考えてください。この考え方は、 [normalizr's](https://github.com/paularmstrong/normalizr) のドキュメントで詳しく説明されています。
+例えば実際のアプリでは、 状態の中に `todosById: { id -> todo }`（訳注：IDをキーとする、Todo項目のオブジェクト） と `todos: array<id>`（訳注：IDの配列） を持つ方が良いでしょう。しかしこのTodoアプリは使用例なので、シンプルなままにしておきましょう。
 
 ## Actionを処理する
 
@@ -50,10 +50,10 @@ Reduxでは、すべてのアプリケーションの状態は1つのオブジ�
 * 副作用を起こす。例）APIコールやページ遷移
 * 純粋ではない関数を呼び出す。 例）`Date.now()` や `Math.random()`
 
-[advanced walkthrough](../advanced/README.md)で、副作用の扱い方を深く見てみます。今のところは、Reducerが必ず純粋でなければならないとだけを覚えていてください。
+[上級コース](../advanced/README.md)で、副作用の扱い方を深く見てみます。今のところは、Reducerが必ず純粋でなければならないとだけ覚えていてください。
  **引数が与えられると、次の状態を計算して返すのです。びっくりすることはありません。副作用もありません。API呼び出しもありません。変更もありません。ただ計算するだけです。**
 
-これを頭に入れた上で、Reducerについて書き始めましょう。先に説明した[Action](Actions.md) を理解できるよう、ゆっくり教えていきます。
+これを頭に入れて、Reducerを書き始めましょう。先に説明した[Action](Actions.md) を理解できるよう、ゆっくり教えていきます。
 
 まず、初期状態を明示しましょう。Reduxは最初、`undefined`状態とともにReducerを呼び出します。このときが、初期状態を返すチャンスです：
 
@@ -70,7 +70,7 @@ function todoApp(state, action) {
     return initialState
   }
 
-  // 今のところ, 何のアクションも処理していない
+  // 今のところ, 何のアクションも処理していない。
   // ただ、与えられた状態を返しているだけ。
   return state
 }
@@ -80,7 +80,7 @@ function todoApp(state, action) {
 
 ```js
 function todoApp(state = initialState, action) {
-  // 今のところ, 何のアクションも処理ていない
+  // 今のところ, 何のアクションも処理ていない。
   // ただ、与えられた状態を返しているだけ。
   return state
 }
@@ -103,19 +103,19 @@ function todoApp(state = initialState, action) {
 
 注意事項：
 
-1. **`state`をいじっている訳ではありません** [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)でコピーを作っています。 `Object.assign(state, { visibilityFilter: action.filter })`も間違いです : これは最初の引数に手を加えています。最初の引数として、**必ず** 空のオブジェクトを渡してください。代わりに [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) で `{ ...state, ...newState }` と書くこともできます。
+1. **`state`は書き換えていません。** [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)でコピーを作っています。 `Object.assign(state, { visibilityFilter: action.filter })`も間違いです : これは最初の引数に手を加えています。最初の引数として、**必ず** 空のオブジェクトを渡してください。代わりに [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) で `{ ...state, ...newState }` と書くこともできます。
 
 2. **`default（既定）` ケースとして、前の`state（状態）を返します`。** すべての不明なActionには、前の`state`を返すのが重要です。
 
 >##### `Object.assign`についての注意
 
->[`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) はES6の一部です。古いブラウザでは、まだ対応していません。対応するためにはポリフィルか、[Babel プラグイン](https://www.npmjs.com/package/babel-plugin-transform-object-assign), または[`_.assign()`](https://lodash.com/docs#assign)のような別のライブラリのヘルパーが必要です。
+>[`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) はES6の一部です。古いブラウザでは、まだ対応していません。対応するためにはポリフィルか、[Babel プラグイン](https://www.npmjs.com/package/babel-plugin-transform-object-assign)、 または[`_.assign()`](https://lodash.com/docs#assign)のような別のライブラリのヘルパーが必要です。
 
 >##### `switch` と常用文についての注意
 
->`switch`文は、本当の常用文では*ありません*。 Fluxの本当の常用文は、概念的です: 更新を発行する必要があるし、 DispatcherとともにStoreを登録する必要があるし、Storeは一つのオブジェクトにする必要があります（ユニバーサルアプリにしたいなら、複雑になります）。 Reduxはイベントを発行する代わりに純粋なReducerを使うことで、これらの問題を解決します。
+>`switch`文は、本当の常用文では*ありません*。 Fluxの本当の常用文は、概念的です: 更新を発行する必要があるし、 DispatcherとともにStoreを登録する必要があるし、Storeは1つのオブジェクトにする必要があります（ユニバーサルアプリにしたいなら、複雑になります）。 Reduxはイベントを発行する代わりに純粋なReducerを使うことで、これらの問題を解決します。
 
->多くの人がまだ、ドキュメントに`switch`文が載っているかどうかでフレームワークを選んでいるのは残念です。もし`switch`が好きでなければ、アクションの処理を対応づける（マッピングする）ために、 特別な`createReducer`関数を使うこともできます。この関数は [“reducing boilerplate”](../recipes/ReducingBoilerplate.md#reducers)で説明しています。
+>多くの人がまだ、ドキュメントに`switch`文が載っているかどうかでフレームワークを選んでいるのは残念です。もし`switch`が好きでなければ、アクションの処理を対応づける（マッピングする）ために、 特別な`createReducer`関数を使うこともできます。この関数は [“常用文の削減”](../recipes/ReducingBoilerplate.md#reducers)で説明しています。
 
 ## もっとアクションを処理する
 
@@ -171,11 +171,11 @@ case TOGGLE_TODO:
   })
 ```
 
-変更のためにソートし直すことなく、配列にある特定の項目を更新したいのです。そのためインデックスで示された項目以外は同じになる、新しい配列を作らないといけません。もしこのような処理をよく書いていることに気づいたら、[immutability-helper](https://github.com/kolodny/immutability-helper)や[updeep](https://github.com/substantial/updeep)のようなヘルパーを使うと良いでしょう。または[Immutable](http://facebook.github.io/immutable-js/)のように、ネストされた更新にもともと対応しているライブラリもあります。とにかく`state`の中に何かを割り当てるときは、まず最初に複製することを忘れないでください。
+変更のためにソートし直すことなく、配列にある特定の項目を更新したいのです。そのためインデックスで示された項目以外は同じになる、新しい配列を作らないといけません。もしこのような処理を何度も書いていることに気づいたら、[immutability-helper](https://github.com/kolodny/immutability-helper)や[updeep](https://github.com/substantial/updeep)のようなヘルパーを使うと良いでしょう。または[Immutable](http://facebook.github.io/immutable-js/)のように、ネストされた更新にもともと対応しているライブラリもあります。とにかく`state`の中に何かを割り当てるときは、まず最初に複製することを忘れないでください。
 
 ## Reducerを分割する
 
-ここまでのコードです。ごちゃごちゃしてます：
+ここまでのコードです。ごちゃごちゃしています：
 
 ```js
 function todoApp(state = initialState, action) {
@@ -276,7 +276,7 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 ```
 
-いま大元のReducerを書き換えました。このReducerは、状態の一部を処理するReducerを呼び出し、1つのオブジェクトとして合成する関数です。もう初期状態の全体を把握する必要はありません。ただ最初に`undefined`が与えられると、配下のReducerがそれぞれの初期状態を返すことが分かっていれば良いのです。
+これで大元のReducerを書き換えることができます。このReducerは、状態の一部を処理するReducerを呼び出し、1つのオブジェクトとして合成する関数です。もう初期状態の全体を把握する必要はありません。ただ最初に`undefined`が与えられると、配下のReducerがそれぞれの初期状態を返すことが分かっていれば良いのです。
 
 ```js
 function todos(state = [], action) {
@@ -368,7 +368,7 @@ function reducer(state = {}, action) {
 }
 ```
 
-[`combineReducers()`](../api/combineReducers.md)がやるのは、複数のReducerを呼び出す関数の生成です。呼び出されたReducerには、キーによって対応づけられた状態の一部が渡されます。 そして[`combineReducers()`](../api/combineReducers.md)はReducerが返した結果を1つのオブジェクトにまとめ直します。[It's not magic.（これは魔法ではありません。）](https://github.com/reactjs/redux/issues/428#issuecomment-129223274)引数として渡されたすべてのReducerが状態を変えなければ、新しいオブジェクトは作られません。これは他のReducerと同じです。
+[`combineReducers()`](../api/combineReducers.md)がやるのは、複数のReducerを呼び出す関数の生成です。呼び出されたReducerには、キーによって対応づけられた状態の一部が渡されます。 そして[`combineReducers()`](../api/combineReducers.md)はそれぞれのReducerが返した結果を1つのオブジェクトにまとめ直します。[It's not magic.（これは魔法ではありません。）](https://github.com/reactjs/redux/issues/428#issuecomment-129223274)引数として渡されたすべてのReducerが状態を変えなければ、新しいオブジェクトは作られません。これは他のReducerと同じです。
 
 >##### ES6に精通したユーザーへの注意
 
