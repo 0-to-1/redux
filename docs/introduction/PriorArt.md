@@ -14,7 +14,7 @@ Reduxは、Fluxの重要な特質に触発されています。Fluxと同じく�
 
 Fluxと違って、ReduxにはDispatcher(ディスパッチャー)という概念はありません。なぜならイベントエミッターではなく、純粋関数を使っているからです。純粋関数は合成が簡単で、管理するのに追加のエンティティがいりません。Fluxをどう捉えるかによりますが、ReduxがFluxの逸脱や具体的な実装に見えるかもしれません。Fluxはよく、[状態とActionを取り、新たな状態を返すと説明されます (`(state, action) => state`)](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1)。この意味では、ReduxはFluxアーキテクチャだと言えます。しかし純粋関数のおかげで、よりシンプルになっています。
 
-もう1つFluxとの重要な違いがあります。それは、**Reduxはデータを決していじらないと想定している** ということです。状態のために単なるオブジェクトや配列を使うのは構いません。しかしReducerの内部で状態に手を加えることには、強く反対します。 状態をいじるのではなく、常に新しいオブジェクトを返すべきです。これは[ECMAScriptで提案されている、オブジェクトのスプレッド演算子 (object spread operator proposal)](../recipes/UsingObjectSpreadOperator.md)や、[Immutable](https://facebook.github.io/immutable-js)のようなライブラリを使えば簡単です。
+もう1つFluxとの重要な違いがあります。それは、**Reduxはデータを決して書き換えないと想定している** ということです。状態のために単なるオブジェクトや配列を使うのは構いません。しかしReducerの内部で状態に手を加えることは、強く反対します。 状態を書き換えるのではなく、常に新しいオブジェクトを返すべきです。これは[ECMAScriptで提案されている、オブジェクトのスプレッド演算子 (object spread operator proposal)](../recipes/UsingObjectSpreadOperator.md)や、[Immutable](https://facebook.github.io/immutable-js)のようなライブラリを使えば簡単です。
 
 パフォーマンスが求められる場合、[純粋でないReducerを書く (write impure reducers)](https://github.com/reactjs/redux/issues/328#issuecomment-125035516)ことは技術的には *可能* です。しかし強く反対します。タイムトラベル（時間の行き来）や記録/再生、自動再読み込みなどの開発機能は、すべて壊れてしまいます。 さらに実際のアプリではほとんどの場合、不変性がパフォーマンスの問題になるようなことは、ほとんどありません。[Om](https://github.com/omcljs/om)が実証したように、オブジェクトの割り当てで遅れをとったとしても、まだ優位に立てます。なぜならReducerが純粋なおかげで、何が変化したかはっきり分かります。そのためコストの高い再描画や再計算を避けられるからです。
 
