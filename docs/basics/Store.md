@@ -1,18 +1,18 @@
 # Store
 
-In the previous sections, we defined the [actions](Actions.md) that represent the facts about “what happened” and the [reducers](Reducers.md) that update the state according to those actions.
+先ほどのセクションで、[Action](Actions.md)を定義しました。Actionは、“何かが起きた”という事実を表します。また、[reducers](Reducers.md)も定義しました。Reducerは、Actionによって状態を更新します。
 
-The **Store** is the object that brings them together. The store has the following responsibilities:
+**Store** は、上記2つをまとめるオブジェクトです。Storeは次の責務を担います：
 
-* Holds application state;
-* Allows access to state via [`getState()`](../api/Store.md#getState);
-* Allows state to be updated via [`dispatch(action)`](../api/Store.md#dispatch);
-* Registers listeners via [`subscribe(listener)`](../api/Store.md#subscribe);
-* Handles unregistering of listeners via the function returned by [`subscribe(listener)`](../api/Store.md#subscribe).
+* アプリケーションの状態を保持する
+* [`getState()`](../api/Store.md#getState)による状態へのアクセスを許可する
+* [`dispatch(action)`](../api/Store.md#dispatch)による状態更新を許可する
+* [`subscribe(listener)`](../api/Store.md#subscribe)によりリスナーを登録する
+* [`subscribe(listener)`](../api/Store.md#subscribe)で返される関数により、リスナーの登録解除を処理する
 
-It's important to note that you'll only have a single store in a Redux application. When you want to split your data handling logic, you'll use [reducer composition](Reducers.md#splitting-reducers) instead of many stores.
+Reduxアプリケーションで、Storeはただ1つです。これは重要なことなので、気をつけてください。 データ処理のロジックを分けたいときは、[Reducer合成](Reducers.md#reducerを分割する)を使いましょう。複数のStoreを作ってはいけません。
 
-It's easy to create a store if you have a reducer. In the [previous section](Reducers.md), we used [`combineReducers()`](../api/combineReducers.md) to combine several reducers into one. We will now import it, and pass it to [`createStore()`](../api/createStore.md).
+Reducerがあれば、Storeを作るのは簡単です。[前のセクション](Reducers.md)で、[`combineReducers()`](../api/combineReducers.md)を使いました。複数のReducerを1つにまとめるためです。このReducerをインポートして、[`createStore()`](../api/createStore.md)に渡しましょう。
 
 ```js
 import { createStore } from 'redux'
@@ -20,15 +20,15 @@ import todoApp from './reducers'
 let store = createStore(todoApp)
 ```
 
-You may optionally specify the initial state as the second argument to [`createStore()`](../api/createStore.md). This is useful for hydrating the state of the client to match the state of a Redux application running on the server.
+初期状態を明示することもできます。初期状態は、[`createStore()`](../api/createStore.md)に第2引数として渡します。これはサーバーで実行しているReduxアプリケーションの状態を、クライアントの状態へ溶け込ませるのに有効です。
 
 ```js
 let store = createStore(todoApp, window.STATE_FROM_SERVER)
 ```
 
-## Dispatching Actions
+## Actionの送信
 
-Now that we have created a store, let's verify our program works! Even without any UI, we can already test the update logic.
+いまStoreを作りました。プログラムが動くか確かめましょう！UIが全くなくても、もう更新ロジックをテストできます。
 
 ```js
 import {
@@ -38,16 +38,16 @@ import {
   VisibilityFilters
 } from './actions'
 
-// Log the initial state
+// 初期状態のログをとる
 console.log(store.getState())
 
-// Every time the state changes, log it
-// Note that subscribe() returns a function for unregistering the listener
+// 状態が変化するたびに、ログをとる
+// subscribe()はリスナーを登録解除するための関数を返すことに、注意してください
 const unsubscribe = store.subscribe(() =>
   console.log(store.getState())
 )
 
-// Dispatch some actions
+// Actionをいくつか送信する
 store.dispatch(addTodo('Learn about actions'))
 store.dispatch(addTodo('Learn about reducers'))
 store.dispatch(addTodo('Learn about store'))
@@ -55,17 +55,17 @@ store.dispatch(toggleTodo(0))
 store.dispatch(toggleTodo(1))
 store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED))
 
-// Stop listening to state updates
+// 状態更新の購読をやめる
 unsubscribe()
 ```
 
-You can see how this causes the state held by the store to change:
+Storeの保持している状態が、どう変わったか確認できます：
 
 <img src='http://i.imgur.com/zMMtoMz.png' width='70%'>
 
-We specified the behavior of our app before we even started writing the UI. We won't do this in this tutorial, but at this point you can write tests for your reducers and action creators. You won't need to mock anything because they are just [pure](../introduction/ThreePrinciples.md#changes-are-made-with-pure-functions) functions. Call them, and make assertions on what they return.
+UIを書き始める前にもう、アプリの動きを明示しました。このチュートリアルではしませんが、この時点でReducerとActionクリエイターのテストを書くこともできます。何もモックする必要はありません。なぜなら、ただ[純粋な](../introduction/ThreePrinciples.md#変化は純粋（副作用のない）関数で作られる)関数だからです。関数を呼び出し、返される値をアサートします。
 
-## Source Code
+## ソースコード
 
 #### `index.js`
 
@@ -76,6 +76,6 @@ import todoApp from './reducers'
 let store = createStore(todoApp)
 ```
 
-## Next Steps
+## 次のステップ
 
-Before creating a UI for our todo app, we will take a detour to see [how the data flows in a Redux application](DataFlow.md).
+TodoアプリのUIを作る前に、寄り道しましょう。[Reduxアプリケーションで、どのようにデータが流れるか](DataFlow.md)を確かめます。

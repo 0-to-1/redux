@@ -11,3 +11,4 @@
 * [初級](/docs/basics/README.md)
   * [Action](/docs/basics/Actions.md)
   * [Reducer](/docs/basics/Reducers.md)
+  * [Store](/docs/basics/Store.md)
