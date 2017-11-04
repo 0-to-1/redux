@@ -70,7 +70,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware) — axiosのHTTPクライアントでデータ取得するReduxのミドルウェア
 * [redux-observable](https://github.com/redux-observable/redux-observable/) — "Epics"を使った、Actionの副作用のためのRxJSのミドルウェア
 * [redux-cycles](https://github.com/cyclejs-community/redux-cycles) — Cycle.jsを使ってReduxの非同期アクションを処理
-* [redux-logger](https://github.com/fcomb/redux-logger) — すべてのReduxアクションと次の状態のログを取る
+* [redux-logger](https://github.com/fcomb/redux-logger) — すべてのReduxアクションと次の状態のログをとる
 * [redux-immutable-state-invariant](https://github.com/leoasis/redux-immutable-state-invariant) — 開発中に、状態変更を警告する
 * [redux-unhandled-action](https://github.com/socialtables/redux-unhandled-action) — 開発中に、状態変更を引き起こさないActionを警告する
 * [redux-analytics](https://github.com/markdalgleish/redux-analytics) — Reduxのための解析ミドルウェア

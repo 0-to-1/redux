@@ -3,7 +3,7 @@
 Reduxではいくつかの使用例が、その[ソースコード](https://github.com/reactjs/redux/tree/master/examples)とともに提供されています。これら使用例のほとんどは、 [CodeSandbox](https://codesandbox.io)にもあります。CodeSandboxはオンラインで使用例を試せる、オンラインエディタです。
 ## 普通のカウンター (Counter Vanilla)
 
-[Counter Vanilla](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla)を起動する：
+[Counter Vanilla](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -16,7 +16,7 @@ open index.html
 
 ## カウンター
 
-[Counter](https://github.com/reactjs/redux/tree/master/examples/counter)を起動する：
+[Counter](https://github.com/reactjs/redux/tree/master/examples/counter)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -36,7 +36,7 @@ ReactとともにReduxを使った、最も基本的な使用例です。分か�
 
 ## Todo
 
-[Todos](https://github.com/reactjs/redux/tree/master/examples/todos)を起動する：
+[Todos](https://github.com/reactjs/redux/tree/master/examples/todos)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -56,7 +56,7 @@ open http://localhost:3000/
 
 ## やり直し（Undo)付きTodo
 
-[Todos with Undo](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo)を起動する：
+[Todos with Undo](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -74,7 +74,7 @@ open http://localhost:3000/
 
 ## TodoMVC
 
-[TodoMVC](https://github.com/reactjs/redux/tree/master/examples/todomvc)を起動する：
+[TodoMVC](https://github.com/reactjs/redux/tree/master/examples/todomvc)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -94,7 +94,7 @@ open http://localhost:3000/
 
 ## ショッピングカート（買い物かご）
 
-[Shopping Cart](https://github.com/reactjs/redux/tree/master/examples/shopping-cart)を起動する：
+[Shopping Cart](https://github.com/reactjs/redux/tree/master/examples/shopping-cart)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -112,7 +112,7 @@ open http://localhost:3000/
 
 ## ツリー表示
 
-[Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view)を起動する：
+[Tree View](https://github.com/reactjs/redux/tree/master/examples/tree-view)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -132,7 +132,7 @@ open http://localhost:3000/
 
 ## 非同期
 
-[Async](https://github.com/reactjs/redux/tree/master/examples/async)を起動する：
+[Async](https://github.com/reactjs/redux/tree/master/examples/async)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -150,7 +150,7 @@ open http://localhost:3000/
 
 ## ユニバーサル
 
-[Universal](https://github.com/reactjs/redux/tree/master/examples/universal) を起動する：
+[Universal](https://github.com/reactjs/redux/tree/master/examples/universal) を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
@@ -166,7 +166,7 @@ ReduxとReactで[サーバーレンダリング (server rendering)](../recipes/S
 
 ## リアルワールド
 
-[Real World](https://github.com/reactjs/redux/tree/master/examples/real-world)を起動する：
+[Real World](https://github.com/reactjs/redux/tree/master/examples/real-world)を実行する：
 
 ```
 git clone https://github.com/reactjs/redux.git
