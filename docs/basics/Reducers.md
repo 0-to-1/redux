@@ -1,14 +1,14 @@
 # Reducer
 
 [Action](./Actions.md) は、*何かが起きた* ということを示します。
-しかしアクションに対して、どのようにアプリケーションの状態を変化させるかは明示しません。それはReducerのやることです.
+しかしアクションに対して、どのようにアプリケーションの状態を変化させるかは明示しません。それはReducerのやることです。
 
 ## 状態の形をデザインする
 
-Reduxでは、すべてのアプリケーションの状態は一つのオブジェクトとして保持されます。
+Reduxでは、すべてのアプリケーションの状態は1つのオブジェクトとして保持されます。
 コードを書く前に、状態の形について考えるのは良いアイデアです。一つのオブジェクトとして、あなたのアプリケーションの状態をとても簡単に表現するにはどうすれば良いでしょう？
 
-私たちのTodoアプリでは、２つの異なる情報を保持します:
+私たちのTodoアプリでは、2つの異なる情報を保持します：
 
 * いま選択されているフィルター
 * 実際のTodoリスト
@@ -44,7 +44,7 @@ Reduxでは、すべてのアプリケーションの状態は一つのオブジ
 (previousState, action) => newState
 ```
 
-なぜReducerと呼ばれるのでしょう？それは、[`Array.prototype.reduce(reducer, ?initialValue)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) に渡すタイプの関数だからです。純粋関数であることは、とても大切です。Reducerで、 **絶対に** してはいけないこと:
+なぜReducerと呼ばれるのでしょう？それは、[`Array.prototype.reduce(reducer, ?initialValue)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) に渡すタイプの関数だからです。純粋関数であることは、とても大切です。Reducerで、 **絶対に** してはいけないこと：
 
 * 引数に手を加える
 * 副作用を起こす。例）APIコールやページ遷移
@@ -55,7 +55,7 @@ Reduxでは、すべてのアプリケーションの状態は一つのオブジ
 
 これを頭に入れた上で、Reducerについて書き始めましょう。先に説明した[Action](Actions.md) を理解できるよう、ゆっくり教えていきます。
 
-まず、初期状態を明示しましょう。Reduxは最初、`undefined`状態とともにReducerを呼び出します。この時が、初期状態を返すチャンスです:
+まず、初期状態を明示しましょう。Reduxは最初、`undefined`状態とともにReducerを呼び出します。このときが、初期状態を返すチャンスです：
 
 ```js
 import { VisibilityFilters } from './actions'
@@ -76,7 +76,7 @@ function todoApp(state, action) {
 }
 ```
 
-よりコンパクトに書くには、 [ES6 default arguments syntax](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/default_parameters) を使うことです:
+よりコンパクトに書くには、 [ES6 default arguments syntax](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/default_parameters) を使うことです：
 
 ```js
 function todoApp(state = initialState, action) {
@@ -86,7 +86,7 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-それでは、`SET_VISIBILITY_FILTER`を処理しましょう. 必要なのは、状態の`visibilityFilter`を変えるだけ。簡単です:
+それでは、`SET_VISIBILITY_FILTER`を処理しましょう。 必要なのは、状態の`visibilityFilter`を変えるだけ。簡単です：
 
 ```js
 function todoApp(state = initialState, action) {
@@ -101,7 +101,7 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-注意事項:
+注意事項：
 
 1. **`state`をいじっている訳ではありません** [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)でコピーを作っています。 `Object.assign(state, { visibilityFilter: action.filter })`も間違いです : これは最初の引数に手を加えています。最初の引数として、**必ず** 空のオブジェクトを渡してください。代わりに [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) で `{ ...state, ...newState }` と書くこともできます。
 
@@ -119,7 +119,7 @@ function todoApp(state = initialState, action) {
 
 ## もっとアクションを処理する
 
-処理しなければいけない、さらに２つのActionがあります！ `SET_VISIBILITY_FILTER`でやったように、`ADD_TODO`と`TOGGLE_TODO`Actionをインポートします。そして`ADD_TODO`を処理するためにReducerを拡張します。
+処理しなければいけない、さらに2つのActionがあります！ `SET_VISIBILITY_FILTER`でやったように、`ADD_TODO`と`TOGGLE_TODO`Actionをインポートします。そして`ADD_TODO`を処理するためにReducerを拡張します。
 
 ```js
 import {
@@ -153,9 +153,9 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-先ほどと同じように、`state`とその中身を直接書き換えてはいけません。代わりに新しいオブジェクトを返します。 新しい`todos`は、古い`todos`の最後に１つTodo項目を付け加えたのと同じです。　新たなTodo項目はアクションのデータから作られます。
+先ほどと同じように、`state`とその中身を直接書き換えてはいけません。代わりに新しいオブジェクトを返します。 新しい`todos`は、古い`todos`の最後に1つTodo項目を付け加えたのと同じです。　新たなTodo項目はアクションのデータから作られます。
 
-最後に、`TOGGLE_TODO`ハンドラを実装します。何も驚くようなことはありません:
+最後に、`TOGGLE_TODO`ハンドラを実装します。何も驚くようなことはありません：
 
 ```js
 case TOGGLE_TODO:
@@ -175,7 +175,7 @@ case TOGGLE_TODO:
 
 ## Reducerを分割する
 
-ここまでのコードです。ごちゃごちゃしてます:
+ここまでのコードです。ごちゃごちゃしてます：
 
 ```js
 function todoApp(state = initialState, action) {
@@ -211,7 +211,7 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-もっと分かりやすくする方法はないでしょうか? `todos`と`visibilityFilter`は完全に独立して更新されているように見えます。状態のそれぞれが互いに依存しているような場合は、もっと考慮が必要です。 しかしこの例では、`todos`を簡単に別の関数に分割して更新できそうです:
+もっと分かりやすくする方法はないでしょうか？ `todos`と`visibilityFilter`は完全に独立して更新されているように見えます。状態のそれぞれが互いに依存しているような場合は、もっと考慮が必要です。 しかしこの例では、`todos`を簡単に別の関数に分割して更新できそうです：
 
 ```js
 function todos(state = [], action) {
@@ -255,16 +255,16 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-気をつけてほしいのは、`todos`も`state`を受け取りますが、配列だということです！`todoApp`は状態の一部だけ渡します。そして`todos`は渡された状態についてのみ、どのように更新すべきか把握しています。**これは *Reducer合成* と呼ばれ、Reduxアプリをつくる基本パターンです。**
+気をつけてほしいのは、`todos`も`state`を受け取りますが、配列だということです！`todoApp`は状態の一部だけ渡します。そして`todos`は渡された状態についてのみ、どのように更新すべきか把握しています。**これは *Reducer合成* と呼ばれ、Reduxアプリを作る基本パターンです。**
 
 Reducer合成をもっと見てみましょう。Reducerから`visibilityFilter`も切り出せないでしょうか？もちろんできます。
 
-下記のインポートでは、`SHOW_ALL`を宣言するために[ES6 Object Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)を使いましょう:
+下記のインポートでは、`SHOW_ALL`を宣言するために[ES6 Object Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)を使いましょう：
 ```js
 const { SHOW_ALL } = VisibilityFilters
 ```
 
-そして:
+そして：
 ```js
 function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
@@ -276,7 +276,7 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 ```
 
-いま大元のReducerを書き換えました。このReducerは、状態の一部を処理するReducerを呼び出し、一つのオブジェクトとして合成する関数です。もう初期状態の全体を把握する必要はありません。ただ最初に`undefined`が与えられると、配下のReducerがそれぞれの初期状態を返すことが分かっていれば良いのです。
+いま大元のReducerを書き換えました。このReducerは、状態の一部を処理するReducerを呼び出し、1つのオブジェクトとして合成する関数です。もう初期状態の全体を把握する必要はありません。ただ最初に`undefined`が与えられると、配下のReducerがそれぞれの初期状態を返すことが分かっていれば良いのです。
 
 ```js
 function todos(state = [], action) {
@@ -324,7 +324,7 @@ function todoApp(state = {}, action) {
 
 これで良くなりました！アプリが大きくなったらReducerを別のファイルに分割しても構いません。ファイルを分けることで、異なるデータ領域の処理について完全な独立性を保てます。
 
-最後に、Reduxは[`combineReducers()`](../api/combineReducers.md)という便利な関数呼び出しを用意しています。これは上記の`todoApp`でやったのと同じ常用的なロジックです。この関数により、`todoApp`を下記のように書き換えられます:
+最後に、Reduxは[`combineReducers()`](../api/combineReducers.md)という便利な関数呼び出しを用意しています。これは上記の`todoApp`でやったのと同じ常用的なロジックです。この関数により、`todoApp`を下記のように書き換えられます：
 
 ```js
 import { combineReducers } from 'redux'
@@ -337,7 +337,7 @@ const todoApp = combineReducers({
 export default todoApp
 ```
 
-これは下記と同じです:
+これは下記と同じです：
 
 ```js
 export default function todoApp(state = {}, action) {
@@ -348,7 +348,7 @@ export default function todoApp(state = {}, action) {
 }
 ```
 
-異なるキーを渡したり、異なる関数を呼び出すこともできます。下記２つの合成したReducerは同等です:
+異なるキーを渡したり、異なる関数を呼び出すこともできます。下記2つの合成したReducerは同等です：
 
 ```js
 const reducer = combineReducers({
@@ -368,7 +368,7 @@ function reducer(state = {}, action) {
 }
 ```
 
-[`combineReducers()`](../api/combineReducers.md)がやるのは、複数のReducerを呼び出す関数の生成です。呼び出されたReducerには、キーによって対応づけられた状態の一部が渡されます。 そして[`combineReducers()`](../api/combineReducers.md)はReducerが返した結果を一つのオブジェクトにまとめ直します。[It's not magic.（これは魔法ではありません。）](https://github.com/reactjs/redux/issues/428#issuecomment-129223274)引数として渡されたすべてのReducerが状態を変えなければ、新しいオブジェクトは作られません。これは他のReducerと同じです。
+[`combineReducers()`](../api/combineReducers.md)がやるのは、複数のReducerを呼び出す関数の生成です。呼び出されたReducerには、キーによって対応づけられた状態の一部が渡されます。 そして[`combineReducers()`](../api/combineReducers.md)はReducerが返した結果を1つのオブジェクトにまとめ直します。[It's not magic.（これは魔法ではありません。）](https://github.com/reactjs/redux/issues/428#issuecomment-129223274)引数として渡されたすべてのReducerが状態を変えなければ、新しいオブジェクトは作られません。これは他のReducerと同じです。
 
 >##### ES6に精通したユーザーへの注意
 
