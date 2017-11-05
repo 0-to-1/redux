@@ -43,7 +43,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 ### 講演
 
 <!-- textlint-disable preset-japanese/sentence-length -->
-* [Live React： 自動再読み込みとタイムトラベル (Hot Reloading and Time Travel)](http://youtube.com/watch?v=xsSnOQynTHs) — Reduxによって課された制約がどのようにタイムトラベル（時間の行き来）と自動再読み込みを簡単にするかを見る
+* [Live React： 自動再読み込みとタイムトラベル (Hot Reloading and Time Travel)](http://youtube.com/watch?v=xsSnOQynTHs) — Reduxによって課された制約がどのようにタイムトラベル（元に戻す/やり直す）と自動再読み込みを簡単にするかを見る
 
 * [ヤニをとる(Cleaning the Tar）： Firefoxの開発者ツール内でReactを使う（Using React within the Firefox Developer Tools)](https://www.youtube.com/watch?v=qUlRpybs7_c) — 既存のMVCアプリケーションを段階的にReduxへ移行する方法を学ぶ
 <!-- textlint-enable preset-japanese/sentence-length -->

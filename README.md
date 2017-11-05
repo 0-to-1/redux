@@ -5,7 +5,7 @@ ReduxはJavaScriptアプリのための、予測しやすい（意外性のな�
 
 アプリケーションが異なる環境（クライアント、サーバー、そしてネイティヴ）で一貫して動く手助けをします。テストも簡単です。さらに次のような、開発者のための素晴らしい体験も提供します。
 
-[タイムトラベル（時間を行き来）するデバッガーで、コードを自動反映しながら編集する (live code editing combined with a time traveling debugger)](https://github.com/gaearon/redux-devtools)
+[元に戻したり、やり直したりできるデバッガーで、コードを自動反映しながら編集する (live code editing combined with a time traveling debugger)](https://github.com/gaearon/redux-devtools)
 
 Reduxは[React](https://facebook.github.io/react/)や、他のどんなViewライブリとも使うことができます。
 Reduxは軽量です。(依存を含め、2kB)
