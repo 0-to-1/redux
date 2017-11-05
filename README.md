@@ -100,7 +100,7 @@ import { createStore } from 'redux'
  *
  * この例では、`switch`文と文字列を使います。
  * しかしプロジェクトと整合性があるなら、他のよくある書き方に従ってヘルパーを使うこともできます。
- * たとえば、map関数のような。
+ * 例えば、map関数のような。
  */
 function counter(state = 0, action) {
   switch (action.type) {
