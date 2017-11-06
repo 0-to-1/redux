@@ -14,6 +14,8 @@ rules:
     pattern: /時([かがでにのはへもを])/
   - expected: 気をつ
     pattern: 気を付
+  - expected: 気づ
+    pattern: 気付
   - expected: ログをと
     pattern: ログを取
   - expected: すべて
@@ -25,6 +27,8 @@ rules:
       - お薦め
   - expected: 例えば
     pattern:  たとえば
+  - expected: 正規化
+    pattern:  標準化
   - expected: 1番
     pattern: 一番
   - expected: 2番
