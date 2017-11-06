@@ -16,6 +16,8 @@ rules:
     pattern: 気を付
   - expected: ログをと
     pattern: ログを取
+  - expected: すべて
+    pattern: 全て
   - expected: おすすめ
     pattern:
       - オススメ
