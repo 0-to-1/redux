@@ -77,7 +77,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [redux-gen](https://github.com/weo-edu/redux-gen) — Reduxのためのジェネレータのミドルウェア
 * [redux-saga](https://github.com/yelouafi/redux-saga) — Reduxのための、別の副作用モデル
 * [redux-action-tree](https://github.com/cerebral/redux-action-tree) — Reduxのための、合成可能なCerebral形式のシグナル
-* [apollo-client](https://github.com/apollostack/apollo-client) — シンプルなキャッシュクライアント。Redux上で作られた全てのGraphQLとUIフレームワークに対応
+* [apollo-client](https://github.com/apollostack/apollo-client) — シンプルなキャッシュクライアント。Redux上で作られたすべてのGraphQLとUIフレームワークに対応
 
 ### ルーティング（ページ遷移）
 

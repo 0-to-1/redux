@@ -27,7 +27,7 @@ import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
 
 >別ファイルで、Actionタイプの定数を定義する必要はありません。というより定義すること自体、しなくても構いません。小さなプロジェクトなら、Actionタイプとして文字列リテラルを使うだけにした方が簡単でしょう。しかし大きなコードベースでは明示的に定数を宣言することに、いくつか利点があります。詳しくは、[常用文の削減](../recipes/ReducingBoilerplate.md)を読んでください。コードベースを綺麗に保つ、実践的なコツが書かれています。
 
-`type`以外の、Actionオブジェクトの構造は全てあなた次第です。 Actionの構成方法に関するおすすめは、[Fluxの標準Action（Flux Standard Action）](https://github.com/acdlite/flux-standard-action)で確認できます。
+`type`以外の、Actionオブジェクトの構造はすべてあなた次第です。 Actionの構成方法に関するおすすめは、[Fluxの標準Action（Flux Standard Action）](https://github.com/acdlite/flux-standard-action)で確認できます。
 
 ユーザーが完了したTodo項目にチェックできるよう、もう1つActionタイプを加えましょう。特定のTodo項目は、`index`で参照します。`index`を配列で保持しているからです。実際のアプリでは、何か新しいものが作られるたびにユニークIDを生成する方が賢明です。
 
