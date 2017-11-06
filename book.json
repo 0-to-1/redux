@@ -4,7 +4,7 @@
   "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs", "algolia"],
   "pluginsConfig": {
     "edit-link": {
-      "base": "https://github.com/to-miya/redux/tree/master",
+      "base": "https://github.com/0-to-1/redux/tree/master",
       "label": "このページを編集する"
     },
     "github": {
