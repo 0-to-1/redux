@@ -168,14 +168,14 @@ Fluxを書いたことがあるなら、理解しなければならない1つの
 
 ### ドキュメント
 
-* [導入](https://0-to-1.github.io/docs/introduction/index.html)
-* [初級](https://0-to-1.github.io/docs/basics/index.html)
-* [上級](https://0-to-1.github.io/docs/advanced/index.html)
-* [レシピ](https://0-to-1.github.io/docs/recipes/index.html)
-* [FAQ](https://0-to-1.github.io/docs/FAQ.html)
-* [トラブルシューティング](https://0-to-1.github.io/docs/Troubleshooting.html)
-* [用語集](https://0-to-1.github.io/docs/Glossary.html)
-* [APIレファレンス](https://0-to-1.github.io/docs/api/index.html)
+* [導入](https://0-to-1.github.io/redux/docs/introduction/index.html)
+* [初級](https://0-to-1.github.io/redux/docs/basics/index.html)
+* [上級](https://0-to-1.github.io/redux/docs/advanced/index.html)
+* [レシピ](https://0-to-1.github.io/redux/docs/recipes/index.html)
+* [FAQ](https://0-to-1.github.io/redux/docs/FAQ.html)
+* [トラブルシューティング](https://0-to-1.github.io/redux/docs/Troubleshooting.html)
+* [用語集](https://0-to-1.github.io/redux/docs/Glossary.html)
+* [APIレファレンス](https://0-to-1.github.io/redux/docs/api/index.html)
 
 オフラインで読むためのPDF、ePub、そしてMOBIもあります。これらの作り方は、こちらをご覧ください： [paulkogel/redux-offline-docs](https://github.com/paulkogel/redux-offline-docs).
 
@@ -185,16 +185,16 @@ Fluxを書いたことがあるなら、理解しなければならない1つの
 
 ほとんどすべての例は、CodeSandboxというサンドボックスに対応しています。オンラインで試せる双方向版のコードです。
 
-* [Counter Vanilla](https://0-to-1.github.io/docs/introduction/Examples.html#counter-vanilla) ([source](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla))
-* [Counter](https://0-to-1.github.io/docs/introduction/Examples.html#counter) ([source](https://github.com/reactjs/redux/tree/master/examples/counter), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/counter))
-* [Todos](https://0-to-1.github.io/docs/introduction/Examples.html#todos) ([source](https://github.com/reactjs/redux/tree/master/examples/todos), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos))
-* [Todos with Undo](https://0-to-1.github.io/docs/introduction/Examples.html#todos-with-undo) ([source](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos-with-undo))
-* [TodoMVC](https://0-to-1.github.io/docs/introduction/Examples.html#todomvc) ([source](https://github.com/reactjs/redux/tree/master/examples/todomvc), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todomvc))
-* [Shopping Cart](https://0-to-1.github.io/docs/introduction/Examples.html#shopping-cart) ([source](https://github.com/reactjs/redux/tree/master/examples/shopping-cart), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/shopping-cart))
-* [Tree View](https://0-to-1.github.io/docs/introduction/Examples.html#tree-view) ([source](https://github.com/reactjs/redux/tree/master/examples/tree-view), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/tree-view))
-* [Async](https://0-to-1.github.io/docs/introduction/Examples.html#async) ([source](https://github.com/reactjs/redux/tree/master/examples/async), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/async))
-* [Universal](https://0-to-1.github.io/docs/introduction/Examples.html#universal) ([source](https://github.com/reactjs/redux/tree/master/examples/universal))
-* [Real World](https://0-to-1.github.io/docs/introduction/Examples.html#real-world) ([source](https://github.com/reactjs/redux/tree/master/examples/real-world), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/real-world))
+* [Counter Vanilla](https://0-to-1.github.io/redux/docs/introduction/Examples.html#counter-vanilla) ([source](https://github.com/reactjs/redux/tree/master/examples/counter-vanilla))
+* [Counter](https://0-to-1.github.io/redux/docs/introduction/Examples.html#counter) ([source](https://github.com/reactjs/redux/tree/master/examples/counter), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/counter))
+* [Todos](https://0-to-1.github.io/redux/docs/introduction/Examples.html#todos) ([source](https://github.com/reactjs/redux/tree/master/examples/todos), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos))
+* [Todos with Undo](https://0-to-1.github.io/redux/docs/introduction/Examples.html#todos-with-undo) ([source](https://github.com/reactjs/redux/tree/master/examples/todos-with-undo), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todos-with-undo))
+* [TodoMVC](https://0-to-1.github.io/redux/docs/introduction/Examples.html#todomvc) ([source](https://github.com/reactjs/redux/tree/master/examples/todomvc), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/todomvc))
+* [Shopping Cart](https://0-to-1.github.io/redux/docs/introduction/Examples.html#shopping-cart) ([source](https://github.com/reactjs/redux/tree/master/examples/shopping-cart), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/shopping-cart))
+* [Tree View](https://0-to-1.github.io/redux/docs/introduction/Examples.html#tree-view) ([source](https://github.com/reactjs/redux/tree/master/examples/tree-view), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/tree-view))
+* [Async](https://0-to-1.github.io/redux/docs/introduction/Examples.html#async) ([source](https://github.com/reactjs/redux/tree/master/examples/async), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/async))
+* [Universal](https://0-to-1.github.io/redux/docs/introduction/Examples.html#universal) ([source](https://github.com/reactjs/redux/tree/master/examples/universal))
+* [Real World](https://0-to-1.github.io/redux/docs/introduction/Examples.html#real-world) ([source](https://github.com/reactjs/redux/tree/master/examples/real-world), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/real-world))
 
 NPMのエコシステムが初めてでプロジェクトを立ち上げたり、運営するのに問題を抱えている。あるいは、上記の重要な箇所をどこにペーストすれば良いかよく分からない。そんな方は、 [simplest-redux-example（一番シンプルなReduxの例）](https://github.com/jackielii/simplest-redux-example)を確認してください。Reduxとともに、ReactとBrowserifyを使っています。
 
