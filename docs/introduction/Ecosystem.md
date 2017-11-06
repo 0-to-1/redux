@@ -108,7 +108,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 ### ユーティリティ（便利プログラム）
 
 * [reselect](https://github.com/faassen/reselect) — NuclearJSに触発された効率的な生成データのセレクタ
-* [normalizr](https://github.com/paularmstrong/normalizr) — Reducerが簡単に受け取って処理できるように、ネストされたAPIレスポンスを標準化
+* [normalizr](https://github.com/paularmstrong/normalizr) — Reducerが簡単に受け取って処理できるように、ネストされたAPIレスポンスを正規化
 * [redux-actions](https://github.com/acdlite/redux-actions) — ReducerとAction Creatorを書くときに、常用文を減らす（訳注：書かないといけないコード量を削減する）
 * [redux-act](https://github.com/pauldijou/redux-act) — ReducerとAction Creatorを作るためのライブラリ
 * [redux-transducers](https://github.com/acdlite/redux-transducers) — Reduxのための変換ユーティリティ
