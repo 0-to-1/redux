@@ -13,7 +13,7 @@
   * [Reducer](/docs/basics/Reducers.md)
   * [Store](/docs/basics/Store.md)
   * [データフロー](/docs/basics/DataFlow.md)
-  * [Reactと併用する](/docs/basics/UsageWithReact.md)
+  * [Reactと併用](/docs/basics/UsageWithReact.md)
   * [使用例：Todoリスト](/docs/basics/ExampleTodoList.md)
 * [上級](/docs/advanced/README.md)
   * [Async Actions](/docs/advanced/AsyncActions.md)

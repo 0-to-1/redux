@@ -8,5 +8,5 @@ Reducerやミドルウェア、そしてStoreエンハンサーについての�
 * [Reducer](Reducers.md)
 * [Store](Store.md)
 * [データフロー](DataFlow.md)
-* [Reactと併用する](UsageWithReact.md)
+* [Reactと併用](UsageWithReact.md)
 * [使用例：Todoリスト](ExampleTodoList.md)
