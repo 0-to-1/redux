@@ -1,69 +1,69 @@
 # Data Flow
 
-Redux architecture revolves around a **strict unidirectional data flow**.
+Reduxのアーキテクチャは、**厳格な一方向のデータフロー** を中心に設計されています。
 
-This means that all data in an application follows the same lifecycle pattern, making the logic of your app more predictable and easier to understand. It also encourages data normalization, so that you don't end up with multiple, independent copies of the same data that are unaware of one another.
+アプリケーション内のすべてのデータが、同じライフサイクルパターンをたどるということです。これによりアプリのロジックがより予測しやすく、理解しやすくなります。また、データの正規化が促されます。そのためお互いにつながりが無い、同じデータの複製をいくつも作らなくてすみます。
 
-If you're still not convinced, read [Motivation](../introduction/Motivation.md) and [The Case for Flux](https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6) for a compelling argument in favor of unidirectional data flow. Although [Redux is not exactly Flux](../introduction/PriorArt.md), it shares the same key benefits.
+まだピンとこないなら、[モチベーション](../introduction/Motivation.md)と[Fluxが役立つ場合（The Case for Flux）](https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6)を読んでください。一方向のデータフローを支持する、説得力のある主張です。[Reduxは正確にはFluxではない](../introduction/PriorArt.md)のですが、主な利点は同じです。
 
-The data lifecycle in any Redux app follows these 4 steps:
+どんなReduxアプリでも、データのライフサイクルは次の４ステップをたどります：
 
-1. **You call** [`store.dispatch(action)`](../api/Store.md#dispatch).
+1. [`store.dispatch(action)`](../api/Store.md#dispatch)**を呼び出す**。
 
-  An [action](Actions.md) is a plain object describing *what happened*. For example:
+  [Action](Actions.md)は *起きたこと* を表す単なるオブジェクトです。例えば：
 
    ```js
     { type: 'LIKE_ARTICLE', articleId: 42 }
     { type: 'FETCH_USER_SUCCESS', response: { id: 3, name: 'Mary' } }
-    { type: 'ADD_TODO', text: 'Read the Redux docs.' }
+    { type: 'ADD_TODO', text: 'Reduxのドキュメントを読む。' }
    ```
 
-  Think of an action as a very brief snippet of news. “Mary liked article 42.” or “‘Read the Redux docs.' was added to the list of todos.”
+  Actionを、とても簡潔なニュースの断片だと考えてください。“メアリーは記事42にいいねした。” とか “‘Reduxのドキュメントを読む。’がTodoリストに追加された。” など。
 
-  You can call [`store.dispatch(action)`](../api/Store.md#dispatch) from anywhere in your app, including components and XHR callbacks, or even at scheduled intervals.
+  アプリのどこからでも[`store.dispatch(action)`](../api/Store.md#dispatch)を呼び出せます。コンポーネント（構成要素）やXHRコールバック、あらかじめ決められた間隔でも呼び出せます。
 
-2. **The Redux store calls the reducer function you gave it.**
+2. **Redux Storeが、与えられたReducer関数を呼び出す。**
 
-  The [store](Store.md) will pass two arguments to the [reducer](Reducers.md): the current state tree and the action. For example, in the todo app, the root reducer might receive something like this:
+  [Store](Store.md)は、２つの引数を[Reducer](Reducers.md)に渡します。現在の状態ツリーとActionです。例えばTodoアプリで、ルート（大元の）Reducerは次のような状態とActionを受け取るでしょう：
 
    ```js
-    // The current application state (list of todos and chosen filter)
+    // 現在のアプリケーション状態（Todoのリストと、選択されたフィルター）
     let previousState = {
       visibleTodoFilter: 'SHOW_ALL',
       todos: [
         {
-          text: 'Read the docs.',
+          text: 'ドキュメントを読む。',
           complete: false
         }
       ]
     }
 
-    // The action being performed (adding a todo)
+    // 実行されたAction（Todoの追加）
     let action = {
       type: 'ADD_TODO',
-      text: 'Understand the flow.'
+      text: '流れを理解する'
     }
 
-    // Your reducer returns the next application state
+    // Reducerは次のアプリケーション状態を返す
     let nextState = todoApp(previousState, action)
    ```
 
-  Note that a reducer is a pure function. It only *computes* the next state. It should be completely predictable: calling it with the same inputs many times should produce the same outputs. It shouldn't perform any side effects like API calls or router transitions. These should happen before an action is dispatched.
+  Reducerは純粋関数であることに注意してください。次の状態を *計算する* だけです。完全に予測可能であるべきです。つまり同じ入力には、何度やっても同じ出力を返すのです。副作用は、どんなものでも行うべきではありません。例えば、API呼び出しやルート遷移など。これらは、Actionを送信する前に行うべきです。
 
-3. **The root reducer may combine the output of multiple reducers into a single state tree.**
+3. **ルートReducerは、複数のReducerの結果を１つの状態ツリーにまとめてよい。**
 
-  How you structure the root reducer is completely up to you. Redux ships with a [`combineReducers()`](../api/combineReducers.md) helper function, useful for “splitting” the root reducer into separate functions that each manage one branch of the state tree.
+  ルートReducerをどのように構成するかは、すべてあなた次第です。Reduxは[`combineReducers()`](../api/combineReducers.md)というヘルパー関数を提供しています。ルートReducerを複数の関数へ“分割する”のに役立ちます。それぞれの関数は、 状態ツリーの一部を処理します。
 
-  Here's how [`combineReducers()`](../api/combineReducers.md) works. Let's say you have two reducers, one for a list of todos, and another for the currently selected filter setting:
+  [`combineReducers()`](../api/combineReducers.md)がどう機能するか示します。ここでは2つのReducerがあります。1つはTodoリストのため、もう1つは今選択されているフィルター設定のためです：
 
    ```js
     function todos(state = [], action) {
-      // Somehow calculate it...
+      // 計算は省略...
       return nextState
     }
 
     function visibleTodoFilter(state = 'SHOW_ALL', action) {
-      // Somehow calculate it...
+      // 計算は省略...
       return nextState
     }
 
@@ -73,14 +73,14 @@ The data lifecycle in any Redux app follows these 4 steps:
     })
    ```
 
-  When you emit an action, `todoApp` returned by `combineReducers` will call both reducers:
+  Actionを発行すると、`combineReducers`によって返された`todoApp`は両方のReducerを呼び出します：
 
    ```js
     let nextTodos = todos(state.todos, action)
     let nextVisibleTodoFilter = visibleTodoFilter(state.visibleTodoFilter, action)
    ```
 
-  It will then combine both sets of results into a single state tree:
+  そして両方の結果を、1つの状態ツリーにまとめます：
 
    ```js
     return {
@@ -89,17 +89,17 @@ The data lifecycle in any Redux app follows these 4 steps:
     }
    ```
 
-  While [`combineReducers()`](../api/combineReducers.md) is a handy helper utility, you don't have to use it; feel free to write your own root reducer!
+  [`combineReducers()`](../api/combineReducers.md)は手軽なヘルパー関数ですが、使わなくても構いません。ルートReducerの書き方は、あなた次第です！
 
-4. **The Redux store saves the complete state tree returned by the root reducer.**
+4. **ReduxはルートReducerによって返された、完全な状態ツリーを保存します。**
 
-  This new tree is now the next state of your app! Every listener registered with [`store.subscribe(listener)`](../api/Store.md#subscribe) will now be invoked; listeners may call [`store.getState()`](../api/Store.md#getState) to get the current state.
+  上記で、新しいツリーがアプリの次の状態となりました！[`store.subscribe(listener)`](../api/Store.md#subscribe)で登録されたすべてのリスナーは、このとき呼び出されます。リスナーは[`store.getState()`](../api/Store.md#getState)で現在の状態を得ることもできます。
 
-  Now, the UI can be updated to reflect the new state. If you use bindings like [React Redux](https://github.com/gaearon/react-redux), this is the point at which `component.setState(newState)` is called.
+  そして、UIの更新が可能となりました。現在の新しい状態を反映するためです。[React Redux](https://github.com/gaearon/react-redux)のようなバインディング（連携プログラム）を使っているなら、この時に`component.setState(newState)`が呼び出されます。
 
-## Next Steps
+## 次のステップ
 
-Now that you know how Redux works, let's [connect it to a React app](UsageWithReact.md).
+これで、Reduxがどのように機能するか分かりました。次は[Reactアプリにつなげましょう](UsageWithReact.md)。
 
->##### Note for Advanced Users
->If you're already familiar with the basic concepts and have previously completed this tutorial, don't forget to check out [async flow](../advanced/AsyncFlow.md) in the [advanced tutorial](../advanced/README.md) to learn how middleware transforms [async actions](../advanced/AsyncActions.md) before they reach the reducer.
+>##### 上級ユーザーへの注意
+>基本的なコンセプトをよく理解していて、以前にこのチュートリアルを終えた方へ。[上級チュートリアル](../advanced/README.md)の[非同期フロー](../advanced/AsyncFlow.md)を忘れずにチェックしてください。Reducerに届く前に、ミドルウェアが[非同期Action](../advanced/AsyncActions.md)をどう変換するか学べます。
