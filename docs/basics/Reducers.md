@@ -80,7 +80,7 @@ function todoApp(state, action) {
 
 ```js
 function todoApp(state = initialState, action) {
-  // 今のところ, 何のアクションも処理ていない。
+  // 今のところ, 何のアクションも処理していない。
   // ただ、与えられた状態を返しているだけ。
   return state
 }
