@@ -63,7 +63,7 @@ npm install --save redux
 
 もし使っていないなら、[unpkgにあるファイルへアクセスして](https://unpkg.com/redux/)ダウンロードするか、 お使いのパッケージマネージャでこれらのファイルを指定できます。
 
-Reduxがもっともよく読み込まれているのは、[CommonJS](http://webpack.github.io/docs/commonjs.html)モジュールのコレクションとしてです。これらのモジュールは、`redux`を[Webpack](https://webpack.js.org/)、 [Browserify](http://browserify.org/)、またはNode.js環境でインポートすると利用できます。 もし最先端でいるのが好きなら、[Rollup](http://rollupjs.org)を使うこともできます。 これも同様に対応しています。
+Reduxがもっともよく読み込まれているのは、[CommonJS](http://webpack.github.io/docs/commonjs.html)モジュールのコレクションとしてです。これらのモジュールは、`redux`を[Webpack](https://webpack.js.org/)、[Browserify](http://browserify.org/)、またはNode.js環境でインポートすると利用できます。 もし最先端でいるのが好きなら、[Rollup](http://rollupjs.org)を使うこともできます。 これも同様に対応しています。
 
 上記のようなモジュールバンドラを使っていなくても、大丈夫です。`redux` npmパッケージには、あらかじめコンパイルされた本番と開発用の[UMD](https://github.com/umdjs/umd)ビルドが同梱されています。 場所は[`dist` フォルダ](https://unpkg.com/redux/dist/)です。バンドラなしで直接使えますし、人気のあるJavaScriptのモジュールローダーや環境の多くと互換性があります。 例えばWebページに[`<script>`タグ](https://unpkg.com/redux/dist/redux.js)で、UMDビルドを読み込むことができます。または、[Bowerでインストールする (tell Bower to install it)](https://github.com/reactjs/redux/pull/1181#issuecomment-167361975)ことも。 UMDビルドは、 Reduxを`window.Redux`というグローバル変数で利用できるようにします。
 
@@ -177,9 +177,9 @@ Fluxを書いたことがあるなら、理解しなければならない1つの
 * [用語集](https://0-to-1.github.io/redux/docs/Glossary.html)
 * [APIレファレンス](https://0-to-1.github.io/redux/docs/api/index.html)
 
-オフラインで読むためのPDF、ePub、そしてMOBIもあります。これらの作り方は、こちらをご覧ください： [paulkogel/redux-offline-docs](https://github.com/paulkogel/redux-offline-docs).
+オフラインで読むためのPDF、ePub、そしてMOBIもあります。これらの作り方は、こちらをご覧ください：[paulkogel/redux-offline-docs](https://github.com/paulkogel/redux-offline-docs).
 
-オフラインのためのドキュメントは、 こちらを： [devdocs](http://devdocs.io/redux/)
+オフラインのためのドキュメントは、 こちらを：[devdocs](http://devdocs.io/redux/)
 
 ### 使用例
 
@@ -196,7 +196,7 @@ Fluxを書いたことがあるなら、理解しなければならない1つの
 * [ユニバーサル](/docs/introduction/Examples.md#ユニバーサル) ([source](https://github.com/reactjs/redux/tree/master/examples/universal))
 * [リアルワールド](/docs/introduction/Examples.md#リアルワールド) ([source](https://github.com/reactjs/redux/tree/master/examples/real-world), [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/real-world))
 
-NPMのエコシステムが初めてでプロジェクトを立ち上げたり、運営するのに問題を抱えている。あるいは、上記の重要な箇所をどこにペーストすれば良いかよく分からない。そんな方は、 [simplest-redux-example（一番シンプルなReduxの例）](https://github.com/jackielii/simplest-redux-example)を確認してください。Reduxとともに、ReactとBrowserifyを使っています。
+NPMのエコシステムが初めてでプロジェクトを立ち上げたり、運営するのに問題を抱えている。あるいは、上記の重要な箇所をどこにペーストすれば良いかよく分からない。そんな方は、[simplest-redux-example（一番シンプルなReduxの例）](https://github.com/jackielii/simplest-redux-example)を確認してください。Reduxとともに、ReactとBrowserifyを使っています。
 
 ### 議論
 
@@ -219,12 +219,12 @@ NPMのエコシステムが初めてでプロジェクトを立ち上げたり�
 
 ### ロゴ
 
-公式ロゴはこちらの [GitHubで](https://github.com/reactjs/redux/tree/master/logo).
+公式ロゴはこちらの[GitHubで](https://github.com/reactjs/redux/tree/master/logo)。
 
 ### 更新履歴
 
 このプロジェクトは[セマンティック バージョニング (Semantic Versioning)](http://semver.org/)に準拠しています。
-すべてのリリースは移行説明とともに、 [リリース (Releases)](https://github.com/reactjs/redux/releases)ページに記録されています。
+すべてのリリースは移行説明とともに、[リリース (Releases)](https://github.com/reactjs/redux/releases)ページに記録されています。
 
 ### パトロン（後援者）
 
@@ -234,7 +234,7 @@ Redux上の作業は[コミュニティによって援助されています。 (
 * [Webflow](https://github.com/webflow)
 * [Ximedes](https://www.ximedes.com/)
 
-[Reduxパトロンの全リストを確認して (See the full list of Redux patrons)](PATRONS.md)ください。 [Reduxを使う人達と会社の (people and companies that use Redux)](https://github.com/reactjs/redux/issues/310)増え続けるリストも。
+[Reduxパトロンの全リストを確認して (See the full list of Redux patrons)](PATRONS.md)ください。[Reduxを使う人達と会社の (people and companies that use Redux)](https://github.com/reactjs/redux/issues/310)増え続けるリストも。
 
 ### ライセンス
 
