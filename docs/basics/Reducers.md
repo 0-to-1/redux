@@ -117,7 +117,7 @@ function todoApp(state = initialState, action) {
 
 >多くの人がまだ、ドキュメントに`switch`文が載っているかどうかでフレームワークを選んでいるのは残念です。もし`switch`が好きでなければ、アクションの処理を対応づける（マッピングする）ために、 特別な`createReducer`関数を使うこともできます。この関数は [“常用文の削減”](../recipes/ReducingBoilerplate.md#reducers)で説明しています。
 
-## もっとアクションを処理する
+## もっとActionを処理する
 
 処理しなければいけない、さらに2つのActionがあります！ `SET_VISIBILITY_FILTER`でやったように、`ADD_TODO`と`TOGGLE_TODO`Actionをインポートします。そして`ADD_TODO`を処理するためにReducerを拡張します。
 
@@ -153,7 +153,7 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-先ほどと同じように、`state`とその中身を直接書き換えてはいけません。代わりに新しいオブジェクトを返します。 新しい`todos`は、古い`todos`の最後に1つTodo項目を付け加えたのと同じです。　新たなTodo項目はアクションのデータから作られます。
+先ほどと同じように、`state`とその中身を直接書き換えてはいけません。代わりに新しいオブジェクトを返します。 新しい`todos`は、古い`todos`の最後に1つTodo項目を付け加えたのと同じです。　新たなTodo項目はActionのデータから作られます。
 
 最後に、`TOGGLE_TODO`ハンドラを実装します。何も驚くようなことはありません：
 

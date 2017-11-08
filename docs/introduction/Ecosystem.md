@@ -69,8 +69,8 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [redux-promise](https://github.com/acdlite/redux-promise) — [FSA](https://github.com/acdlite/flux-standard-action)に対応したPromise（プロミス）のミドルウェア
 * [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware) — axiosのHTTPクライアントでデータ取得するReduxのミドルウェア
 * [redux-observable](https://github.com/redux-observable/redux-observable/) — "Epics"を使った、Actionの副作用のためのRxJSのミドルウェア
-* [redux-cycles](https://github.com/cyclejs-community/redux-cycles) — Cycle.jsを使ってReduxの非同期アクションを処理
-* [redux-logger](https://github.com/fcomb/redux-logger) — すべてのReduxアクションと次の状態のログをとる
+* [redux-cycles](https://github.com/cyclejs-community/redux-cycles) — Cycle.jsを使ってReduxの非同期Actionを処理
+* [redux-logger](https://github.com/fcomb/redux-logger) — すべてのRedux Actionと次の状態のログをとる
 * [redux-immutable-state-invariant](https://github.com/leoasis/redux-immutable-state-invariant) — 開発中に、状態変更を警告する
 * [redux-unhandled-action](https://github.com/socialtables/redux-unhandled-action) — 開発中に、状態変更を引き起こさないActionを警告する
 * [redux-analytics](https://github.com/markdalgleish/redux-analytics) — Reduxのための解析ミドルウェア
@@ -92,8 +92,8 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### エンハンサー（強化材）
 
-* [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) — ストアの購読者のために、一括処理やデバウンシングした呼び出し（訳注：抑制した呼び出し。例えば、最大で○秒に1回しか呼び出されないようにする）をカスタマイズ
-* [redux-history-transitions](https://github.com/johanneslumpe/redux-history-transitions) — 任意のアクションに基づいたルート遷移
+* [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) — Storeの購読者のために、一括処理やデバウンシングした呼び出し（訳注：抑制した呼び出し。例えば、最大で○秒に1回しか呼び出されないようにする）をカスタマイズ
+* [redux-history-transitions](https://github.com/johanneslumpe/redux-history-transitions) — 任意のActionに基づいたルート遷移
 * [redux-optimist](https://github.com/ForbesLindesay/redux-optimist) — あとでコミットされるか、または元に戻される可能性のあるActionを楽観的に適用する
 * [redux-optimistic-ui](https://github.com/mattkrick/redux-optimistic-ui) — 型にとらわれず（訳注：JSのオブジェクトだけでなく、 immutable.jsなどでも良い）、楽観的に更新するReducerのエンハンサー
 * [redux-undo](https://github.com/omnidan/redux-undo) —  Ruducerのための手っ取り早い、元に戻す/やり直す（Undo/Redo)とAction履歴
