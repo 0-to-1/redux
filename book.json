@@ -11,10 +11,10 @@
       "url": "https://github.com/reactjs/redux/"
     },
     "algolia": {
-      "index": "redux-docs",
-      "applicationID": "BC2QB3G2G4",
-      "publicKey": "75eb88bb56d8cf8d17b6366a2c8e5fcd",
-      "freeAccount": "false"
+      "index": "redux-docs_JP",
+      "applicationID": "2CQV0KNXIN",
+      "publicKey": "640a1ddbf5d047d11e183dc46183f6bf",
+      "freeAccount": "true"
     },
     "theme-default": {
       "styles": {
