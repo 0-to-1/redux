@@ -2,6 +2,12 @@ version: 1
 rules:
   - expected: Redux
     pattern: /redux(?!-)/
+  - expected: Store
+    pattern: ストア
+  - expected: Action
+    pattern: アクション
+  - expected: Reducer
+    pattern: /[リレ]デューサー/
   - expected: Web
     pattern: web
   - expected: サーバー
