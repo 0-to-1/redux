@@ -122,7 +122,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 ### 開発者ツール
 
 * [Redux DevTools](http://github.com/gaearon/redux-devtools) — タイムトラベルUIの付いたActionロガー、Reducerのための自動再読み込みとエラーハンドリング。 [Reactヨーロッパで初めてデモされた (first demoed at React Europe)](https://www.youtube.com/watch?v=xsSnOQynTHs)
-* [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) — Redux開発者ツールをラップして追加機能を提供する、Chromeの拡張機能
+* [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) — Redux開発者ツールをラップ（内包）して追加機能を提供する、Chromeの拡張機能
 
 ### 開発者ツールのモニター
 

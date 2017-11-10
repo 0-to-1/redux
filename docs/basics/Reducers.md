@@ -276,7 +276,7 @@ function visibilityFilter(state = SHOW_ALL, action) {
 }
 ```
 
-これで大元のReducerを書き換えることができます。このReducerは、状態の一部を処理するReducerを呼び出し、1つのオブジェクトとして合成する関数です。もう初期状態の全体を把握する必要はありません。ただ最初に`undefined`が与えられると、配下のReducerがそれぞれの初期状態を返すことが分かっていれば良いのです。
+これでルート（大元の）Reducerを書き換えることができます。このReducerは、状態の一部を処理するReducerを呼び出し、1つのオブジェクトとして合成する関数です。もう初期状態の全体を把握する必要はありません。ただ最初に`undefined`が与えられると、配下のReducerがそれぞれの初期状態を返すことが分かっていれば良いのです。
 
 ```js
 function todos(state = [], action) {
