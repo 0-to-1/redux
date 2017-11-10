@@ -17,7 +17,7 @@ rules:
   - expected: 作$1
     pattern: /つく([らりるれろっ])/
   - expected: とき$1
-    pattern: /時([かがでにのはへもを])/
+    pattern: /時([かがでにのはへもやを])/
   - expected: 気をつ
     pattern: 気を付
   - expected: 気づ
