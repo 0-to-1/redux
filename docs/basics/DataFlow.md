@@ -6,9 +6,9 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 
 まだピンとこないなら、[モチベーション](../introduction/Motivation.md)と[Fluxが役立つ場合（The Case for Flux）](https://medium.com/@dan_abramov/the-case-for-flux-379b7d1982c6)を読んでください。一方向のデータフローを支持する、説得力のある主張です。[Reduxは正確にはFluxではない](../introduction/PriorArt.md)のですが、主な利点は同じです。
 
-どんなReduxアプリでも、データのライフサイクルは次の４ステップをたどります：
+どんなReduxアプリでも、データのライフサイクルは次の4ステップをたどります：
 
-1. [`store.dispatch(action)`](../api/Store.md#dispatch)**を呼び出す**。
+1. [`store.dispatch(action)`](../api/Store.md#dispatch)**を呼び出す。**
 
   [Action](Actions.md)は *起きたこと* を表す単なるオブジェクトです。例えば：
 
@@ -24,7 +24,7 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 
 2. **Redux Storeが、与えられたReducer関数を呼び出す。**
 
-  [Store](Store.md)は、２つの引数を[Reducer](Reducers.md)に渡します。現在の状態ツリーとActionです。例えばTodoアプリで、ルート（大元の）Reducerは次のような状態とActionを受け取るでしょう：
+  [Store](Store.md)は、2つの引数を[Reducer](Reducers.md)に渡します。現在の状態ツリーとActionです。例えばTodoアプリで、ルート（大元の）Reducerは次のような状態とActionを受け取るでしょう：
 
    ```js
     // 現在のアプリケーション状態（Todoのリストと、選択されたフィルター）
@@ -50,7 +50,9 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 
   Reducerは純粋関数であることに注意してください。次の状態を *計算する* だけです。完全に予測可能であるべきです。つまり同じ入力には、何度やっても同じ出力を返すのです。副作用は、どんなものでも行うべきではありません。例えば、API呼び出しやルート遷移など。これらは、Actionを送信する前に行うべきです。
 
-3. **ルートReducerは、複数のReducerの結果を１つの状態ツリーにまとめてよい。**
+<!-- textlint-disable preset-jtf-style/1.1.3.箇条書き -->
+3. **ルートReducerは、複数のReducerの結果を1つの状態ツリーにまとめてよい。**
+<!-- textlint-enable preset-jtf-style/1.1.3.箇条書き -->
 
   ルートReducerをどのように構成するかは、すべてあなた次第です。Reduxは[`combineReducers()`](../api/combineReducers.md)というヘルパー関数を提供しています。ルートReducerを複数の関数へ“分割する”のに役立ちます。それぞれの関数は、 状態ツリーの一部を処理します。
 
@@ -95,7 +97,7 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 
   上記で、新しいツリーがアプリの次の状態となりました！[`store.subscribe(listener)`](../api/Store.md#subscribe)で登録されたすべてのリスナーは、このとき呼び出されます。リスナーは[`store.getState()`](../api/Store.md#getState)で現在の状態を得ることもできます。
 
-  そして、UIの更新が可能となりました。現在の新しい状態を反映するためです。[React Redux](https://github.com/gaearon/react-redux)のようなバインディング（連携プログラム）を使っているなら、この時に`component.setState(newState)`が呼び出されます。
+  そして、UIの更新が可能となりました。現在の新しい状態を反映するためです。[React Redux](https://github.com/gaearon/react-redux)のようなバインディング（連携プログラム）を使っているなら、このときに`component.setState(newState)`が呼び出されます。
 
 ## 次のステップ
 
