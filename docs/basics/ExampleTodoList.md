@@ -1,8 +1,8 @@
-# Example: Todo List
+# 使用例： Todoリスト
 
-This is the complete source code of the tiny todo app we built during the [basics tutorial](./README.md).
+とても簡単なTodoアプリの、すべてのソースコードです。[初級チュートリアル](./README.md)で作りました。
 
-## Entry Point
+## エントリーポイント（プログラムの開始場所）
 
 #### `index.js`
 
@@ -24,7 +24,7 @@ render(
 )
 ```
 
-## Action Creators
+## Actionクリエイター
 
 #### `actions/index.js`
 
@@ -53,7 +53,7 @@ export const toggleTodo = id => {
 }
 ```
 
-## Reducers
+## Reducer
 
 #### `reducers/todos.js`
 
@@ -71,7 +71,7 @@ const todos = (state = [], action) => {
       ]
     case 'TOGGLE_TODO':
       return state.map(todo =>
-        (todo.id === action.id) 
+        (todo.id === action.id)
           ? {...todo, completed: !todo.completed}
           : todo
       )
@@ -113,7 +113,7 @@ const todoApp = combineReducers({
 export default todoApp
 ```
 
-## Presentational Components
+## プレゼンテーショナルコンポーネント
 
 #### `components/Todo.js`
 
@@ -248,7 +248,7 @@ const App = () => (
 export default App
 ```
 
-## Container Components
+## コンテナコンポーネント
 
 #### `containers/VisibleTodoList.js`
 
@@ -319,7 +319,7 @@ const FilterLink = connect(
 export default FilterLink
 ```
 
-### Other Components
+### 他のコンポーネント
 
 #### `containers/AddTodo.js`
 
