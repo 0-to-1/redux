@@ -1,28 +1,28 @@
-# Async Actions
+# 非同期Action
 
-In the [basics guide](../basics/README.md), we built a simple todo application. It was fully synchronous. Every time an action was dispatched, the state was updated immediately.
+[初級チュートリアル](../basics/README.md)では、シンプルなTodoアプリケーションを作りました。これは完全に同期的なアプリです。ActionがDispatch（送信）されると毎回、すぐに状態が更新されます。
 
-In this guide, we will build a different, asynchronous application. It will use the Reddit API to show the current headlines for a selected subreddit. How does asynchronicity fit into Redux flow?
+しかしこのチュートリアルでは、非同期なアプリケーションを作ります。具体的には、RedditのAPIを使います。選択したサブレディット（訳注：特定の話題を扱う掲示板。いわゆる「板」のこと）にある、現在の見出しを一覧表示するためです。どうやって非同期に、Reduxフローへ適合させれば良いでしょう？
 
-## Actions
+## Action
 
-When you call an asynchronous API, there are two crucial moments in time: the moment you start the call, and the moment when you receive an answer (or a timeout).
+非同期APIを呼び出すとき、2つのとても重要な瞬間があります：呼び出しを始める瞬間と、応答を受け取る（またはタイムアウトした）瞬間です。
 
-Each of these two moments usually require a change in the application state; to do that, you need to dispatch normal actions that will be processed by reducers synchronously. Usually, for any API request you'll want to dispatch at least three different kinds of actions:
+この2つの瞬間はそれぞれ、アプリケーションの状態変更を必要とするのが一般的です。そのためには、標準的なActionをいくつかDispatchする必要があります。これらのActionは、Reducerによって同期的に処理されます。通常どんなAPIリクエストでも、最低3回は違う種類のActionをDispatchしたいでしょう：
 
-* **An action informing the reducers that the request began.**
+* **Reducerに、リクエストの開始を知らせるAction**
 
-  The reducers may handle this action by toggling an `isFetching` flag in the state. This way the UI knows it's time to show a spinner.
+  Reducerは状態にある`isFetching`フラグを切り替えることで、このActionを処理できます。これで、UIはスピナーを表示するタイミングだと分かります。
 
-* **An action informing the reducers that the request finished successfully.**
+* **Reducerに、リクエストの成功を知らせるAction**
 
-  The reducers may handle this action by merging the new data into the state they manage and resetting `isFetching`. The UI would hide the spinner, and display the fetched data.
+  Reducerは管理している状態に新しいデータをマージして、`isFetching`をリセットします。こうすることで、ReducerはこのActionを処理できます。UIは、スピナーを非表示にして取得したデータを表示します。
 
-* **An action informing the reducers that the request failed.**
+* **Reducerに、リクエストの失敗を知らせるAction**
 
-  The reducers may handle this action by resetting `isFetching`. Additionally, some reducers may want to store the error message so the UI can display it.
+  Reducerは`isFetching`フラグをリセットすることで、このActionを処理できます。加えて、Reducerはエラーメッセージを保持しても良いでしょう。UIがこのエラーメッセージを表示するためです。
 
-You may use a dedicated `status` field in your actions:
+Action専用の`status`フィールドを使えます：
 
 ```js
 { type: 'FETCH_POSTS' }
@@ -30,7 +30,7 @@ You may use a dedicated `status` field in your actions:
 { type: 'FETCH_POSTS', status: 'success', response: { ... } }
 ```
 
-Or you can define separate types for them:
+または、別々のタイプを定義しても構いません：
 
 ```js
 { type: 'FETCH_POSTS_REQUEST' }
@@ -38,14 +38,14 @@ Or you can define separate types for them:
 { type: 'FETCH_POSTS_SUCCESS', response: { ... } }
 ```
 
-Choosing whether to use a single action type with flags, or multiple action types, is up to you. It's a convention you need to decide with your team. Multiple types leave less room for a mistake, but this is not an issue if you generate action creators and reducers with a helper library like [redux-actions](https://github.com/acdlite/redux-actions).
+フラグと一緒に1つのActionタイプを使うか、または複数のActionタイプを使うかは、あなた次第です。つまりチーム全体で決めるべき約束事です。複数タイプの方が、失敗する余地はありません。しかし[redux-actions](https://github.com/acdlite/redux-actions)のようなヘルパーライブラリでActionクリエイターとReducerを生成すれば、問題にはなりません。
 
-Whatever convention you choose, stick with it throughout the application.  
-We'll use separate types in this tutorial.
+どんな約束事を選んだとしても、アプリケーション全体でそれを守ってください。
+このチュートリアルでは、複数のタイプを使います。
 
-## Synchronous Action Creators
+## 同期的なActionクリエイター
 
-Let's start by defining the several synchronous action types and action creators we need in our example app. Here, the user can select a subreddit to display:
+このアプリで必要な同期的なActionタイプとActionクリエイターを、いくつか定義することから始めましょう。まず、ユーザーは表示するサブレディットを選択できます：
 
 #### `actions.js` (Synchronous)
 
@@ -60,7 +60,7 @@ export function selectSubreddit(subreddit) {
 }
 ```
 
-They can also press a “refresh” button to update it:
+またユーザーは、更新するための“リフレッシュ”ボタンを押せます：
 
 ```js
 export const INVALIDATE_SUBREDDIT = 'INVALIDATE_SUBREDDIT'
@@ -73,9 +73,11 @@ export function invalidateSubreddit(subreddit) {
 }
 ```
 
-These were the actions governed by the user interaction. We will also have another kind of action, governed by the network requests. We will see how to dispatch them later, but for now, we just want to define them.
+これらはユーザーの操作に左右されるActionです。また違う種類のActionもあります。それは、ネットワークリクエストに左右されるActionです。これらをDispatchする方法は後で確認しましょう。今は定義だけします。
 
-When it's time to fetch the posts for some subreddit, we will dispatch a `REQUEST_POSTS` action:
+`SELECT_SUBREDDIT`と`INVALIDATE_SUBREDDIT`を分けることが大切です。もちろん、この2つは続けて起きることもあります。しかし、アプリが発展するにつれてより複雑になります。そうすると、ユーザーのActionに関係なくデータを取得したくなるかもしれません。（例えば1番人気のサブレディットを前もって取得したり、ときどき古いデータをリフレッシュするなど）または、ルート遷移に応じて取得したくなるかもしれません。そのため初期の段階で、取得と特定のUIイベントを一緒にするのは、賢いやり方ではありません。
+
+サブレディットの投稿を取得するには、`REQUEST_POSTS`ActionをDispatchします：
 
 ```js
 export const REQUEST_POSTS = 'REQUEST_POSTS'
@@ -88,9 +90,7 @@ function requestPosts(subreddit) {
 }
 ```
 
-It is important for it to be separate from `SELECT_SUBREDDIT` or `INVALIDATE_SUBREDDIT`. While they may occur one after another, as the app grows more complex, you might want to fetch some data independently of the user action (for example, to prefetch the most popular subreddits, or to refresh stale data once in a while). You may also want to fetch in response to a route change, so it's not wise to couple fetching to some particular UI event early on.
-
-Finally, when the network request comes through, we will dispatch `RECEIVE_POSTS`:
+最後に、ネットワークリクエストが無事にDispatchされてきたら、`RECEIVE_POSTS`をDispatchします：
 
 ```js
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
@@ -105,21 +105,21 @@ function receivePosts(subreddit, json) {
 }
 ```
 
-This is all we need to know for now. The particular mechanism to dispatch these actions together with network requests will be discussed later.
+今のところ知っておくべきことは、これですべてです。Actionをネットワークリクエストと共にDispatchするための特別な仕組みは、後で検討しましょう。
 
->##### Note on Error Handling
+>##### エラーハンドリングについての注意
 
->In a real app, you'd also want to dispatch an action on request failure. We won't implement error handling in this tutorial, but the [real world example](../introduction/Examples.md#real-world) shows one of the possible approaches.
+>実際のアプリでは、リクエストの失敗でもActionをDispatchしたいはずです。このチュートリアルでは、エラーハンドリングを実装しません。しかし[リアルワールドの例](../introduction/Examples.md#リアルワールド)では、適切な対処法の1つを示しています。
 
-## Designing the State Shape
+## 状態の形をデザインする
 
-Just like in the basic tutorial, you'll need to [design the shape of your application's state](../basics/Reducers.md#designing-the-state-shape) before rushing into the implementation. With asynchronous code, there is more state to take care of, so we need to think it through.
+初級チュートリアルと同じく、実装へ突き進む前に[アプリケーションにおける状態の形をデザインする](../basics/Reducers.md#状態の形をデザインする)必要があります。また非同期的なコードが加わると、気をつけなければならない状態が多くなります。そのためじっくり考える必要があります。
 
-This part is often confusing to beginners, because it is not immediately clear what information describes the state of an asynchronous application, and how to organize it in a single tree.
+ここは、よく初心者が混乱する部分です。なぜならどの情報が非同期アプリケーションの状態を記述していて、どうやってそれを1つの状態ツリーにまとめるか、すぐ明確にはならないからです。
 
-We'll start with the most common use case: lists. Web applications often show lists of things. For example, a list of posts, or a list of friends. You'll need to figure out what sorts of lists your app can show. You want to store them separately in the state, because this way you can cache them and only fetch again if necessary.
+最も一般的な事例から始めましょう。Webアプリケーションではよく、物事のリストを表示することがあります。例えば投稿のリストや、友人のリスト。アプリを開発するには、どんなソートを表示可能か理解する必要があります。これらのリストは、状態の中で別々に保持したいはずです。別々に保持することで、キャッシュして必要なときだけ再取得できるからです。
 
-Here's what the state shape for our “Reddit headlines” app might look like:
+“Redditの見出し一覧”の状態の形は、下記のようになるでしょう：
 
 ```js
 {
@@ -137,11 +137,11 @@ Here's what the state shape for our “Reddit headlines” app might look like:
       items: [
         {
           id: 42,
-          title: 'Confusion about Flux and Relay'
+          title: 'FluxとRelayについての混乱'
         },
         {
           id: 500,
-          title: 'Creating a Simple Application Using React JS and Flux Architecture'
+          title: 'React JSとFluxアーキテクチャを使って、シンプルなアプリケーションを作る'
         }
       ]
     }
@@ -149,17 +149,22 @@ Here's what the state shape for our “Reddit headlines” app might look like:
 }
 ```
 
-There are a few important bits here:
+重要な点があります：
 
-* We store each subreddit's information separately so we can cache every subreddit. When the user switches between them the second time, the update will be instant, and we won't need to refetch unless we want to. Don't worry about all these items being in memory: unless you're dealing with tens of thousands of items, and your user rarely closes the tab, you won't need any sort of cleanup.
+* それぞれのサブレディット情報を別々に保持しています。すべてのサブレディットをキャッシュするためです。ユーザーが2度目に切り替えた際は、すぐに更新されます。意図しない限り、再取得しなくて良いのです。すべての投稿データをメモリに保持することについて、心配する必要はありません：数万の投稿を扱い、ユーザーがめったにタブを閉じないような場合でなければ、メモリの解放などは全く必要ないでしょう。
 
-* For every list of items, you'll want to store `isFetching` to show a spinner, `didInvalidate` so you can later toggle it when the data is stale, `lastUpdated` so you know when it was fetched the last time, and the `items` themselves. In a real app, you'll also want to store pagination state like `fetchedPageCount` and `nextPageUrl`.
+* サブレディットのリストごとに、下記を保持します。
+  * `isFetching`：スピナーを表示するため
+  * `didInvalidate`：データが古くなったら更新するため
+  * `lastUpdated`：最後にいつ取得されたか把握するため
+  * `items`：投稿本文
+  * `fetchedPageCount`や`nextPageUrl`：実際のアプリでは、ページネーション（ページ繰り）の状態を保持するため
 
->##### Note on Nested Entities
+>##### ネストしたエンティティについての注意Note on Nested Entities
 
->In this example, we store the received items together with the pagination information. However, this approach won't work well if you have nested entities referencing each other, or if you let the user edit items. Imagine the user wants to edit a fetched post, but this post is duplicated in several places in the state tree. This would be really painful to implement.
+>この使用例では、受け取った投稿データをページネーション情報と一緒に保持しています。しかしこの方法は上手くいかない場合があります。それは、ネストしたエンティティがお互いを参照したり、ユーザーが個々のデータを編集できるような場合です。ある投稿を、ユーザーが編集したいとしましょう。しかしこのとき、投稿は状態ツリー内のいくつかの場所に分散しています。これでは、実装がとても辛いでしょう。
 
->If you have nested entities, or if you let users edit received entities, you should keep them separately in the state as if it was a database. In pagination information, you would only refer to them by their IDs. This lets you always keep them up to date. The [real world example](../introduction/Examples.md#real-world) shows this approach, together with [normalizr](https://github.com/paularmstrong/normalizr) to normalize the nested API responses. With this approach, your state might look like this:
+>ネストしたエンティティがあったり、ユーザーが受け取ったエンティティを編集可能なら、状態内で別々に保持すべきです。まるでデータベースのように。そしてページネーション情報では、エンティティをIDだけで参照しましょう。こうすることで、いつも最新の状態を保てます。 [リアルワールドの例](../introduction/Examples.md#リアルワールド)では、この方法を取っています。また[normalizr](https://github.com/paularmstrong/normalizr)で、ネストされたAPIレスポンスを正規化しています。状態はこのようになるでしょう：
 
 >```js
 > {
@@ -174,12 +179,12 @@ There are a few important bits here:
 >     posts: {
 >       42: {
 >         id: 42,
->         title: 'Confusion about Flux and Relay',
+>         title: 'FluxとRelayについての混乱',
 >         author: 2
 >       },
 >       100: {
 >         id: 100,
->         title: 'Creating a Simple Application Using React JS and Flux Architecture',
+>         title: 'React JSとFluxアーキテクチャを使って、シンプルなアプリケーションを作る',
 >         author: 2
 >       }
 >     }
@@ -200,15 +205,15 @@ There are a few important bits here:
 > }
 >```
 
->In this guide, we won't normalize entities, but it's something you should consider for a more dynamic application.
+>このチュートリアルでは、エンティティを正規化しません。しかし、もっと動的なアプリケーションでは考慮すべきです。
 
-## Handling Actions
+## Actionを処理する
 
-Before going into the details of dispatching actions together with network requests, we will write the reducers for the actions we defined above.
+ネットワークリクエストと共にActionをDispatchする詳細へ進む前に、上記で定義したActionのためにReducerを書きましょう。
 
->##### Note on Reducer Composition
+>##### Reducer合成についての注意
 
-> Here, we assume that you understand reducer composition with [`combineReducers()`](../api/combineReducers.md), as described in the [Splitting Reducers](../basics/Reducers.md#splitting-reducers) section on the [basics guide](../basics/README.md). If you don't, please [read it first](../basics/Reducers.md#splitting-reducers).
+> ここでは、[`combineReducers()`](../api/combineReducers.md)によるReducer合成を理解していることが前提です。`combineReducers()`は、[初級チュートリアル](../basics/README.md)にある[Reducerを分割する](../basics/Reducers.md#reducerを分割する)という部分で説明しています。もしまだ理解できていないようなら、[ここを最初に読んで](../basics/Reducers.md#reducerを分割する)ください。
 
 #### `reducers.js`
 
@@ -281,33 +286,35 @@ const rootReducer = combineReducers({
 export default rootReducer
 ```
 
-In this code, there are two interesting parts:
+このコードでは、2つの興味深い点があります：
 
-* We use ES6 computed property syntax so we can update `state[action.subreddit]` with `Object.assign()` in a concise way. This:
+<!-- textlint-disable preset-jtf-style/1.1.3.箇条書き -->
+* ES6の計算されたプロパティ構文（computed property syntax）を使っています。`Object.assign()`で、`state[action.subreddit]`を簡単な方法で更新できます。この部分です：
+<!-- textlint-enable preset-jtf-style/1.1.3.箇条書き -->
 
   ```js
   return Object.assign({}, state, {
     [action.subreddit]: posts(state[action.subreddit], action)
   })
   ```
-  is equivalent to this:
+  これは下記と同等です：
 
   ```js
   let nextState = {}
   nextState[action.subreddit] = posts(state[action.subreddit], action)
   return Object.assign({}, state, nextState)
   ```
-* We extracted `posts(state, action)` that manages the state of a specific post list. This is just [reducer composition](../basics/Reducers.md#splitting-reducers)! It is our choice how to split the reducer into smaller reducers, and in this case, we're delegating updating items inside an object to a `posts` reducer. The [real world example](../introduction/Examples.md#real-world) goes even further, showing how to create a reducer factory for parameterized pagination reducers.
+* 特定の投稿リストについて状態管理する、`posts(state, action)`を抜き出しました。これこそ[Reducer合成](../basics/Reducers.md#reducerを分割する)です！Reducerを、どうやってより小さなReducerに分割するかは自由です。ここではオブジェクト内にある、投稿データの更新を`posts`に任せています。[リアルワールドの例](../introduction/Examples.md#リアルワールド)ではさらに、ページネーションのために抜き出したReducerをパラメータ化して、Reducerファクトリで作り出す方法を示しています。
 
-Remember that reducers are just functions, so you can use functional composition and higher-order functions as much as you feel comfortable.
+Reducerはただの関数だということを思い出してください。そのため思う存分、関数合成や高階関数が使えます。
 
-## Async Action Creators
+## 非同期的なActionクリエイター
 
-Finally, how do we use the synchronous action creators we [defined earlier](#synchronous-action-creators) together with network requests? The standard way to do it with Redux is to use the [Redux Thunk middleware](https://github.com/gaearon/redux-thunk). It comes in a separate package called `redux-thunk`. We'll explain how middleware works in general [later](Middleware.md); for now, there is just one important thing you need to know: by using this specific middleware, an action creator can return a function instead of an action object. This way, the action creator becomes a [thunk](https://en.wikipedia.org/wiki/Thunk).
+最後に、[先ほど定義した](#同期的なActionクリエイター)同期的なActionクリエイターを、どうやってネットワークリクエストと共に使えば良いでしょうか？　Reduxでの標準的な方法は、[Redux Thunkのミドルウェア](https://github.com/gaearon/redux-thunk)を使うことです。`redux-thunk`という別のパッケージを導入します。一般的にミドルウェアがどう機能するかは、[あとで](Middleware.md)説明します。今のところ、知っておくべき大切なことは1つだけです：この特別なミドルウェアを使うことで、Actionクリエイターはオブジェクトの代わりに関数を返せるようになります。これにより、Actionクリエイターは[Thunk](https://en.wikipedia.org/wiki/Thunk)になります。
 
-When an action creator returns a function, that function will get executed by the Redux Thunk middleware. This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls. The function can also dispatch actions—like those synchronous actions we defined earlier.
+Actionクリエイターが関数を返すと、その関数はRedux Thunkのミドルウェアによって実行されます。この関数は、純粋でなくても構いません。つまり非同期のAPI呼び出しを含めて、副作用を持つことが許されます。またこの関数は、ActionをDispatchすることもできます。先ほど定義した、同期的なActionと同じように。
 
-We can still define these special thunk action creators inside our `actions.js` file:
+これら特別なThunk Actionも、これまで通り`actions.js`ファイル内で定義できます：
 
 #### `actions.js` (Asynchronous)
 
@@ -340,39 +347,41 @@ export function invalidateSubreddit(subreddit) {
   }
 }
 
-// Meet our first thunk action creator!
-// Though its insides are different, you would use it just like any other action creator:
+// 初めてThunk Actionとご対面！
+// 内部は異なりますが、使い方はその他のActionクリエイターと同様です：
 // store.dispatch(fetchPosts('reactjs'))
 
 export function fetchPosts(subreddit) {
-  // Thunk middleware knows how to handle functions.
-  // It passes the dispatch method as an argument to the function,
-  // thus making it able to dispatch actions itself.
+  // Thunkミドルウェアは関数の処理方法を分かっています。
+  // 関数に引数としてDispatchメソッドを渡されたら、
+  // DispatchメソッドがActionをDispatchできるようにします。
 
   return function (dispatch) {
-    // First dispatch: the app state is updated to inform
-    // that the API call is starting.
+    // 最初のDispatch：API呼び出しが始まり、
+    // アプリの状態が更新されたことを伝えます。
 
     dispatch(requestPosts(subreddit))
 
-    // The function called by the thunk middleware can return a value,
-    // that is passed on as the return value of the dispatch method.
+    // Thunkミドルウェアによって呼び出された関数は、値を返せます。
+    // この値はDispatchメソッドへ渡されます。
+    // 渡された値は、Dispatchメソッドの戻り値になります。
 
-    // In this case, we return a promise to wait for.
-    // This is not required by thunk middleware, but it is convenient for us.
+    // この事例では、待機するためにPromiseを返します。
+    // Thunkミドルウェアにとって必要なわけではなく、その方が書きやすいからです。
 
     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
       .then(
         response => response.json(),
-        // Do not use catch, because that will also catch
-        // any errors in the dispatch and resulting render,
-        // causing a loop of 'Unexpected batch number' errors.
+        // Catchを使わないでください。
+        // Dispatchとそれに続く描画に関するすべてのエラーが、
+        // Catchされてしまうからです。
+        // これは'Unexpected batch number'エラーのループを引き起こします。
         // https://github.com/facebook/react/issues/6895
         error => console.log('An error occurred.', error)
       )
       .then(json =>
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
+        // 何度でもDispatchできます！
+        // ここでは、API呼び出しの結果でアプリ状態を更新します。
 
         dispatch(receivePosts(subreddit, json))
       )
@@ -380,25 +389,25 @@ export function fetchPosts(subreddit) {
 }
 ```
 
->##### Note on `fetch`
+>##### `fetch`についての注意
 
->We use [`fetch` API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) in the examples. It is a new API for making network requests that replaces `XMLHttpRequest` for most common needs. Because most browsers don't yet support it natively, we suggest that you use [`cross-fetch`](https://github.com/lquixada/cross-fetch) library:
+>この使用例では、[`fetch` API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)を使っています。`fetch`はネットワークリクエストをするための、新しいAPIです。`XMLHttpRequest`に代わり、最も共通したニーズに応えます。ほとんどのブラウザが、まだネイティヴでは対応していません。そのため[`cross-fetch`](https://github.com/lquixada/cross-fetch)ライブラリの使用を提案します：
 
 >```js
->// Do this in every file where you use `fetch`
+>// `fetch`を使う場所すべてにこれを書いてください
 >import fetch from 'cross-fetch'
 >```
 
->Internally, it uses [`whatwg-fetch` polyfill](https://github.com/github/fetch) on the client, and [`node-fetch`](https://github.com/bitinn/node-fetch) on the server, so you won't need to change API calls if you change your app to be [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
+>内部的に、クライアントでは[`whatwg-fetch` Polyfill](https://github.com/github/fetch)を使っています。またサーバーでは[`node-fetch`](https://github.com/bitinn/node-fetch)を使っています。そのためアプリを[ユニバーサル（universal）](https://medium.com/@mjackson/universal-javascript-4761051b7ae9)に変更しても、API呼び出しを変更する必要はありません。
 
->Be aware that any `fetch` polyfill assumes a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill is already present. The easiest way to ensure you have a Promise polyfill is to enable Babel's ES6 polyfill in your entry point before any other code runs:
+>すべての`fetch`ポリフィルは、[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)ポリフィルがあることを前提としています。Promiseポリフィルを確実に持たせる、最も簡単な方法があります。それは、どんなコードを実行するよりも前に、エントリーポイントでBabelのES6ポリフィルを有効にすることです：
 
 >```js
->// Do this once before any other code in your app
+>// アプリのどんなコードよりも前に、一度だけ行う
 >import 'babel-polyfill'
 >```
 
-How do we include the Redux Thunk middleware in the dispatch mechanism? We use the [`applyMiddleware()`](../api/applyMiddleware.md) store enhancer from Redux, as shown below:
+Redux Thunkミドルウェアを、どうやってDispatchの仕組みに取り込めば良いでしょう？　Reduxから、[`applyMiddleware()`](../api/applyMiddleware.md)というStoreエンハンサー（強化プログラム）を使います。下記のように：
 
 #### `index.js`
 
@@ -414,8 +423,8 @@ const loggerMiddleware = createLogger()
 const store = createStore(
   rootReducer,
   applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
-    loggerMiddleware // neat middleware that logs actions
+    thunkMiddleware, // 関数をdispatch()できるようにする。
+    loggerMiddleware // Actionのログを取るための、簡潔なミドルウェア。
   )
 )
 
@@ -425,7 +434,7 @@ store
   .then(() => console.log(store.getState()))
 ```
 
-The nice thing about thunks is that they can dispatch results of each other:
+Thunkの良いところは、Thunkの間でお互いの結果をDispatchできることです：
 
 #### `actions.js` (with `fetch`)
 
@@ -479,25 +488,25 @@ function shouldFetchPosts(state, subreddit) {
 }
 
 export function fetchPostsIfNeeded(subreddit) {
-  // Note that the function also receives getState()
-  // which lets you choose what to dispatch next.
+  // 関数はgetState()も受け取ることに注意してください。
+  // 次に何をDispatchするか選択できます。
 
-  // This is useful for avoiding a network request if
-  // a cached value is already available.
+  // これはキャッシュされた値が利用できるとき、
+  // ネットワークリクエストを避けるために有効です。
 
   return (dispatch, getState) => {
     if (shouldFetchPosts(getState(), subreddit)) {
-      // Dispatch a thunk from thunk!
+      // ThunkからThunkをDispatchする！
       return dispatch(fetchPosts(subreddit))
     } else {
-      // Let the calling code know there's nothing to wait for.
+      // 呼び出しコードに、待つべきものはないと知らせる。
       return Promise.resolve()
     }
   }
 }
 ```
 
-This lets us write more sophisticated async control flow gradually, while the consuming code can stay pretty much the same:
+これでより高性能な非同期制御フローを、段階的に書けるようになりました。一方で、これを実行するコードはほとんど同じです：
 
 #### `index.js`
 
@@ -507,23 +516,25 @@ store
   .then(() => console.log(store.getState()))
 ```
 
->##### Note about Server Rendering
+>##### サーバーレンダリングについての注意
 
->Async action creators are especially convenient for server rendering. You can create a store, dispatch a single async action creator that dispatches other async action creators to fetch data for a whole section of your app, and only render after the Promise it returns, completes. Then your store will already be hydrated with the state you need before rendering.
+>非同期なActionクリエイターは、サーバーレンダリングにとって非常に便利です。まずStoreを作り、1つの非同期なActionクリエイターをDispatchします。このActionクリエイターが、さらに別の非同期なActionクリエイターをDispatchします。このActionクリエイターは、アプリ全体のデータを取得します。データを取得してPromiseを返した後のみ、描画します。これで完了です。描画前に必要な状態が、Storeにはもう供給されているのです。
 
-[Thunk middleware](https://github.com/gaearon/redux-thunk) isn't the only way to orchestrate asynchronous actions in Redux:
-- You can use [redux-promise](https://github.com/acdlite/redux-promise) or [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) to dispatch Promises instead of functions.
-- You can use [redux-observable](https://github.com/redux-observable/redux-observable) to dispatch Observables.
-- You can use the [redux-saga](https://github.com/yelouafi/redux-saga/) middleware to build more complex asynchronous actions.
-- You can use the [redux-pack](https://github.com/lelandrichardson/redux-pack) middleware to dispatch promise-based asynchronous actions.
-- You can even write a custom middleware to describe calls to your API, like the [real world example](../introduction/Examples.md#real-world) does.
+[Thunkミドルウェア](https://github.com/gaearon/redux-thunk)以外にも、Reduxで非同期なActionをまとめる方法はあります：
+- 関数の代わりにPromiseをDispatchするには、[redux-promise](https://github.com/acdlite/redux-promise)か[redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware)が使えます。
+- ObservableをDispatchするには、[redux-observable](https://github.com/redux-observable/redux-observable) が使えます。
+- より複雑で非同期なActionを組み立てるには、[redux-saga](https://github.com/yelouafi/redux-saga/)というミドルウェアが使えます。
+- Promiseベースの非同期なActionをDispatchするには、[redux-pack](https://github.com/lelandrichardson/redux-pack) が使えます。
+- APIの呼び出しを記述する（訳注：例えばAPIの呼び出しや、その戻り値の正規化などをする）ために、あなたが自分でミドルウェアを書くことさえできます。[リアルワールドの例](../introduction/Examples.md#リアルワールド)でやっているように。
 
-It is up to you to try a few options, choose a convention you like, and follow it, whether with, or without the middleware.
+<!-- textlint-disable preset-japanese/no-doubled-joshi -->
+これらの選択肢を試すかどうかは、あなた次第です。ミドルウェアを使っても使わなくても、好きなものを選び、その約束事に従ってください。
+<!-- textlint-enable preset-japanese/no-doubled-joshi -->
 
-## Connecting to UI
+## UIにつなげる
 
-Dispatching async actions is no different from dispatching synchronous actions, so we won't discuss this in detail. See [Usage with React](../basics/UsageWithReact.md) for an introduction into using Redux from React components. See [Example: Reddit API](ExampleRedditAPI.md) for the complete source code discussed in this example.
+非同期なActionをDispatchすることは、同期的なActionをDispatchするのと変わりません。そのため詳しい説明はしません。ReactコンポーネントからReduxを使うには、まず[Reactと使う](../basics/UsageWithReact.md)を確認してください。この使用例で検討したソースコードの完全版は、 [使用例： Reddit API](ExampleRedditAPI.md)を確認してください。
 
-## Next Steps
+## 次のステップ
 
-Read [Async Flow](AsyncFlow.md) to recap how async actions fit into the Redux flow.
+[非同期フロー](AsyncFlow.md)を読んでください。Reduxフローに、非同期なActionがどう適合するか、その要点をつかむためです。
