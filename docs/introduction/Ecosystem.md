@@ -90,7 +90,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [react-redux-form](https://github.com/davidkpiano/react-redux-form) — ReduxでReactのフォームを簡単に作る
 * [redux-resource](https://github.com/jmeas/redux-resource) — Reduxでリモートサーバーのリソースを管理する
 
-### エンハンサー（強化材）
+### エンハンサー（強化プログラム）
 
 * [redux-batched-subscribe](https://github.com/tappleby/redux-batched-subscribe) — Storeの購読者のために、一括処理やデバウンシングした呼び出し（訳注：抑制した呼び出し。例えば、最大で○秒に1回しか呼び出されないようにする）をカスタマイズ
 * [redux-history-transitions](https://github.com/johanneslumpe/redux-history-transitions) — 任意のActionに基づいたルート遷移

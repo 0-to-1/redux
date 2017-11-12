@@ -1,4 +1,4 @@
-# Reactと併用
+# Reactと使う
 
 まず最初に、ReduxはReactと何の関係もないことを強調する必要があります。ReduxアプリはReact、Angular、Ember、jQuery、あるいはJavaScript単体とでも書けます。
 
