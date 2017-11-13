@@ -66,7 +66,7 @@ function addTodo(text) {
 
 これによって移動が可能となり、テストも簡単になります。
 
-[従来のFlux（traditional Flux）](http://facebook.github.io/flux)ではよく、Actionクリエイターが呼び出されたときにDispatch（ディスパッチ）を引き起こします：
+[従来のFlux（traditional Flux）](http://facebook.github.io/flux)ではよく、Actionクリエイターが呼び出されたときにDispatch（送信）を起こします：
 
 ```js
 function addTodoWithDispatch(text) {
@@ -146,4 +146,4 @@ export function setVisibilityFilter(filter) {
 
 ## 次のステップ
 
-これから[Reducerを定義](Reducers.md)しましょう！Actionを送信したとき、どうやって状態更新するか指定するためです。
+これから[Reducerを定義](Reducers.md)しましょう！ActionをDispatchしたとき、どうやって状態更新するか指定するためです。

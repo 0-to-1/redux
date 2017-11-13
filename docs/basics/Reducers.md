@@ -441,4 +441,4 @@ export default todoApp
 
 ## 次のステップ
 
-次に、[ReduxのStoreをつくる](Store.md) 方法を学びましょう。Storeは状態を保持します。そしてActionが送られると、Reducerの呼び出しを処理します。
+次に、[ReduxのStoreをつくる](Store.md) 方法を学びましょう。Storeは状態を保持します。そしてActionがDispatch（送信）されると、Reducerの呼び出しを処理します。

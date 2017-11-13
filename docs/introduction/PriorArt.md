@@ -12,7 +12,7 @@ Reduxは[Flux](https://facebook.github.io/flux/)の実装だと考えられま�
 Reduxは、Fluxの重要な特質に触発されています。Fluxと同じく、Reduxもアプリケーションの一定の層にモデルの更新ロジックを集約するよう定めています。(Fluxでは“Store”、Reduxでは“Reducer”)
 どちらもアプリケーションのコードに直接データを変更させるのではなく、Actionという単なるオブジェクトにすべての変更を記述します。
 
-Fluxと違って、ReduxにはDispatcher(ディスパッチャー)という概念はありません。なぜならイベントエミッターではなく、純粋関数を使っているからです。純粋関数は合成が簡単で、管理するのに追加のエンティティがいりません。Fluxをどう捉えるかによりますが、ReduxがFluxの逸脱や具体的な実装に見えるかもしれません。Fluxはよく、[状態とActionを取り、新たな状態を返すと説明されます (`(state, action) => state`)](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1)。この意味では、ReduxはFluxアーキテクチャだと言えます。しかし純粋関数のおかげで、よりシンプルになっています。
+Fluxと違って、ReduxにはDispatcherという概念はありません。なぜならイベントエミッターではなく、純粋関数を使っているからです。純粋関数は合成が簡単で、管理するのに追加のエンティティがいりません。Fluxをどう捉えるかによりますが、ReduxがFluxの逸脱や具体的な実装に見えるかもしれません。Fluxはよく、[状態とActionを取り、新たな状態を返すと説明されます (`(state, action) => state`)](https://speakerdeck.com/jmorrell/jsconf-uy-flux-those-who-forget-the-past-dot-dot-dot-1)。この意味では、ReduxはFluxアーキテクチャだと言えます。しかし純粋関数のおかげで、よりシンプルになっています。
 
 もう1つFluxとの重要な違いがあります。それは、**Reduxはデータを決して書き換えないと想定している** ということです。状態のために単なるオブジェクトや配列を使うのは構いません。しかしReducerの内部で状態に手を加えることは、強く反対します。 状態を書き換えるのではなく、常に新しいオブジェクトを返すべきです。これは[ECMAScriptで提案されている、オブジェクトのスプレッド演算子 (object spread operator proposal)](../recipes/UsingObjectSpreadOperator.md)や、[Immutable](https://facebook.github.io/immutable-js)のようなライブラリを使えば簡単です。
 
@@ -47,7 +47,7 @@ Immutableや他の類似ライブラリのほとんどは、Reduxに影響しま
 
 [Baobab](https://github.com/Yomguithereal/baobab)は、ふつうのJavaScriptオブジェクトを更新するために不変性を持ったAPIを実装している、もう1つの人気ライブラリです。 Reduxとともに使えますが、一緒に使う利点はほとんどありません。
 
-Baobabが用意しているほとんどの機能は、カーソルでデータを更新することに関連しています。しかしReduxでデータを更新する唯一の方法は、Actionを送ることです。つまりBaobabとReduxは、同じ問題を異なる方法で解決しています。そしてこの2つは、補い合うことができません。
+Baobabが用意しているほとんどの機能は、カーソルでデータを更新することに関連しています。しかしReduxでデータを更新する唯一の方法は、ActionをDispatch（送信）することです。つまりBaobabとReduxは、同じ問題を異なる方法で解決しています。そしてこの2つは、補い合うことができません。
 
 Immutableとは違い、Baobabは内部で特別に効率的なデータ構造をまだ何も実装していません。そのためReduxと一緒に使っても、本当に何も得るものはありません。 ただ単にふつうのオブジェクトを使った方が簡単です。
 

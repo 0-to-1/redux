@@ -26,7 +26,7 @@ let store = createStore(todoApp)
 let store = createStore(todoApp, window.STATE_FROM_SERVER)
 ```
 
-## Actionの送信
+## ActionのDispatch（送信）
 
 いまStoreを作りました。プログラムが動くか確かめましょう！UIが全くなくても、もう更新ロジックをテストできます。
 
@@ -47,7 +47,7 @@ const unsubscribe = store.subscribe(() =>
   console.log(store.getState())
 )
 
-// Actionをいくつか送信する
+// ActionをいくつかDispatchする
 store.dispatch(addTodo('Learn about actions'))
 store.dispatch(addTodo('Learn about reducers'))
 store.dispatch(addTodo('Learn about store'))

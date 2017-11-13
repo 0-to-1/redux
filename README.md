@@ -125,7 +125,7 @@ store.subscribe(() =>
   console.log(store.getState())
 )
 
-// 内部状態を変更する唯一の方法は、Actionを送ることです。
+// 内部状態を変更する唯一の方法は、ActionをDispatch（送信）することです。
 // Actionはシリアライズ（訳注：データをネットワークで送受信できるように変換すること。直列化）、ログをとる、また保持してもう一度実行などができます。
 store.dispatch({ type: 'INCREMENT' })
 // 1
