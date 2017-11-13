@@ -99,7 +99,7 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 * [redux-undo](https://github.com/omnidan/redux-undo) —  Ruducerのための手っ取り早い、元に戻す/やり直す（Undo/Redo)とAction履歴
 * [redux-ignore](https://github.com/omnidan/redux-ignore) — 配列かフィルター関数によって、ReduxのActionを無視（訳注：特定のActionを無視することで、パフォーマンスの問題を回避）
 * [redux-recycle](https://github.com/omnidan/redux-recycle) — 特定のActionに対して、Reduxの状態をリセット
-* [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) — 1つの購読者通知で、複数のActionを送信
+* [redux-batched-actions](https://github.com/tshelburne/redux-batched-actions) — 1つの購読者通知で、複数のActionをDispatch（送信）
 * [redux-search](https://github.com/treasure-data/redux-search) —  Web Workerで自動的にリソースをインデックスし、ブロッキングなしで検索
 * [redux-electron-store](https://github.com/samiskin/redux-electron-store) — Electronの複数プロセス間でReduxのStoreを同期するStoreエンハンサー
 * [redux-loop](https://github.com/raisemarketplace/redux-loop) — Reducerから返すことで、純粋かつ自然に作用を並べる（訳注：Reducerは通常、同期的な状態遷移のみを扱う。つまり、Actionに対してReducerから新しい状態が返される。しかしredux-loopが加えられたReducerは、Actionに対して非同期関数の実行も定義できる。そしてその関数の結果次第で、新たなActionを呼び出す。ただし通常のReducerと同じく、最終的に返すのは状態としての単なるオブジェクト）

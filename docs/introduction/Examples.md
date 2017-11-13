@@ -108,7 +108,7 @@ open http://localhost:3000/
 
 または、 [sandbox](https://codesandbox.io/s/github/reactjs/redux/tree/master/examples/shopping-cart)を確認してください。
 
-この使用例は、アプリが成長するにつれて重要になる慣用的なReduxパターンを示しています。特に、IDによって正規化された方法でエンティティを保持する方法。階層化した複数のReducerを合成する方法。そして状態の形についての認識をカプセル化するために、ReducerとともにSelector（訳注：セレクターは状態の一部を引数として受け取り、処理して返す関数）を定義する方法。この3つについて示しています。また[Redux Logger](https://github.com/fcomb/redux-logger)でログ取得や、 ミドルウェアの[Redux Thunk](https://github.com/gaearon/redux-thunk)で条件付きのAction送信もしています。
+この使用例は、アプリが成長するにつれて重要になる慣用的なReduxパターンを示しています。特に、IDによって正規化された方法でエンティティを保持する方法。階層化した複数のReducerを合成する方法。そして状態の形についての認識をカプセル化するために、ReducerとともにSelector（訳注：セレクターは状態の一部を引数として受け取り、処理して返す関数）を定義する方法。この3つについて示しています。また[Redux Logger](https://github.com/fcomb/redux-logger)でログ取得や、 ミドルウェアの[Redux Thunk](https://github.com/gaearon/redux-thunk)を使い条件次第でActionのDispatch（送信）もしています。
 
 ## ツリー表示
 

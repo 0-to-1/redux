@@ -49,7 +49,7 @@ Redux用のReactバインディング（連携プログラム）は、**プレ�
         <tr>
           <th scope="row" style="text-align:right">データ変更</th>
           <td>Propsからコールバックを呼び出す</td>
-          <td>Reduxのアクションを送信する</td>
+          <td>ReduxのアクションをDispatch（送信）する</td>
         </tr>
         <tr>
           <th scope="row" style="text-align:right">作り方</th>
@@ -95,7 +95,7 @@ Todoアプリのデザイン概要はシンプルです。Todo項目のリスト
 
 ### コンテナコンポーネントをデザインする
 
-プレゼンテーショナルコンポーネントをReduxにつなげるため、コンテナコンポーネントも必要です。例えばプレゼンテーショナルコンポーネントの`TodoList`は、`VisibleTodoList`のようなコンテナコンポーネントが必要です。ReduxのStoreを購読して、現在の表示フィルターをどう適用するか把握するためです。表示フィルターを変更するためには、`FilterLink`というコンテナコンポーネントを用意しましょう。プレゼンテーショナルコンポーネントの`Link`を描画し、クリックに応じて適切なActionを送信するためです：
+プレゼンテーショナルコンポーネントをReduxにつなげるため、コンテナコンポーネントも必要です。例えばプレゼンテーショナルコンポーネントの`TodoList`は、`VisibleTodoList`のようなコンテナコンポーネントが必要です。ReduxのStoreを購読して、現在の表示フィルターをどう適用するか把握するためです。表示フィルターを変更するためには、`FilterLink`というコンテナコンポーネントを用意しましょう。プレゼンテーショナルコンポーネントの`Link`を描画し、クリックに応じて適切なActionをDispatchするためです：
 
 * **`VisibleTodoList`** は現在の表示フィルターに従って、Todo項目を選別します。そして`TodoList`を描画します。
 * **`FilterLink`** は現在の表示フィルターを取得して、`Link`を描画します。
@@ -262,7 +262,7 @@ const mapStateToProps = state => {
 }
 ```
 
-状態の読み込みに加えて、コンテナコンポーネントはActionの送信もできます。同じようにして、`mapDispatchToProps()`という関数を定義します。この関数は[`dispatch()`](../api/Store.md#dispatch)メソッドを受け取り、 コールバックとなるPropsを返します。このコールバックを、プレゼンテーショナルコンポーネントに渡すためです。例えば`VisibleTodoList`から`TodoList`コンポーネントへ、`onTodoClick`というコールバックをPropとして渡します。そして`onTodoClick`から、`TOGGLE_TODO`というActionを送信します：
+状態の読み込みに加えて、コンテナコンポーネントはActionのDispatchもできます。同じようにして、`mapDispatchToProps()`という関数を定義します。この関数は[`dispatch()`](../api/Store.md#dispatch)メソッドを受け取り、 コールバックとなるPropsを返します。このコールバックを、プレゼンテーショナルコンポーネントに渡すためです。例えば`VisibleTodoList`から`TodoList`コンポーネントへ、`onTodoClick`というコールバックをPropとして渡します。そして`onTodoClick`から、`TOGGLE_TODO`というActionをDispatchします：
 
 ```js
 const mapDispatchToProps = dispatch => {
