@@ -1,106 +1,106 @@
-# Middleware
+# ミドルウェア
 
-You've seen middleware in action in the [Async Actions](../advanced/AsyncActions.md) example. If you've used server-side libraries like [Express](http://expressjs.com/) and [Koa](http://koajs.com/), you were also probably already familiar with the concept of *middleware*. In these frameworks, middleware is some code you can put between the framework receiving a request, and the framework generating a response. For example, Express or Koa middleware may add CORS headers, logging, compression, and more. The best feature of middleware is that it's composable in a chain. You can use multiple independent third-party middleware in a single project.
+[非同期なAction](../advanced/AsyncActions.md)の例で、Action内にあるミドルウェアを見てきました。もし[Express](http://expressjs.com/)や[Koa](http://koajs.com/)のようなサーバーサイドのライブラリを使ったことがあれば、すでに *ミドルウェア* のコンセプトにも慣れているかもしれません。これらのフレームワークでミドルウェアは、フレームワークがリクエストを受け取り、そしてレスポンスを生成する間に何らかのコードを加えます。例えばExpressやKoaのミドルウェアは、CORSヘッダーやログ取得、圧縮などを加えます。ミドルウェアの最大の特徴は、チェーンでつなげることです。 つまり1つのプロジェクトで、独立したサードパーティによる複数のミドルウェアが使えます。
 
-Redux middleware solves different problems than Express or Koa middleware, but in a conceptually similar way. **It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.** People use Redux middleware for logging, crash reporting, talking to an asynchronous API, routing, and more.
+Reduxのミドルウェアは、ExpressやKoaのミドルウェアとは異なる問題を解決します。しかし、コンセプトは同様です。**ActionがDispatch（送信）され、Reducerへたどり着くまでの間に、サードパーティによる拡張ポイントを用意します。** Reduxのミドルウェアはログ取得やクラッシュレポート、非同期なAPIとの交信、ルーティングなどに使われます。
 
-This article is divided into an in-depth intro to help you grok the concept, and [a few practical examples](#seven-examples) to show the power of middleware at the very end. You may find it helpful to switch back and forth between them, as you flip between feeling bored and inspired.
+この記事は、大きく2つのセクションで構成されています。1つは、コンセプトの理解に役立つ導入部です。もう1つは、ミドルウェアの力を示すための[実践的な使用例](#7つの使用例)です。使用例は最後に記載しています。この2つは、対応する部分を交互に読むと良いかもしれません。退屈とひらめきを、行き来するように。
 
-## Understanding Middleware
+## ミドルウェアを理解する
 
-While middleware can be used for a variety of things, including asynchronous API calls, it's really important that you understand where it comes from. We'll guide you through the thought process leading to middleware, by using logging and crash reporting as examples.
+ミドルウェアは、API呼び出しを含めいろんな用途に使えます。そんなミドルウェアは、どうやって作られているのでしょうか？　これを理解するのが大切です。そこで、ミドルウェアへとつながる思考プロセスを案内します。例として、ログ取得とクラッシュレポートを使います。
 
-### Problem: Logging
+### 問題： ログ取得
 
-One of the benefits of Redux is that it makes state changes predictable and transparent. Every time an action is dispatched, the new state is computed and saved. The state cannot change by itself, it can only change as a consequence of a specific action.
+Reduxを使う利点の1つ。それは状態変化を予測できるようにし、その透明性を高めることです。ActionがDispatchされるたびに、新しい状態が計算・保持されます。状態が自分自身を変更することはできません。特定のActionによる結果としてのみ、変更できます。
 
-Wouldn't it be nice if we logged every action that happens in the app, together with the state computed after it? When something goes wrong, we can look back at our log, and figure out which action corrupted the state.
+アプリで起きるすべてのActionと、そのActionによって計算された次の状態。この2つのログを取れたら良いですね。何か問題が起きたら、ログを確認できます。そしてどのActionが状態を壊したのか、把握できるのです。
 
 <img src='http://i.imgur.com/BjGBlES.png' width='70%'>
 
-How do we approach this with Redux?
+Reduxでどう対処するか？
 
-### Attempt #1: Logging Manually
+### 試行 #1: 手作業でログを取る
 
-The most naïve solution is just to log the action and the next state yourself every time you call [`store.dispatch(action)`](../api/Store.md#dispatch). It's not really a solution, but just a first step towards understanding the problem.
+最も単純な解決策は、[`store.dispatch(action)`](../api/Store.md#dispatch)を呼び出すたびに自分でActionと次の状態のログを取ることです。実際のところ、これは解決策ではありません。しかし、問題を理解するための第一歩です。
 
->##### Note
+>##### 注意
 
->If you're using [react-redux](https://github.com/reactjs/react-redux) or similar bindings, you likely won't have direct access to the store instance in your components. For the next few paragraphs, just assume you pass the store down explicitly.
+>もし[react-redux](https://github.com/reactjs/react-redux)や同様のバインディング（連携プログラム）を使っているなら、コンポーネント内でStoreインスタンスに直接アクセスすることはできないでしょう。次の段落は、Storeを明示的に渡したという想定です。
 
-Say, you call this when creating a todo:
+Todoを作成するとき、これを呼び出します：
 
 ```js
 store.dispatch(addTodo('Use Redux'))
 ```
 
-To log the action and state, you can change it to something like this:
+Actionと状態のログを取るには、このように変えます：
 
 ```js
 let action = addTodo('Use Redux')
 
-console.log('dispatching', action)
+console.log('Dispatching', action)
 store.dispatch(action)
-console.log('next state', store.getState())
+console.log('次の状態', store.getState())
 ```
 
-This produces the desired effect, but you wouldn't want to do it every time.
+これで望んだ結果が得られます。しかし、毎回これを書きたくはないでしょう。
 
-### Attempt #2: Wrapping Dispatch
+### 試行 #2: Dispatchをラップ（内包）する
 
-You can extract logging into a function:
+関数内でログを取れます：
 
 ```js
 function dispatchAndLog(store, action) {
-  console.log('dispatching', action)
+  console.log('Dispatching', action)
   store.dispatch(action)
-  console.log('next state', store.getState())
+  console.log('次の状態', store.getState())
 }
 ```
 
-You can then use it everywhere instead of `store.dispatch()`:
+`store.dispatch()`の代わりに、この関数をどこでも使えます：
 
 ```js
 dispatchAndLog(store, addTodo('Use Redux'))
 ```
 
-We could end this here, but it's not very convenient to import a special function every time.
+ここで終わっても良いのですが、いつも特別な関数をインポートするのは、あまり便利じゃありません。
 
-### Attempt #3: Monkeypatching Dispatch
+### 試行 #3: Dispatchを、置き換える（モンキーパッチング）
 
-What if we just replace the `dispatch` function on the store instance? The Redux store is just a plain object with [a few methods](../api/Store.md), and we're writing JavaScript, so we can just monkeypatch the `dispatch` implementation:
+ただ単に、Storeインスタンスの`dispatch`関数を置き換えるのはどうでしょう？　ReduxのStoreは、[いくつかのメソッド](../api/Store.md)を持つ普通のObjectです。それに、書いているのはJavaScriptです。ということは、`dispatch`の実装を置き換えることができます：
 
 ```js
 let next = store.dispatch
 store.dispatch = function dispatchAndLog(action) {
-  console.log('dispatching', action)
+  console.log('Dispatching', action)
   let result = next(action)
-  console.log('next state', store.getState())
+  console.log('次の状態', store.getState())
   return result
 }
 ```
 
-This is already closer to what we want!  No matter where we dispatch an action, it is guaranteed to be logged. Monkeypatching never feels right, but we can live with this for now.
+やりたいことに、かなり近づきました！　ActionをどこでDispatchしても、ログの取得が保証されます。置き換えるのが正しい事だとは、まったく思えません。しかし今は、これでやっていけます。
 
-### Problem: Crash Reporting
+### 問題： クラッシュレポート
 
-What if we want to apply **more than one** such transformation to `dispatch`?
+もし、`dispatch`に上記のような変形を **複数** 加えたいときは？
 
-A different useful transformation that comes to my mind is reporting JavaScript errors in production. The global `window.onerror` event is not reliable because it doesn't provide stack information in some older browsers, which is crucial to understand why an error is happening.
+先ほどとは別の、有効な変形を思いつきました。本番環境で、JavaScriptのエラーをレポートするのです。グローバルの `window.onerror`イベントは頼れません。なぜなら、古いブラウザのいくつかではスタック情報を提供していないからです。これは、なぜエラーが起きるのかを理解する上で致命的です。
 
-Wouldn't it be useful if, any time an error is thrown as a result of dispatching an action, we would send it to a crash reporting service like [Sentry](https://getsentry.com/welcome/) with the stack trace, the action that caused the error, and the current state? This way it's much easier to reproduce the error in development.
+次のようにできたら、役に立つと思いませんか？　まず、ActionをDispatchした結果としてエラーがいつも投げられます。そしてこのエラーを[Sentry](https://getsentry.com/welcome/)のようなクラッシュレポートのサービスに送ります。エラーだけでなくスタックトレース、エラーを起こしたAction、現在の状態も一緒に送ります。こうすると、開発環境でエラーの再現がより簡単になります。
 
-However, it is important that we keep logging and crash reporting separate. Ideally we want them to be different modules, potentially in different packages. Otherwise we can't have an ecosystem of such utilities. (Hint: we're slowly getting to what middleware is!)
+しかし、ログ取得とクラッシュレポートを分けておくことが大切です。理想的には、この2つを別のモジュールにしたいです。別のパッケージとする可能性もあります。そうしないと、求めているようなユーティリティのエコシステムは得られません。（ヒント：ミドルウェアって何なのか、ゆっくりと分かり始めています！）
 
-If logging and crash reporting are separate utilities, they might look like this:
+もしログ取得とクラッシュレポートが別々のユーティリティなら、下記のようになるでしょう：
 
 ```js
 function patchStoreToAddLogging(store) {
   let next = store.dispatch
   store.dispatch = function dispatchAndLog(action) {
-    console.log('dispatching', action)
+    console.log('Dispatching', action)
     let result = next(action)
-    console.log('next state', store.getState())
+    console.log('次の状態', store.getState())
     return result
   }
 }
@@ -111,7 +111,7 @@ function patchStoreToAddCrashReporting(store) {
     try {
       return next(action)
     } catch (err) {
-      console.error('Caught an exception!', err)
+      console.error('例外をキャッチした！', err)
       Raven.captureException(err, {
         extra: {
           action,
@@ -124,102 +124,102 @@ function patchStoreToAddCrashReporting(store) {
 }
 ```
 
-If these functions are published as separate modules, we can later use them to patch our store:
+これらの関数を別々のモジュールとして公開すれば、あとで使えます。具体的には、Storeにパッチとしてあてることができます：
 
 ```js
 patchStoreToAddLogging(store)
 patchStoreToAddCrashReporting(store)
 ```
 
-Still, this isn't nice.
+まだ、改善の余地があります。
 
-### Attempt #4: Hiding Monkeypatching
+### 試行 #4: 置き換えを隠す
 
-Monkeypatching is a hack. “Replace any method you like”, what kind of API is that? Let's figure out the essence of it instead. Previously, our functions replaced `store.dispatch`. What if they *returned* the new `dispatch` function instead?
+置き換えはハック（改変）です。“どんなメソッドでも、好きなように置き換える”ということです。それってつまり、どんなAPIでしょう？　その本質を理解しましょう。先ほど`store.dispatch`を、自作の関数で置き換えました。この関数の代わりに、新しい`dispatch`関数を *返したら* どうでしょう？
 
 ```js
 function logger(store) {
   let next = store.dispatch
 
-  // Previously:
+  // さっきやったのは:
   // store.dispatch = function dispatchAndLog(action) {
 
   return function dispatchAndLog(action) {
-    console.log('dispatching', action)
+    console.log('Dispatching', action)
     let result = next(action)
-    console.log('next state', store.getState())
+    console.log('次の状態', store.getState())
     return result
   }
 }
 ```
 
-We could provide a helper inside Redux that would apply the actual monkeypatching as an implementation detail:
+Reduxの内部に、ヘルパーを提供できます。このヘルパーが、実際の置き換えとして使われます。下記が実装の詳細です：
 
 ```js
 function applyMiddlewareByMonkeypatching(store, middlewares) {
   middlewares = middlewares.slice()
   middlewares.reverse()
 
-  // Transform dispatch function with each middleware.
+  // それぞれのミドルウェアで、Dispatch関数を変形する
   middlewares.forEach(middleware =>
     store.dispatch = middleware(store)
   )
 }
 ```
 
-We could use it to apply multiple middleware like this:
+ヘルパーで複数のミドルウェアを追加できます。下記のように：
 
 ```js
 applyMiddlewareByMonkeypatching(store, [logger, crashReporter])
 ```
 
-However, it is still monkeypatching.  
-The fact that we hide it inside the library doesn't alter this fact.
+しかしまだ、置き換えています。
+置き換えという事実をライブラリの中に隠しても、この事実は変わりません。
 
-### Attempt #5: Removing Monkeypatching
+### 試行 #5: 置き換えを取り除く
 
-Why do we even overwrite `dispatch`? Of course, to be able to call it later, but there's also another reason: so that every middleware can access (and call) the previously wrapped `store.dispatch`:
+そもそも、なぜ`dispatch`を上書きするんでしたっけ？　もちろん、`dispatch`をあとで呼び出すためです。しかし、もう1つ理由があります：それはすべてのミドルウェアが、前にラップされた`store.dispatch`へアクセス（呼び出しも）できるようにするためです：
 
 ```js
 function logger(store) {
-  // Must point to the function returned by the previous middleware:
+  // 前のミドルウェアが返したdispatch関数を、参照しなければいけない：
   let next = store.dispatch
 
   return function dispatchAndLog(action) {
-    console.log('dispatching', action)
+    console.log('Dispatching', action)
     let result = next(action)
-    console.log('next state', store.getState())
+    console.log('次の状態', store.getState())
     return result
   }
 }
 ```
 
-It is essential to chaining middleware!
+ミドルウェアを、チェーンでつなげるために必要なのです！
 
-If `applyMiddlewareByMonkeypatching` doesn't assign `store.dispatch` immediately after processing the first middleware, `store.dispatch` will keep pointing to the original `dispatch` function. Then the second middleware will also be bound to the original `dispatch` function.
+もし`applyMiddlewareByMonkeypatching`が、最初のミドルウェアを処理した直後に`store.dispatch`を割り当てなければ、`store.dispatch`は元の`dispatch`関数をずっと参照し続けるでしょう。そして2番目のミドルウェアもまた、元の`dispatch`関数にバインド（束縛）されます。
 
-But there's also a different way to enable chaining. The middleware could accept the `next()` dispatch function as a parameter instead of reading it from the `store` instance.
+しかし、チェーンでつなげるようにする方法は他にもあります。この方法だと、ミドルウェアは`next()`というDispatch関数を受け取れます。この`next()`が、`store`インスタンスの`dispatch`関数を読み込む代わりになります。
 
 ```js
 function logger(store) {
   return function wrapDispatchToAddLogging(next) {
     return function dispatchAndLog(action) {
-      console.log('dispatching', action)
+      console.log('Dispatching', action)
       let result = next(action)
-      console.log('next state', store.getState())
+      console.log('次の状態', store.getState())
       return result
     }
   }
 }
 ```
 
-It's a [“we need to go deeper”](http://knowyourmeme.com/memes/we-need-to-go-deeper) kind of moment, so it might take a while for this to make sense. The function cascade feels intimidating. ES6 arrow functions make this [currying](https://en.wikipedia.org/wiki/Currying) easier on eyes:
+[“もっと深く進まなければならない”](http://knowyourmeme.com/memes/we-need-to-go-deeper)ときが来ました。理解するのに、しばらく時間がかかるかもしれません。上記の連続する関数には、威圧感があります。ES6のアロー関数で、この[カリー化（currying）](https://en.wikipedia.org/wiki/Currying)をもっと見やすくしましょう：
 
 ```js
 const logger = store => next => action => {
-  console.log('dispatching', action)
+  console.log('Dispatching', action)
   let result = next(action)
-  console.log('next state', store.getState())
+  console.log('次の状態', store.getState())
   return result
 }
 
@@ -227,7 +227,7 @@ const crashReporter = store => next => action => {
   try {
     return next(action)
   } catch (err) {
-    console.error('Caught an exception!', err)
+    console.error('例外をキャッチした！', err)
     Raven.captureException(err, {
       extra: {
         action,
@@ -239,17 +239,17 @@ const crashReporter = store => next => action => {
 }
 ```
 
-**This is exactly what Redux middleware looks like.**
+**これはまさに、Reduxのミドルウェアと同様です。**
 
-Now middleware takes the `next()` dispatch function, and returns a dispatch function, which in turn serves as `next()` to the middleware to the left, and so on. It's still useful to have access to some store methods like `getState()`, so `store` stays available as the top-level argument.
+ミドルウェアが、`next()`としてDispatch関数を引数に取り、またDispatch関数を返すようになりました。ミドルウェアが返したDispatch関数は、`next()`として左のミドルウェアへ順番に渡されます。この繰り返しです。 この方法でも、`getState()`のようなStoreメソッドへのアクセスを保っておくと役立ちます。そのため`store`は、これまで通り最上位の引数として利用できます。
 
-### Attempt #6: Naïvely Applying the Middleware
+### 試行 #6: ミドルウェアを単純に加える
 
-Instead of `applyMiddlewareByMonkeypatching()`, we could write `applyMiddleware()` that first obtains the final, fully wrapped `dispatch()` function, and returns a copy of the store using it:
+`applyMiddlewareByMonkeypatching()`の代わりとして、下記のように`applyMiddleware()`が書けます。この関数はまず、完全にラップされた`dispatch()`関数を得ます。そして、この`dispatch()`関数を使ったStoreのコピーを返します：
 
 ```js
-// Warning: Naïve implementation!
-// That's *not* Redux API.
+// 警告: 単純すぎる実装です！
+// これはRedux APIでは *ありません*。
 function applyMiddleware(store, middlewares) {
   middlewares = middlewares.slice()
   middlewares.reverse()
@@ -261,25 +261,25 @@ function applyMiddleware(store, middlewares) {
 }
 ```
 
-The implementation of [`applyMiddleware()`](../api/applyMiddleware.md) that ships with Redux is similar, but **different in three important aspects**:
+これはReduxに含まれている[`applyMiddleware()`](../api/applyMiddleware.md)の実装と同様です。しかし、**3つの重要な面で異なります**：
 
-* It only exposes a subset of the [store API](../api/Store.md) to the middleware: [`dispatch(action)`](../api/Store.md#dispatch) and [`getState()`](../api/Store.md#getState).
+* ミドルウェアに対して、[Store API](../api/Store.md)の一部だけを公開しています：具体的には、 [`dispatch(action)`](../api/Store.md#dispatch)と[`getState()`](../api/Store.md#getState)です。
 
-* It does a bit of trickery to make sure that if you call `store.dispatch(action)` from your middleware instead of `next(action)`, the action will actually travel the whole middleware chain again, including the current middleware. This is useful for asynchronous middleware, as we have seen [previously](AsyncActions.md).
+* ミドルウェアから`next(action)`の代わりに`store.dispatch(action)`を呼び出すと、少しトリッキーな動きをします。このときActionは、ミドルウェアのチェーン全体を再び伝わります。呼び出したミドルウェアにも、Actionが再び伝わってきます。[以前](AsyncActions.md)確認したように、これは非同期なミドルウェアにとって有効です。
 
-* To ensure that you may only apply middleware once, it operates on `createStore()` rather than on `store` itself. Instead of `(store, middlewares) => store`, its signature is `(...middlewares) => (createStore) => createStore`.
+* ミドルウェアを一度しか追加できないようにするため、`store`自体ではなく`createStore()`で操作します。`(store, middlewares) => store`の代わりに、引数を`(...middlewares) => (createStore) => createStore`という形で渡します。
 
-Because it is cumbersome to apply functions to `createStore()` before using it, `createStore()` accepts an optional last argument to specify such functions.
+`createStore()`を使う前に、`createStore()`へ関数を渡すというのは扱いづらいです。そのため`createStore()`は、最後の引数として関数を受け取ります。この引数は、任意（省略可能）です。
 
-### The Final Approach
+### 最後の対処法
 
-Given this middleware we just wrote:
+上記で書いたミドルウェアを考慮すると：
 
 ```js
 const logger = store => next => action => {
-  console.log('dispatching', action)
+  console.log('Dispatching', action)
   let result = next(action)
-  console.log('next state', store.getState())
+  console.log('次の状態', store.getState())
   return result
 }
 
@@ -287,7 +287,7 @@ const crashReporter = store => next => action => {
   try {
     return next(action)
   } catch (err) {
-    console.error('Caught an exception!', err)
+    console.error('例外をキャッチした！', err)
     Raven.captureException(err, {
       extra: {
         action,
@@ -299,7 +299,7 @@ const crashReporter = store => next => action => {
 }
 ```
 
-Here's how to apply it to a Redux store:
+下記は、Redux Storeにミドルウェアを加える方法です：
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -307,45 +307,45 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 let todoApp = combineReducers(reducers)
 let store = createStore(
   todoApp,
-  // applyMiddleware() tells createStore() how to handle middleware
+  // applyMiddleware()は、createStore()にミドルウェアの処理方法を伝える
   applyMiddleware(logger, crashReporter)
 )
 ```
 
-That's it! Now any actions dispatched to the store instance will flow through `logger` and `crashReporter`:
+これで完成！StoreインスタンスへとDispatchされたActionはすべて、`logger`と`crashReporter`を通るようになりました：
 
 ```js
-// Will flow through both logger and crashReporter middleware!
+// loggerとcrashRepor、両方のミドルウェアを通ることになる！
 store.dispatch(addTodo('Use Redux'))
 ```
 
-## Seven Examples
+## 7つの使用例
 
-If your head boiled from reading the above section, imagine what it was like to write it. This section is meant to be a relaxation for you and me, and will help get your gears turning.
+もし上記のセクションを読んで頭が痛くなったら、ミドルウェアを書くって結局どういう事なのか考えてみてください。このセクションは、リラックスするためにあります。そして、頭の回転を助けます。
 
-Each function below is a valid Redux middleware. They are not equally useful, but at least they are equally fun.
+下記の関数はそれぞれ、有効なReduxミドルウェアです。ただ、すべて有用というわけではありません。しかし少なくとも、すべて楽しい関数です。
 
 ```js
 /**
- * Logs all actions and states after they are dispatched.
+ * Dispatchされた、すべてのActionと状態のログを取る
  */
 const logger = store => next => action => {
   console.group(action.type)
-  console.info('dispatching', action)
+  console.info('Dispatching', action)
   let result = next(action)
-  console.log('next state', store.getState())
+  console.log('次の状態', store.getState())
   console.groupEnd(action.type)
   return result
 }
 
 /**
- * Sends crash reports as state is updated and listeners are notified.
+ * 状態が更新されリスナーに通知されたら、クラッシュレポートを送る
  */
 const crashReporter = store => next => action => {
   try {
     return next(action)
   } catch (err) {
-    console.error('Caught an exception!', err)
+    console.error('例外をキャッチした！', err)
     Raven.captureException(err, {
       extra: {
         action,
@@ -357,8 +357,8 @@ const crashReporter = store => next => action => {
 }
 
 /**
- * Schedules actions with { meta: { delay: N } } to be delayed by N milliseconds.
- * Makes `dispatch` return a function to cancel the timeout in this case.
+ * { meta: { delay: N } }を持つActionに対し、Nミリ秒の遅延をスケジューリングする
+ * この場合`dispatch`が、タイムアウトを取り消す関数を返すようにする
  */
 const timeoutScheduler = store => next => action => {
   if (!action.meta || !action.meta.delay) {
@@ -376,9 +376,9 @@ const timeoutScheduler = store => next => action => {
 }
 
 /**
- * Schedules actions with { meta: { raf: true } } to be dispatched inside a rAF loop
- * frame.  Makes `dispatch` return a function to remove the action from the queue in
- * this case.
+ * { meta: { raf: true } }を持つActionに対し、
+ * rAFループ内でDispatchされることをスケジューリングする
+ * この場合`dispatch`が、キュー（待ち行列）からActionを削除する関数を返すようにする
  */
 const rafScheduler = store => next => {
   let queuedActions = []
@@ -416,9 +416,9 @@ const rafScheduler = store => next => {
 }
 
 /**
- * Lets you dispatch promises in addition to actions.
- * If the promise is resolved, its result will be dispatched as an action.
- * The promise is returned from `dispatch` so the caller may handle rejection.
+ * Actionに加え、PromiseもDispatchできるようにする
+ * Promiseが解決したら、その結果がActionとしてDispatchされる
+ * 呼び出し元でReject処理ができるように、このPromiseは`dispatch`から返される
  */
 const vanillaPromise = store => next => action => {
   if (typeof action.then !== 'function') {
@@ -429,12 +429,13 @@ const vanillaPromise = store => next => action => {
 }
 
 /**
- * Lets you dispatch special actions with a { promise } field.
+ * { promise }フィールドを持つ特別なActionをDispatchできるようにする
  *
- * This middleware will turn them into a single action at the beginning,
- * and a single success (or failure) action when the `promise` resolves.
+ * このミドルウェアはまず、{ promise }フィールドを持つActionを普通のActionに変えてDispatchする
+ * そして`promise`が解決したら、成功（または失敗）を加えたActionに変えて再びDispatchする
  *
- * For convenience, `dispatch` will return the promise so the caller can wait.
+ * 呼び出し元で待機できるように、このPromiseは`dispatch`から返される
+ * こうすると都合が良い
  */
 const readyStatePromise = store => next => action => {
   if (!action.promise) {
@@ -455,20 +456,20 @@ const readyStatePromise = store => next => action => {
 }
 
 /**
- * Lets you dispatch a function instead of an action.
- * This function will receive `dispatch` and `getState` as arguments.
+ * Actionの代わりに関数をDispatchできるようにする
+ * この関数は、引数として`dispatch`と`getState`を受け取る
  *
- * Useful for early exits (conditions over `getState()`), as well
- * as for async control flow (it can `dispatch()` something else).
+ * 非同期な制御フローと同じく（Action以外も`dispatch()`できる）、
+ * 早く抜けるのに役立つ（`getState()`によって条件付け）
  *
- * `dispatch` will return the return value of the dispatched function.
+ * `dispatch`はDispatchされた関数の戻り値を返す
  */
 const thunk = store => next => action =>
   typeof action === 'function'
     ? action(store.dispatch, store.getState)
     : next(action)
 
-// You can use all of them! (It doesn't mean you should.)
+// これら全部を使えます！（使うべきだという意味ではありません）
 let todoApp = combineReducers(reducers)
 let store = createStore(
   todoApp,
