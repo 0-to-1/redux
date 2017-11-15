@@ -16,4 +16,6 @@
   * [Reactと併用](/docs/basics/UsageWithReact.md)
   * [使用例：Todoリスト](/docs/basics/ExampleTodoList.md)
 * [上級](/docs/advanced/README.md)
-    * [Async Actions](/docs/advanced/AsyncActions.md)
+  * [非同期なAction](/docs/advanced/AsyncActions.md)
+  * [非同期なフロー](/docs/advanced/AsyncFlow.md)
+  * [ミドルウェア](/docs/advanced/Middleware.md)
