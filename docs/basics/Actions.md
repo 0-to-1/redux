@@ -102,7 +102,7 @@ boundCompleteTodo(index)
 
 `dispatch()`関数は、[`store.dispatch()`](../api/Store.md#dispatch)としてStoreから直接利用できます。しかし、ヘルパーを使って利用することが多いでしょう。[react-redux](http://github.com/gaearon/react-redux)の`connect()`などです。[`bindActionCreators()`](../api/bindActionCreators.md)を使うと、自動的に多くのActionクリエイターを`dispatch()`関数にバインド（結び付ける、束縛）できます。
 
-Actionクリエイターは非同期でも良いし、副作用も持てます。 詳しくは[上級チュートリアル](../advanced/README.md)にある、[非同期Action](../advanced/AsyncActions.md)を読んでください。AJAXのレスポンスを処理し、Actionクリエイターを非同期な制御フローに組み立てる方法を学べます。初級チュートリアルを終えるまで、非同期Actionに飛ばないでください。 初級チュートリアルには上級チュートリアルと非同期Actionの前に必要となる、重要なコンセプトが含まれています。
+Actionクリエイターは非同期でも良いし、副作用も持てます。 詳しくは[上級チュートリアル](../advanced/README.md)にある、[非同期なAction](../advanced/AsyncActions.md)を読んでください。AJAXのレスポンスを処理し、Actionクリエイターを非同期な制御フローに組み立てる方法を学べます。初級チュートリアルを終えるまで、非同期なActionに飛ばないでください。 初級チュートリアルには上級チュートリアルと非同期なActionの前に必要となる、重要なコンセプトが含まれています。
 
 ## ソースコード
 

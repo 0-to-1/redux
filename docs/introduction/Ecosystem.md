@@ -65,12 +65,12 @@ Reduxは小さなライブラリです。しかし決まりごととAPIは注意
 
 ### ミドルウェア
 
-* [redux-thunk](http://github.com/gaearon/redux-thunk) — 非同期Actionクリエイターを書く、最も簡単な方法
+* [redux-thunk](http://github.com/gaearon/redux-thunk) — 非同期なActionクリエイターを書く、最も簡単な方法
 * [redux-promise](https://github.com/acdlite/redux-promise) — [FSA](https://github.com/acdlite/flux-standard-action)に対応したPromise（プロミス）のミドルウェア
 * [redux-axios-middleware](https://github.com/svrcekmichal/redux-axios-middleware) — axiosのHTTPクライアントでデータ取得するReduxのミドルウェア
 * [redux-observable](https://github.com/redux-observable/redux-observable/) — "Epics"を使った、Actionの副作用のためのRxJSのミドルウェア
-* [redux-cycles](https://github.com/cyclejs-community/redux-cycles) — Cycle.jsを使ってReduxの非同期Actionを処理
-* [redux-logger](https://github.com/fcomb/redux-logger) — すべてのRedux Actionと次の状態のログをとる
+* [redux-cycles](https://github.com/cyclejs-community/redux-cycles) — Cycle.jsを使ってReduxの非同期なActionを処理
+* [redux-logger](https://github.com/fcomb/redux-logger) — すべてのRedux Actionと次の状態のログを取る
 * [redux-immutable-state-invariant](https://github.com/leoasis/redux-immutable-state-invariant) — 開発中に、状態変更を警告する
 * [redux-unhandled-action](https://github.com/socialtables/redux-unhandled-action) — 開発中に、状態変更を引き起こさないActionを警告する
 * [redux-analytics](https://github.com/markdalgleish/redux-analytics) — Reduxのための解析ミドルウェア

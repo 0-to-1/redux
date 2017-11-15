@@ -8,6 +8,7 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 
 どんなReduxアプリでも、データのライフサイクルは次の4ステップをたどります：
 
+<!-- textlint-disable preset-jtf-style/1.1.3.箇条書き -->
 1. [`store.dispatch(action)`](../api/Store.md#dispatch)**を呼び出す。**
 
   [Action](Actions.md)は *起きたこと* を表す単なるオブジェクトです。例えば：
@@ -50,9 +51,7 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 
   Reducerは純粋関数であることに注意してください。次の状態を *計算する* だけです。完全に予測可能であるべきです。つまり同じ入力には、何度やっても同じ出力を返すのです。副作用は、どんなものでも行うべきではありません。例えば、API呼び出しやルート遷移など。これらは、ActionをDispatch（送信）する前に行うべきです。
 
-<!-- textlint-disable preset-jtf-style/1.1.3.箇条書き -->
 3. **ルートReducerは、複数のReducerの結果を1つの状態ツリーにまとめてよい。**
-<!-- textlint-enable preset-jtf-style/1.1.3.箇条書き -->
 
   ルートReducerをどのように構成するかは、すべてあなた次第です。Reduxは[`combineReducers()`](../api/combineReducers.md)というヘルパー関数を提供しています。ルートReducerを複数の関数へ“分割する”のに役立ちます。それぞれの関数は、 状態ツリーの一部を処理します。
 
@@ -94,6 +93,7 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
   [`combineReducers()`](../api/combineReducers.md)は手軽なヘルパー関数ですが、使わなくても構いません。ルートReducerの書き方は、あなた次第です！
 
 4. **ReduxはルートReducerによって返された、完全な状態ツリーを保存します。**
+<!-- textlint-enable preset-jtf-style/1.1.3.箇条書き -->
 
   上記で、新しいツリーがアプリの次の状態となりました！[`store.subscribe(listener)`](../api/Store.md#subscribe)で登録されたすべてのリスナーは、このとき呼び出されます。リスナーは[`store.getState()`](../api/Store.md#getState)で現在の状態を得ることもできます。
 
@@ -104,4 +104,4 @@ Reduxのアーキテクチャは、**厳格な一方向のデータフロー** �
 これで、Reduxがどのように機能するか分かりました。次は[Reactアプリにつなげましょう](UsageWithReact.md)。
 
 >##### 上級ユーザーへの注意
->基本的なコンセプトをよく理解していて、以前にこのチュートリアルを終えた方へ。[上級チュートリアル](../advanced/README.md)の[非同期フロー](../advanced/AsyncFlow.md)を忘れずにチェックしてください。Reducerに届く前に、ミドルウェアが[非同期Action](../advanced/AsyncActions.md)をどう変換するか学べます。
+>基本的なコンセプトをよく理解していて、以前にこのチュートリアルを終えた方へ。[上級チュートリアル](../advanced/README.md)の[非同期なフロー](../advanced/AsyncFlow.md)を忘れずに確認してください。Reducerに届く前に、ミドルウェアが[非同期なAction](../advanced/AsyncActions.md)をどう変換するか学べます。

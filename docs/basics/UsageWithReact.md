@@ -241,7 +241,7 @@ export default Footer
 （これによる1つの成果があります。それは、`shouldComponentUpdate`を自分で実装するという[Reactのパフォーマンス提案（React performance suggestion）](https://facebook.github.io/react/docs/advanced-performance.html)について、心配しなくて良いということです）
 <!-- textlint-enable preset-japanese/sentence-length -->
 
-`connect()`を使うためには、`mapStateToProps`という特別な関数を定義する必要があります。この関数は、現在のRedux Storeの状態を、どのようにPropsに転換するか示します。このPropsは、コンテナがラップ（内包）しているプレゼンテーショナルコンポーネントに渡されます。例えば、`VisibleTodoList`は状態の`todos`を計算しなければいけません。計算した`todos`は、`TodoList`に渡します。そのために、`state.visibilityFilter`に従って`state.todos`を選別する関数を定義します。そしてこの関数を、`mapStateToProps`内で使います：
+`connect()`を使うためには、`mapStateToProps`という特別な関数を定義する必要があります。この関数は現在のRedux Storeの状態を、どのようにPropsへ変換するかを示します。このPropsは、コンテナがラップ（内包）しているプレゼンテーショナルコンポーネントに渡されます。例えば、`VisibleTodoList`は状態の`todos`を計算しなければいけません。計算した`todos`は、`TodoList`に渡します。そのために、`state.visibilityFilter`に従って`state.todos`を選別する関数を定義します。そしてこの関数を、`mapStateToProps`内で使います：
 
 ```js
 const getVisibleTodos = (todos, filter) => {
