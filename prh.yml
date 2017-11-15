@@ -22,8 +22,8 @@ rules:
     pattern: 気を付
   - expected: 気づ
     pattern: 気付
-  - expected: ログをと
-    pattern: ログを取
+  - expected: ログを取
+    pattern: ログをと
   - expected: すべて
     pattern: 全て
   - expected: おすすめ
