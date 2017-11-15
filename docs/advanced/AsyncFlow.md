@@ -1,15 +1,15 @@
-# Async Flow
+# 非同期なフロー
 
-Without [middleware](Middleware.md), Redux store only supports [synchronous data flow](../basics/DataFlow.md). This is what you get by default with [`createStore()`](../api/createStore.md).
+[ミドルウェア](Middleware.md)がなければ、[同期的なデータフロー](../basics/DataFlow.md)だけに対応します。これは[`createStore()`](../api/createStore.md)を、特に設定せず使った場合です。
 
-You may enhance [`createStore()`](../api/createStore.md) with [`applyMiddleware()`](../api/applyMiddleware.md). It is not required, but it lets you [express asynchronous actions in a convenient way](AsyncActions.md).
+[`applyMiddleware()`](../api/applyMiddleware.md)により、[`createStore()`](../api/createStore.md)の性能を高めることができます。絶対に必要というわけではありませんが、[簡潔なやり方で非同期なActionを表現](AsyncActions.md)できます。
 
-Asynchronous middleware like [redux-thunk](https://github.com/gaearon/redux-thunk) or [redux-promise](https://github.com/acdlite/redux-promise) wraps the store's [`dispatch()`](../api/Store.md#dispatch) method and allows you to dispatch something other than actions, for example, functions or Promises. Any middleware you use can then interpret anything you dispatch, and in turn, can pass actions to the next middleware in the chain. For example, a Promise middleware can intercept Promises and dispatch a pair of begin/end actions asynchronously in response to each Promise.
+[redux-thunk](https://github.com/gaearon/redux-thunk)や[redux-promise](https://github.com/acdlite/redux-promise)などの非同期なミドルウェアは、Storeの[`dispatch()`](../api/Store.md#dispatch)メソッドをラップ（内包）します。Action以外のもの、例えば関数やPromiseをDispatch（送信）できるようにするのです。どんなミドルウェアも、Dispatchされたものを解釈・実行します。そして順番に、チェーン内にある次のミドルウェアへActionを渡します。例えば、PromiseのミドルウェアはPromiseを途中でつかまえます。そして、それぞれのPromiseに応じて開始/終了というActionのペアを、非同期にDispatchします。
 
-When the last middleware in the chain dispatches an action, it has to be a plain object. This is when the [synchronous Redux data flow](../basics/DataFlow.md) takes place.
+チェーン内にある最後のミドルウェアがActionをDispatchするさい、そのActionは普通のObjectである必要があります。このときに、[同期的なReduxデータフロー](../basics/DataFlow.md)が行われます。
 
-Check out [the full source code for the async example](ExampleRedditAPI.md).
+[非同期を用いた例の、ソースコード完全版](ExampleRedditAPI.md)を確認してください。
 
-## Next Steps
+## 次のステップ
 
-Now you saw an example of what middleware can do in Redux, it's time to learn how it actually works, and how you can create your own. Go on to the next detailed section about [Middleware](Middleware.md). 
+ここまで、Reduxのミドルウェアができることの一例を見てきました。次は実際にミドルウェアがどう機能し、そして自分で作るにはどうすれば良いかを学びましょう。詳しく[ミドルウェア](Middleware.md)を学べるセクションへ進みましょう。
