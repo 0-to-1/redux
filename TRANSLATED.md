@@ -19,3 +19,4 @@
   * [非同期なAction](/docs/advanced/AsyncActions.md)
   * [非同期なフロー](/docs/advanced/AsyncFlow.md)
   * [ミドルウェア](/docs/advanced/Middleware.md)
+  * [React Routerと使う](/docs/advanced/UsageWithReactRouter.md)
