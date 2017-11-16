@@ -8,12 +8,12 @@ rules:
     pattern: アクション
   - expected: Reducer
     pattern: /[リレ]デューサー/
-  - expected: Web
-    pattern: web
   - expected: サーバー
     pattern: /サーバ(?!ー)/
   - expected: 製品
     pattern: プロダクト
+  - expected: 再読み込み
+    pattern: リフレッシュ
   - expected: 作$1
     pattern: /つく([らりるれろっ])/
   - expected: とき$1
