@@ -18,7 +18,7 @@ Reduxは軽量です。(依存を含め、2kB)
 [![Changelog #187](https://img.shields.io/badge/changelog-%23187-lightgrey.svg?style=flat-square)](https://changelog.com/187)
 
 >**Reduxを開発者から学ぶ:**  
->**[パート１： Reduxを始めよう（Part 1: Getting Started with Redux）](https://egghead.io/series/getting-started-with-redux) （３０本の無料動画）**<br>
+>**[パート１： Reduxを始めよう（Part 1: Getting Started with Redux）](https://egghead.io/series/getting-started-with-redux) （３０本の無料動画）**<br>
 >**[パート２： Reduxの特徴的な書き方でアプリケーションを作ろう (Part 2: Building React Applications with Idiomatic Redux )](https://egghead.io/courses/building-react-applications-with-idiomatic-redux) （２７本の無料動画）**
 
 ### 推薦文
