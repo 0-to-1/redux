@@ -20,3 +20,4 @@
   * [非同期なフロー](/docs/advanced/AsyncFlow.md)
   * [ミドルウェア](/docs/advanced/Middleware.md)
   * [React Routerと使う](/docs/advanced/UsageWithReactRouter.md)
+  * [使用例: Reddit API](/docs/advanced/ExampleRedditAPI.md)
