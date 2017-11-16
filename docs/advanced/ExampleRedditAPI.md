@@ -1,8 +1,8 @@
-# Example: Reddit API
+# 使用例： Reddit API
 
-This is the complete source code of the Reddit headline fetching example we built during the [advanced tutorial](README.md).
+これはRedditの見出しを取得する、完全なソースコードです。例として、[上級チュートリアル](README.md)の中で作りました。
 
-## Entry Point
+## エントリーポイント（プログラムの開始場所）
 
 #### `index.js`
 
@@ -19,7 +19,7 @@ render(
 )
 ```
 
-## Action Creators and Constants
+## Actionクリエイターと定数
 
 #### `actions.js`
 
@@ -90,7 +90,7 @@ export function fetchPostsIfNeeded(subreddit) {
 }
 ```
 
-## Reducers
+## Reducer
 
 #### `reducers.js`
 
@@ -187,7 +187,7 @@ export default function configureStore(preloadedState) {
 }
 ```
 
-## Container Components
+## コンテナコンポーネント
 
 #### `containers/Root.js`
 
@@ -317,7 +317,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(AsyncApp)
 ```
 
-## Presentational Components
+## プレゼンテーショナルコンポーネント
 
 #### `components/Picker.js`
 
