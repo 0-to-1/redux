@@ -1,0 +1,14 @@
+{
+  "rules": {
+    "preset-japanese": true,
+    "preset-jtf-style": true,
+    "prh": {
+      "rulePaths": [
+        "./prh.yml"
+      ]
+    }
+  },
+  "filters": {
+    "comments": true
+  }
+}

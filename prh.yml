@@ -1,0 +1,50 @@
+version: 1
+rules:
+  - expected: Redux
+    pattern: /redux(?!-)/
+  - expected: Store
+    pattern: ストア
+  - expected: Action
+    pattern: アクション
+  - expected: Reducer
+    pattern: /[リレ]デューサー/
+  - expected: サーバー
+    pattern: /サーバ(?!ー)/
+  - expected: 製品
+    pattern: プロダクト
+  - expected: 再読み込み
+    pattern: リフレッシュ
+  - expected: 作$1
+    pattern: /つく([らりるれろっ])/
+  - expected: とき$1
+    pattern: /時([かがでにのはへもやを])/
+  - expected: 気をつ
+    pattern: 気を付
+  - expected: 気づ
+    pattern: 気付
+  - expected: ログを取
+    pattern: ログをと
+  - expected: すべて
+    pattern: 全て
+  - expected: おすすめ
+    pattern:
+      - オススメ
+      - お勧め
+      - お薦め
+  - expected: 例えば
+    pattern:  たとえば
+  - expected: 正規化
+    pattern:  標準化
+  - expected: 1番
+    pattern: 一番
+  - expected: 2番
+    pattern: 二番
+  - expected: 3番
+    pattern: 三番
+  - expected: ください
+    pattern: 下さい
+  - expected: でき
+    pattern:
+      - 出来
+      - することができ
+      - することが可能で
